@@ -1,102 +1,123 @@
 
-public class ShoppingCart{
-	private long[] itemIdArray = new long[100];
-	private int[] itemQuantity = new int[100];
-	private float[] unitPrice = new float[100];
-	static int count=0;
+import java.util.*;
+
+/**
+public class Products {
+	long itemId;
+	double unitPrice;
+	String name;
+	int quantity;
+
+}
+*/
+
+
+public class ShoppingCart {
 	
-	// adding item to cart
-	public void addToCart(long id, int quantity, float uPrice){
-		itemIdArray[count] = id;
-		itemQuantity[count] = quantity;
-		unitPrice[count]= uPrice;
-		count+=1;
-	}
-
-	// update cart
-	public void updateCart(long id, int quantity){
-		for (int numCount=0; numCount<=count; numCount+=1){
-			if(itemIdArray[numCount] == id){
-				itemQuantity[numCount] = quantity;
-				break;
-			}
-		}
-	}
-
-	// remove from cart
-	public void removeFromCart(long id){
-		for (int numCount=0; numCount<=count; numCount+=1){
-			if(itemIdArray[numCount] == id){
-				itemQuantity[numCount] = 0;
-				break;
-			}
-		}
-	}
+	static LinkedList<Products> cartItems = new LinkedList<Products>();
 	
-	//show cart
-	public void showCart(){
-		System.out.println("ITEM ID\t\t QUANTITY\t\t UNIT PRICE");
-		for (int numCount=0; numCount<=count; numCount+=1){
-			if(itemQuantity[numCount] > 0){
-				System.out.print(itemIdArray[numCount]+"\t\t\t");
-				System.out.print(itemQuantity[numCount]+"\t\t\t");
-				System.out.println(unitPrice[numCount]);
-			}
+	
+	// product object values allocation
+		public static Products productValues(long id, int quantity, double uPrice, String iName){
+			Products obj = new Products();
+			
+			obj.itemId = id;
+			obj.unitPrice = uPrice;
+			obj.quantity = quantity;
+			obj.name = iName;
+			
+			return obj;
+			
 		}
-		System.out.println("\n\n");
-	}
-
-	//generate bill
-	public void generateBill(){
-		double totalAmount = 0, costPerItem;
-		System.out.println("ITEM ID\t\t QUANTITY\t\t UNIT PRICE\t\t\tSUM ");
-		for (int numCount=0; numCount<=count; numCount+=1){
-			if(itemQuantity[numCount] > 0){
-				System.out.print(itemIdArray[numCount]+"\t\t\t");
-				System.out.print(itemQuantity[numCount]+"\t\t\t");
-				System.out.print(unitPrice[numCount]+"\t\t\t");
-				costPerItem = unitPrice[numCount]*itemQuantity[numCount];
-				totalAmount += costPerItem;
-				System.out.println(costPerItem);
-			}
+		
+	//adding item to cart
+		public void addToCart(Products obj){
+			cartItems.add(obj);
 		}
-		System.out.print("Total\t\t\t\t\t\t\t\t\t");
-		System.out.println(totalAmount+"\n\n");
-	}
-
+		
+		// update cart
+		public void updateCart(long id, int quantity){
+			for (Products obj1 : cartItems){
+				 if(obj1.itemId == id){
+					 obj1.quantity = quantity;
+					 //cartItems.add(obj1);
+					 break;
+				 }
+			 }
+		}
+		
+		// remove from cart
+		public void removeFromCart(long id){
+			int numCount=0;
+			for (Products obj : cartItems){
+				 if(obj.itemId == id){
+					 cartItems.remove(numCount);
+					 break;
+				 }
+				 numCount+=1;
+			 }
+		}
+		
+		
+		//show cart
+		public void showCart(){
+			System.out.println("ITEM ID\t\t NAME\t\t QUANTITY\t\t UNIT PRICE");
+			for (Products obj : cartItems){
+				 System.out.println(obj.itemId + "\t\t" + obj.name + "\t\t" 
+						 + obj.quantity + "\t\t"+ obj.unitPrice); 
+			 }
+			System.out.println("\n\n");
+		}
+		
+		
+		
+		//generate bill
+		public void generateBill(){
+			double totalAmount = 0, costPerItem;
+			System.out.println("ITEM ID\t\t NAME\t\t QUANTITY\t\t UNIT PRICE\t\t\tSUM ");
+			for (Products obj : cartItems){
+				costPerItem = obj.quantity * obj.unitPrice;
+				totalAmount += costPerItem; 
+				 System.out.println(obj.itemId + "\t\t" + obj.name + "\t\t" 
+						 + obj.quantity + "\t\t"+ obj.unitPrice 
+						 + "\t\t" + costPerItem); 
+			 }
+			System.out.println();
+			System.out.print("Total\t");
+			System.out.println(totalAmount+"\n\n\n");
+		}
 
 	public static void main(String args[]){
-		//object of the class
-		ShoppingCart cart1 = new ShoppingCart();
-
-		// adding item in cart
-		cart1.addToCart(11111, 4, 20);
-		cart1.addToCart(11112, 2, (float)20.5);
-		cart1.addToCart(11113, 4, (float)200.75);
-
+		
+		ShoppingCart cart = new ShoppingCart();
+		Products prodObj = new Products();
+		prodObj = productValues(11111, 4, 1000, "shoe");
+		cart.addToCart(prodObj);
+		
+		prodObj = productValues(11112, 2, 200, "shoe");
+		cart.addToCart(prodObj);
+		
+		prodObj = productValues(11113, 40, 2000, "shoe");
+		cart.addToCart(prodObj);
+		
+		prodObj = productValues(11114, 14, 4000, "shoe");
+		cart.addToCart(prodObj);
+		
 		//show cart
-		System.out.println("CART DETAILS:");
-		cart1.showCart();
-
-		// generate bill
-		System.out.println("BILL:");
-		cart1.generateBill();
-
-		//update cart
-		cart1.updateCart(11111, 2);
-		System.out.println("BILL AFTER REDUCING QUANTITY OF ID- 11111 (4 to 2):");
-		cart1.generateBill();
-
-		//remove from cart
-		cart1.removeFromCart(11112);
-		System.out.println("BILL AFTER REMOVING ITEM OF ID - 11112:");
-		cart1.generateBill();
-
+		cart.showCart();
+		
+		//removing one item
+		cart.removeFromCart(11112);
+		cart.showCart();
+		
+		//updating one item
+		cart.updateCart(11113, 30);
+		cart.generateBill();
+		 
 	}
 
 }
 
 
 
-	
 
