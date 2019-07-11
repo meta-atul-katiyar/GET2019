@@ -1,6 +1,7 @@
+
 import java.util.*;
 
-/***
+/**
 public class Products {
 	long itemId;
 	double unitPrice;
@@ -16,8 +17,8 @@ public class ShoppingCart {
 	static LinkedList<Products> cartItems = new LinkedList<Products>();
 	
 	
-	// adding item to cart
-		public void addToCart(long id, int quantity, double uPrice, String iName){
+	// product object values allocation
+		public static Products productValues(long id, int quantity, double uPrice, String iName){
 			Products obj = new Products();
 			
 			obj.itemId = id;
@@ -25,21 +26,23 @@ public class ShoppingCart {
 			obj.quantity = quantity;
 			obj.name = iName;
 			
+			return obj;
+			
+		}
+		
+	//adding item to cart
+		public void addToCart(Products obj){
 			cartItems.add(obj);
 		}
 		
-	
 		// update cart
 		public void updateCart(long id, int quantity){
-			int numCount = 0;
 			for (Products obj1 : cartItems){
 				 if(obj1.itemId == id){
-					 cartItems.remove(numCount);
 					 obj1.quantity = quantity;
-					 cartItems.add(obj1);
+					 //cartItems.add(obj1);
 					 break;
 				 }
-				 numCount+=1;
 			 }
 		}
 		
@@ -87,10 +90,18 @@ public class ShoppingCart {
 	public static void main(String args[]){
 		
 		ShoppingCart cart = new ShoppingCart();
-		cart.addToCart(11111, 4, 1000, "shoe");
-		cart.addToCart(11112, 2, 200, "shoe");
-		cart.addToCart(11113, 40, 2000, "shoe");
-		cart.addToCart(11114, 14, 4000, "shoe");
+		Products prodObj = new Products();
+		prodObj = productValues(11111, 4, 1000, "shoe");
+		cart.addToCart(prodObj);
+		
+		prodObj = productValues(11112, 2, 200, "shoe");
+		cart.addToCart(prodObj);
+		
+		prodObj = productValues(11113, 40, 2000, "shoe");
+		cart.addToCart(prodObj);
+		
+		prodObj = productValues(11114, 14, 4000, "shoe");
+		cart.addToCart(prodObj);
 		
 		//show cart
 		cart.showCart();
@@ -106,6 +117,7 @@ public class ShoppingCart {
 	}
 
 }
+
 
 
 
