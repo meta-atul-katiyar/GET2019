@@ -101,31 +101,25 @@ public class HexCalc {
 		return hexNum;
 	}
 
-
 	//add
 	public static int addNum(int num1, int num2){
 		return num1+num2;
-
 	}
 
 	//subtract
 	public static int subtractNum(int num1, int num2){
 		return num1-num2;
-
 	}
 
 	//divide
 	public static int divideNum(int num1, int num2){
 		return num1/num2;
-
 	}
 
 	//multiply
 	public static int multiplyNum(int num1, int num2){
 		return num1*num2;
-
 	}
-
 	
 	//perform operation as per the operator in expression
 	public static void performOp(int num1, int num2, char opSym){
