@@ -1,5 +1,5 @@
 import java.util.*;
-
+ 
 public class HexCalc {
 	static int BASE = 16;
 	private String text;
