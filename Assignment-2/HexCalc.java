@@ -1,54 +1,40 @@
-
 import java.util.*;
-import java.lang.*;
-
+  
 public class HexCalc {
 	static int BASE = 16;
-	//static Scanner in = new Scanner(System.in);
-
-	private String text, firstNum, secondNum;
+	private String text;
+	private static String firstNum="";
+	private static String secondNum="";
 	private static char opSym;
-	static LinkedList<String> numOne = new LinkedList<String>();
-	static LinkedList<String> numTwo = new LinkedList<String>();
-
 	public static String getExpre(){
 		Scanner in = new Scanner(System.in);
-		//System.out.print("enter the whole expression: ");
 		String text=in.nextLine();    
-		//System.out.println("Text is: "+text);
 		return text;
 	}
 
 	//extract operators and operands
-	public void extractOps(String text){
-		int index=0;
-		
-
+	public static void extractOps(String text){
+		int index = 0;
 		for (int numChar = 0; numChar < text.length(); numChar++){
 			if(text.charAt(numChar) != '+' && text.charAt(numChar) != '-'
-				&& text.charAt(numChar) != '/' && text.charAt(numChar) != '*'){
+				&& text.charAt(numChar) != '/' && text.charAt(numChar) != '*'
+				&& text.charAt(numChar) != ' ' ){
 			
 				if(index ==0){
-					numOne.add(Character.toString(text.charAt(numChar)));
+					firstNum+=text.charAt(numChar);
 				}
-
 				else{
-					
-					numTwo.add(Character.toString(text.charAt(numChar)));
+					secondNum+=text.charAt(numChar);
 				}
 			}
-
 			else{
 				opSym = text.charAt(numChar);
-				index = 1;
+				index+=1;
 			}
 		}
-		//System.out.println(numTwo);
-
 	}
-
-/***
-	//hexadecimal to decimal ------by string number
+	
+	//hexadecimal to decimal
 	public static int toDecimal (String num, int BASE){
 		int decimal=0;
 		for (int numCount = num.length()-1; numCount >= 0; numCount--){
@@ -79,125 +65,68 @@ public class HexCalc {
 		}
 		return decimal;
 	}
-*/
-
-
-
-	//hexadecimal to decimal ----by String-linked-list of number
-	public static int toDecimal (LinkedList<String> num, int BASE){
-		int decimal=0, numDigit = 0;
-		String str = num.removeLast();
-		while(str != null){
-			String hexCharS = "abcdef";
-			String hexCharC = "ABCDEF";
-			//char tempChar = num.charAt(numCount);
-			int indexS = hexCharS.indexOf(str),
-			indexC = hexCharC.indexOf(str);
-			//int numIndex = (num.length() - numCount - 1);
-
-			int basePower=1;
-			for (int tempIdx = 0; tempIdx < numDigit; tempIdx++ ){
-				basePower*=BASE;
-			}
-
-			if(indexS >= 0){
-				decimal+=(indexS+10)*basePower;
-
-			}
-			else if(indexC >= 0){
-				decimal+=(indexS+10)*basePower;
-			}
-			else{
-				int tempNum;
-				tempNum = Integer.parseInt(str);
-				decimal += tempNum * basePower;
-			}
-			//System.out.println(str);
-
-			// Exception-- java.util.NoSuchElementException
-			try{
-				str = num.removeLast();
-			}
-			catch(Exception e){
-				break;
-			}
-			numDigit+=1;
-		}
-		return decimal;
-	}
-
-
 
 	// decimal to hexadecimal
-	public static void fromDecimal(int num, int BASE){
+	public static String fromDecimal(int num, int BASE){
+		String hexNum = "";
+		
 		if(num == 0 ){
-			System.out.println(0);
+			return "0";
 		}
 		else{
 			int numByBase = num;
-			LinkedList<String> hexNum = new LinkedList<String>();
 			while(numByBase > 0){
 				int modNum;
 				modNum = numByBase%BASE;
 				if(modNum > 9){
-					hexNum.addFirst(Character.toString((char)(65+(modNum%10))));
+					hexNum = Character.toString((char)(65+(modNum%10))) + hexNum;
 				}
 				else{
-					hexNum.addFirst(Integer.toString(modNum));
+					hexNum = Integer.toString(modNum) + hexNum;
 				}
 				numByBase = numByBase/BASE;
 				if(numByBase < BASE){
 					if(numByBase >= 10){
-						hexNum.addFirst(Character.toString((char)(65+(numByBase%10))));
+						hexNum = Character.toString((char)(65+(numByBase%10))) + hexNum;
 					}
-					else if(numByBase < 10 && numByBase > 0){
-						//System.out.println(numByBase);
-							String n = Integer.toString(numByBase);
-							hexNum.addFirst(n);
+					else if(numByBase < 10 && numByBase >= 0){
+						hexNum = Integer.toString(numByBase) + hexNum;
 					}
 				}
+				if(numByBase == 1){
+					break;
+				}
 			}
-			for(String str : hexNum){
-				System.out.print(str);
-			}
-			System.out.println();
 		}
+		return hexNum;
 	}
-
 
 	//add
 	public static int addNum(int num1, int num2){
 		return num1+num2;
-
 	}
 
 	//subtract
 	public static int subtractNum(int num1, int num2){
 		return num1-num2;
-
 	}
 
 	//divide
 	public static int divideNum(int num1, int num2){
 		return num1/num2;
-
 	}
 
 	//multiply
 	public static int multiplyNum(int num1, int num2){
 		return num1*num2;
-
 	}
-
 	
-	//perform operation
+	//perform operation as per the operator in expression
 	public static void performOp(int num1, int num2, char opSym){
 		int answer = -1;
 		switch (opSym){
 			case '+':
-				System.out.print("Addition: ");
-				fromDecimal(addNum(num1, num2), BASE);
-				
+				System.out.print("Addition: "+ fromDecimal(addNum(num1, num2), BASE));
 				break;
 
 			case '-':
@@ -205,24 +134,19 @@ public class HexCalc {
 				int sub = subtractNum(num1, num2);
 				if(sub<0){
 					sub *= -1;
-					System.out.print("-");
-					fromDecimal(sub, BASE);
+					System.out.print("-"+fromDecimal(sub, BASE));
 				}
 				else{
-					fromDecimal(subtractNum(num1, num2), BASE);
+					System.out.print(fromDecimal(subtractNum(num1, num2), BASE));
 				}
 				break;
 
 			case '/':
-				System.out.print("Division: ");
-				fromDecimal(divideNum(num1, num2), BASE);
-				
+				System.out.print("Division: "+ fromDecimal(divideNum(num1, num2), BASE));
 				break;
 
 			case '*':
-				System.out.print("Multiplication: ");
-				fromDecimal(multiplyNum(num1, num2), BASE);
-				
+				System.out.print("Multiplication: "+ fromDecimal(multiplyNum(num1, num2), BASE));
 				break;
 
 			default:
@@ -232,69 +156,44 @@ public class HexCalc {
 		fromDecimal(answer, BASE);
 	}
 
-
+	// return true if both number equal
 	public static boolean equalTo(String num1, String num2){
-		//static LinkedList<String> tempNumOne = new LinkedList<String>();
-		//static LinkedList<String> tempNumTwo = new LinkedList<String>();
-		int numEq1 = toDecimal(strToLL(num1), BASE);
-		int numEq2 = toDecimal(strToLL(num2), BASE);
+		int numEq1 = toDecimal(num1, BASE);
+		int numEq2 = toDecimal(num2, BASE);
 		if(numEq1 == numEq2){
 			return true;
 		}
 		else{
 			return false;
 		}
-		
 	}
 	
-	
+	// True if first number is greater
 	public static boolean greaterThan(String num1, String num2){
-		//static LinkedList<String> tempNumOne = new LinkedList<String>();
-		//static LinkedList<String> tempNumTwo = new LinkedList<String>();
-		int numEq1 = toDecimal(strToLL(num1), BASE);
-		int numEq2 = toDecimal(strToLL(num2), BASE);
+		int numEq1 = toDecimal(num1, BASE);
+		int numEq2 = toDecimal(num2, BASE);
 		if(numEq1 > numEq2){
 			return true;
 		}
 		else{
 			return false;
-		}
-		
+		}	
 	}
 	
-	
+	// True if second number is greater
 	public static boolean lessThan(String num1, String num2){
-		//static LinkedList<String> tempNumOne = new LinkedList<String>();
-		//static LinkedList<String> tempNumTwo = new LinkedList<String>();
-		int numEq1 = toDecimal(strToLL(num1), BASE);
-		int numEq2 = toDecimal(strToLL(num2), BASE);
+		int numEq1 = toDecimal(num1, BASE);
+		int numEq2 = toDecimal(num2, BASE);
 		if(numEq1 < numEq2){
 			return true;
 		}
 		else{
 			return false;
 		}
-		
 	}
 	
-	
-	
-	public static LinkedList<String> strToLL( String strText){
-		String tempStr;   
-		LinkedList<String> strList =  new LinkedList<String>();
-		for (int count = strText.length()-1; count>=0; count--){
-			tempStr = Character.toString(strText.charAt(count));
-			strList.add(tempStr);
-		}
-		return strList;
-	}
-
+	// main method
 	public static void main(String[] args) {
-	// TODO Auto-generated method stub
-
-		
-		//System.out.println(toDecimal(obj.numTwo,16));
-		
 		System.out.println("enter your choice:");
 		System.out.println("1. To per form +,-,*,/ on hex numbers.");
 		System.out.println("2. To Decimal to hexadecimal.");
@@ -303,9 +202,8 @@ public class HexCalc {
 		
 		Scanner in = new Scanner(System.in);
 		int choice = in.nextInt(); 
-		//switch case
-		switch(choice){
 		
+		switch(choice){
 		case 1 :
 			System.out.print("enter the expression as (a+b): ");
 			String expr;
@@ -313,53 +211,32 @@ public class HexCalc {
 			expr = HexCalc.getExpre();
 			obj.extractOps(expr);
 			int num1, num2;
-			
-			num1 = toDecimal (obj.numOne, BASE);
-			num2 = toDecimal (obj.numTwo, BASE);
+			num1 = toDecimal (obj.firstNum, BASE);
+			num2 = toDecimal (obj.secondNum, BASE);
 			performOp(num1,num2, opSym);
-			
 			break;
 		
 		case 2 :
 			System.out.print("enter the decimal number: ");
 			int uNum = in.nextInt(); 
-			fromDecimal(uNum, BASE);
+			System.out.println("corresponding hexa: " + fromDecimal(uNum, BASE));
 			break;
 			
 		case 3 :
 			int hexToDeci;
 			System.out.print("enter the hexadecimal number(like- 1ab2): ");
 			String uText=getExpre();
-			/**
-			String tempStr;   
-			
-			LinkedList<String> uHexaNum =  new LinkedList<String>();
-			for (int count = uText.length()-1; count>=0; count--){
-				tempStr = Character.toString(uText.charAt(count));
-				uHexaNum.add(tempStr);
-			}
-			*/
-			
-			hexToDeci = toDecimal ( strToLL(uText), BASE);
+			hexToDeci = toDecimal ( uText, BASE);
 			System.out.println("the corresponding decimal: "+ hexToDeci);
 			break;
 			
 		case 4 :
-				System.out.println("enter number 1: ");
-				String uStrNum1 = in.next();
-				
-				//Scanner in1 = new Scanner(System.in);
-				System.out.println("enter number 2: ");
-				String uStrNum2 = in.next();
-			
-			System.out.println("first number == second number: "+ equalTo(uStrNum1, uStrNum2));
-			
-			System.out.println("first number > second number: "+ greaterThan(uStrNum1, uStrNum2));
-			
-			System.out.println("first number < second number: "+ lessThan(uStrNum1, uStrNum2));
-			
-			
-		}
-		
+			System.out.println("enter both numbers in a  line with space:  ");
+			String str = getExpre();
+			extractOps(str);
+			System.out.println("first number == second number: "+ equalTo(firstNum, secondNum));
+			System.out.println("first number > second number: "+ greaterThan(firstNum, secondNum));
+			System.out.println("first number < second number: "+ lessThan(firstNum, secondNum));
+		}		
 	}
 }
