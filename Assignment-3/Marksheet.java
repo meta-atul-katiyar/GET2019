@@ -1,79 +1,69 @@
 import java.util.*;
+import java.text.DecimalFormat;
 
 public class Marksheet{
-	static int numOfSubjects = 5;		//Subjects: hindi, english, socialScience, maths, science;
-	static Scanner reader = new Scanner(System.in);
-	static LinkedList<StudentMarks> stuobj = new LinkedList<StudentMarks>();
-
-	public static double avgGrade(int[] stuMarksArray){
+	static LinkedList<Integer> stuMarks = new LinkedList<Integer>();
+	//upto 2 decimal places
+	private static DecimalFormat df = new DecimalFormat("0.00");
+	//input:list of student grade and number of students  output: average of all
+	public static String avgGrade(LinkedList<Integer> stu, int stuNum){
 		double avg = 0;
 		int count;
-		for (count = 0; count < stuMarksArray.length; count++){
-			avg += stuMarksArray[count];
+		for (int sGrade : stu){
+			avg += sGrade;
 		}
-		return (avg/=count);
+		return df.format(avg/=stuNum);
 	}
-
-	public static int maxMarks(int[] stuMarksArray){
+	//input:list of student grade  output:maximum of all
+	public static int maxMarks(LinkedList<Integer> stu){
 		int max = 0;
-		for (int count = 0; count < stuMarksArray.length; count++){
-			int marks = stuMarksArray[count];
-			if(marks > max){
-				max = marks;
+		for (int sGrade : stu){
+			if(sGrade > max){
+				max = sGrade;
 			}
 		}
 		return max;
 	}
-
-	public static int minMarks(int[] stuMarksArray){
+	//input:list of student grade  output:minimum of all
+	public static int minMarks(LinkedList<Integer> stu){
 		int min = 100;
-		for (int count = 0; count < stuMarksArray.length; count++){
-			int marks = stuMarksArray[count];
-			if(marks < min){
-				min = marks;
+		for (int sGrade : stu){
+			if(sGrade < min){
+				min = sGrade;
 			}
 		}
 		return min;
 	}
-
-	public static double percentStuPass(LinkedList<StudentMarks> stu, int stuNum){
+	//input:list of student grade and number of students  output:percent of students passed
+	public static String percentStuPass(LinkedList<Integer> stu, int stuNum){
 		int fail =0;
-		for (StudentMarks s : stuobj){
-			for (int count = 0; count < numOfSubjects; count++){
-				System.out.println("ma "+s.subjectMarks[count]);
-				if (s.subjectMarks[count] <= 40){
-					fail += 1;
-					//System.out.println(marksArray.subjectMarks[count]);
-					//break;
-				}
+		for (int sGrade : stu){
+			if (sGrade <= 40){
+				fail += 1;
 			}
 		}
-		return (double)((stuNum - fail)*100.0)/stuNum;
+		return df.format(((stuNum - fail)*100.0)/stuNum);
 	}
-	public static void addToObj (StudentMarks stu){
-		stuobj.add(stu);
-	}
-
 	
 	public static void main(String[] args){
-		
+		 Scanner reader = new Scanner(System.in);
 		System.out.println("enter number of students: ");
 		int stuNum = reader.nextInt();
-		//StudentMarks[] stuobj = new StudentMarks[stuNum];
 		for (int count = 0; count < stuNum; count++){
-			System.out.println("enter marks space separated: ");
-			Scanner reader1 = new Scanner(System.in);
-			String strMarks = reader1.nextLine();
-			//StudentMarks sobj = new StudentMarks();
-			Marksheet mSheet = new Marksheet();
-			Marksheet.addToObj (StudentMarks.insertMarks(strMarks, numOfSubjects));
-		}
-		for (StudentMarks s : stuobj){
-			for (int count1 = 0; count1<numOfSubjects; count1++){
-				System.out.println("m"+s.subjectMarks[count1]);
+			System.out.println("enter Grade: ");
+			//Scanner reader1 = new Scanner(System.in);
+			int grade = reader.nextInt();
+			if(grade < 0 || grade > 100){
+				System.out.println("try something between 0 and 100");
+				grade = reader.nextInt();
+				stuMarks.add(grade);
+				
 			}
+			else{
+				stuMarks.add(grade);
+			}
+			
 		}
-
-		System.out.println(percentStuPass(stuobj, stuNum));
+		System.out.println(avgGrade(stuMarks, stuNum));
 	}
 }
