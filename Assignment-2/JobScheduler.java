@@ -47,16 +47,7 @@ public class JobScheduler {
 		}
 		return max;
 	}
-	
-	public static void maxWaitProcess( int max, int[] arr){
-		System.out.print("index: ");
-		for(int count = 0; count< arr.length; count++){
-			if(max == arr[count]){
-				System.out.print(count+" ");
-			}
-		}
-	}
-	
+
 	public static void main(String[] args){
 		for (int count = 0; count < numEntry; count++){
 			Scanner scanner = new Scanner(System.in);
