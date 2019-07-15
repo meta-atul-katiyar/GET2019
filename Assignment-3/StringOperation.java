@@ -1,7 +1,6 @@
 import java.util.*;
 
 public class StringOperation {
-	
 	//return 1 if str1=str2, else 0
 	public static int strComp(String str1, String str2){
 		int flag = 0;
@@ -21,7 +20,6 @@ public class StringOperation {
 		}
 		return 1;
 	}
-
 	//reverse of string
 	public static String strReverse(String str){
 		String tempStr="";
@@ -30,7 +28,6 @@ public class StringOperation {
 		}
 		return tempStr;
 	}
-
 	//Swap cases of string
 	public static String switchCase(String str){
 		String tempStr="";
@@ -49,7 +46,6 @@ public class StringOperation {
 		}
 		return tempStr;
 	}
-
 	//return largest words list
 	public static LinkedList<String> largeWord(String str){
 		String word = "";
@@ -63,16 +59,16 @@ public class StringOperation {
 		}
 		for(int count = idx; count < str.length(); count++){
 			if(str.charAt(count) != ' '){    
-            	word = word + str.charAt(count);    
-          	}    
-          	else{  
-            	words.add(word);
-            	int wordLength = word.length();
-            	if(wordLength > maxLength){
-            		maxLength = wordLength;
-            	}       
-            	word = "";    
-          	} 
+            			word = word + str.charAt(count);    
+          		}    
+          		else{  
+            			words.add(word);
+            			int wordLength = word.length();
+            			if(wordLength > maxLength){
+            				maxLength = wordLength;
+            			}       
+            			word = "";    
+          		} 
 		}
 		for(String strWord : words){
 			if(strWord.length() == maxLength){
@@ -86,5 +82,4 @@ public class StringOperation {
 		String uStr = "  Code, Compile, Run and Debug java program online.. Write your code in this editor and press button to exe.cute it.";
 		System.out.println(largeWord(uStr+" "));
 	}
-
 }
