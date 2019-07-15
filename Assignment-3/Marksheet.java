@@ -46,23 +46,32 @@ public class Marksheet{
 	}
 	
 	public static void main(String[] args){
-		 Scanner reader = new Scanner(System.in);
+		Scanner reader = new Scanner(System.in);
 		System.out.println("enter number of students: ");
-		int stuNum = reader.nextInt();
+		try{
+			int stuNum = reader.nextInt();
+		}catch(NumberFormatException e){
+	  		System.out.println("Number format exception occurred");
+       		}
 		for (int count = 0; count < stuNum; count++){
 			System.out.println("enter Grade: ");
-			//Scanner reader1 = new Scanner(System.in);
-			int grade = reader.nextInt();
+			try{
+				int grade = reader.nextInt();
+			}catch(NumberFormatException e){
+	  			System.out.println("Number format exception occurred");
+       			}
 			if(grade < 0 || grade > 100){
 				System.out.println("try something between 0 and 100");
-				grade = reader.nextInt();
-				stuMarks.add(grade);
-				
+				try{
+					grade = reader.nextInt();
+				}catch(NumberFormatException e){
+	  				System.out.println("Number format exception occurred");
+       				}
+				stuMarks.add(grade);	
 			}
 			else{
 				stuMarks.add(grade);
 			}
-			
 		}
 		System.out.println(avgGrade(stuMarks, stuNum));
 	}
