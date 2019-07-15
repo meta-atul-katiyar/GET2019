@@ -23,12 +23,15 @@ public class HexCalc {
 			int indexS = hexCharS.indexOf(tempChar),
 			indexC = hexCharC.indexOf(tempChar);
 			int numIndex = (num.length() - numCount - 1);
+
 			int basePower=1;
 			for (int tempIdx = 0; tempIdx < numIndex; tempIdx++ ){
 				basePower*=BASE;
 			}
+
 			if(indexS >= 0){
 				decimal+=(indexS+10)*basePower;
+
 			}
 			else if(indexC >= 0){
 				decimal+=(indexS+10)*basePower;
@@ -158,11 +161,13 @@ public class HexCalc {
 		}
 		else{
 			int count = 0;
-			while(Character.getNumericValue(num1.charAt(count)) > Character.getNumericValue(num1.charAt(count))
-					&& count != numLength2){
+			while(count < numLength2 && Character.getNumericValue(num1.charAt(count)) > Character.getNumericValue(num2.charAt(count))
+					 ){
 				numLength1 -= 1;
+				System.out.print(numLength1);
+				count += 1;
 			}
-			if(numLength1 != numLength2){
+			if(numLength1 < numLength2){
 				return true;
 			}
 			else{
@@ -183,9 +188,10 @@ public class HexCalc {
 		}
 		else{
 			int count = 0;
-			while(Character.getNumericValue(num1.charAt(count)) < Character.getNumericValue(num1.charAt(count))
-					&& count != numLength2){
+			while(count < numLength2 && Character.getNumericValue(num1.charAt(count)) < Character.getNumericValue(num2.charAt(count))
+					 ){
 				numLength1 -= 1;
+				count += 1;
 			}
 			if(numLength1 != numLength2){
 				return true;
@@ -197,21 +203,24 @@ public class HexCalc {
 	}
 	//removes initial zeros from the hexadecimal number
 	public static String omitInitZeros(String num){
-		int len = num.length();
-		if(len == 1){
-			return num;
-		}
-		else{
-			int count = 0;
-			while(num.charAt(count) == '0'){
-				count+=1;
+		if(num.charAt(0) == '0'){
+			int len = num.length();
+			if(len == 1){
+				return num;
 			}
-			String str = "";
-			for (int numCount = count; numCount<len; numCount++){
-				str += num.charAt(numCount);
+			else{
+				int count = 0;
+				while(count<len-1 && num.charAt(count) == '0'){
+					count+=1;
+				}
+				String str = "";
+				for (int numCount = count; numCount<len; numCount++){
+					str += num.charAt(numCount);
+				}
+				return str;
 			}
-			return str;
 		}
+		return num;
 	}
 	
 	// main method
@@ -254,10 +263,13 @@ public class HexCalc {
 			getNum();
 			firstNum = omitInitZeros(firstNum);
 			secondNum = omitInitZeros(secondNum);
+			System.out.println(firstNum);
+			System.out.println(secondNum);
 			System.out.println("first number == second number: "+ equalTo(firstNum, secondNum));
 			System.out.println("first number > second number: "+ greaterThan(firstNum, secondNum));
 			System.out.println("first number < second number: "+ lessThan(firstNum, secondNum));
-				
+			break;
+			
 		default:
 			System.out.println("incorrect operation.");
 			break;
