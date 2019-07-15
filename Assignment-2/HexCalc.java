@@ -2,36 +2,15 @@ import java.util.*;
   
 public class HexCalc {
 	static int BASE = 16;
-	private String text;
 	private static String firstNum="";
 	private static String secondNum="";
 	private static char opSym;
-	public static String getExpre(){
-		Scanner in = new Scanner(System.in);
-		String text=in.nextLine();    
-		return text;
-	}
-
-	//extract operators and operands
-	public static void extractOps(String text){
-		int index = 0;
-		for (int numChar = 0; numChar < text.length(); numChar++){
-			if(text.charAt(numChar) != '+' && text.charAt(numChar) != '-'
-				&& text.charAt(numChar) != '/' && text.charAt(numChar) != '*'
-				&& text.charAt(numChar) != ' ' ){
-			
-				if(index ==0){
-					firstNum+=text.charAt(numChar);
-				}
-				else{
-					secondNum+=text.charAt(numChar);
-				}
-			}
-			else{
-				opSym = text.charAt(numChar);
-				index+=1;
-			}
-		}
+	public static void getNum(){
+		Scanner in = new Scanner(System.in); 
+		System.out.print("enter first number: ");
+		firstNum += in.nextLine();
+		System.out.print("enter second number: ");
+		secondNum += in.nextLine();	
 	}
 	
 	//hexadecimal to decimal
@@ -44,15 +23,12 @@ public class HexCalc {
 			int indexS = hexCharS.indexOf(tempChar),
 			indexC = hexCharC.indexOf(tempChar);
 			int numIndex = (num.length() - numCount - 1);
-
 			int basePower=1;
 			for (int tempIdx = 0; tempIdx < numIndex; tempIdx++ ){
 				basePower*=BASE;
 			}
-
 			if(indexS >= 0){
 				decimal+=(indexS+10)*basePower;
-
 			}
 			else if(indexC >= 0){
 				decimal+=(indexS+10)*basePower;
@@ -92,9 +68,7 @@ public class HexCalc {
 					else if(numByBase < 10 && numByBase >= 0){
 						hexNum = Integer.toString(numByBase) + hexNum;
 					}
-				}
-				if(numByBase == 1){
-					break;
+					return hexNum;
 				}
 			}
 		}
@@ -158,9 +132,13 @@ public class HexCalc {
 
 	// return true if both number equal
 	public static boolean equalTo(String num1, String num2){
-		int numEq1 = toDecimal(num1, BASE);
-		int numEq2 = toDecimal(num2, BASE);
-		if(numEq1 == numEq2){
+		int numLength = num1.length();
+		if(numLength == num2.length()){
+			for(int count = 0; count < numLength; count++){
+				if(num1.charAt(count) != num2.charAt(count)){
+					return false;
+				}
+			}
 			return true;
 		}
 		else{
@@ -170,25 +148,69 @@ public class HexCalc {
 	
 	// True if first number is greater
 	public static boolean greaterThan(String num1, String num2){
-		int numEq1 = toDecimal(num1, BASE);
-		int numEq2 = toDecimal(num2, BASE);
-		if(numEq1 > numEq2){
+		int numLength1 = num1.length();
+		int numLength2 = num2.length();
+		if(numLength1 > numLength2){
 			return true;
 		}
-		else{
+		else if(numLength1 < numLength2){
 			return false;
-		}	
+		}
+		else{
+			int count = 0;
+			while(Character.getNumericValue(num1.charAt(count)) > Character.getNumericValue(num1.charAt(count))
+					&& count != numLength2){
+				numLength1 -= 1;
+			}
+			if(numLength1 != numLength2){
+				return true;
+			}
+			else{
+				return false;
+			}
+		}
 	}
 	
 	// True if second number is greater
 	public static boolean lessThan(String num1, String num2){
-		int numEq1 = toDecimal(num1, BASE);
-		int numEq2 = toDecimal(num2, BASE);
-		if(numEq1 < numEq2){
+		int numLength1 = num1.length();
+		int numLength2 = num2.length();
+		if(numLength1 < numLength2){
 			return true;
 		}
-		else{
+		else if(numLength1 > numLength2){
 			return false;
+		}
+		else{
+			int count = 0;
+			while(Character.getNumericValue(num1.charAt(count)) < Character.getNumericValue(num1.charAt(count))
+					&& count != numLength2){
+				numLength1 -= 1;
+			}
+			if(numLength1 != numLength2){
+				return true;
+			}
+			else{
+				return false;
+			}
+		}
+	}
+	//removes initial zeros from the hexadecimal number
+	public static String omitInitZeros(String num){
+		int len = num.length();
+		if(len == 1){
+			return num;
+		}
+		else{
+			int count = 0;
+			while(num.charAt(count) == '0'){
+				count+=1;
+			}
+			String str = "";
+			for (int numCount = count; numCount<len; numCount++){
+				str += num.charAt(numCount);
+			}
+			return str;
 		}
 	}
 	
@@ -196,8 +218,8 @@ public class HexCalc {
 	public static void main(String[] args) {
 		System.out.println("enter your choice:");
 		System.out.println("1. To per form +,-,*,/ on hex numbers.");
-		System.out.println("2. To Decimal to hexadecimal.");
-		System.out.println("3. To hexadecimal to decimal.");
+		System.out.println("2. To hexadecimal to decimal.");
+		System.out.println("3. To Decimal to hexadecimal.");
 		System.out.println("4. To comapre two hexadecimal numbers.");
 		
 		Scanner in = new Scanner(System.in);
@@ -205,14 +227,12 @@ public class HexCalc {
 		
 		switch(choice){
 		case 1 :
-			System.out.print("enter the expression as (a+b): ");
-			String expr;
-			HexCalc obj = new HexCalc();
-			expr = HexCalc.getExpre();
-			obj.extractOps(expr);
+			getNum();
+			System.out.print("enter operator(+,-/,*): ");
+			opSym = in.next().charAt(0);
 			int num1, num2;
-			num1 = toDecimal (obj.firstNum, BASE);
-			num2 = toDecimal (obj.secondNum, BASE);
+			num1 = toDecimal (firstNum, BASE);
+			num2 = toDecimal (secondNum, BASE);
 			performOp(num1,num2, opSym);
 			break;
 		
@@ -225,18 +245,22 @@ public class HexCalc {
 		case 3 :
 			int hexToDeci;
 			System.out.print("enter the hexadecimal number(like- 1ab2): ");
-			String uText=getExpre();
+			String uText = in.next();
 			hexToDeci = toDecimal ( uText, BASE);
 			System.out.println("the corresponding decimal: "+ hexToDeci);
 			break;
 			
 		case 4 :
-			System.out.println("enter both numbers in a  line with space:  ");
-			String str = getExpre();
-			extractOps(str);
+			getNum();
+			firstNum = omitInitZeros(firstNum);
+			secondNum = omitInitZeros(secondNum);
 			System.out.println("first number == second number: "+ equalTo(firstNum, secondNum));
 			System.out.println("first number > second number: "+ greaterThan(firstNum, secondNum));
 			System.out.println("first number < second number: "+ lessThan(firstNum, secondNum));
+				
+		default:
+			System.out.println("incorrect operation.");
+			break;
 		}		
 	}
 }
