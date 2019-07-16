@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class StringOperation {
+public class StringOperation { 
 	//return 1 if str1=str2, else 0
 	public static int strComp(String str1, String str2){
 		int flag = 0;
