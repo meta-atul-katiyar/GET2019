@@ -1,7 +1,7 @@
 import java.util.*;
 import java.text.DecimalFormat;
 
-public class Marksheet{
+public class Marksheet{ 
 	static LinkedList<Integer> stuMarks = new LinkedList<Integer>();
 	//upto 2 decimal places
 	private static DecimalFormat df = new DecimalFormat("0.00");
