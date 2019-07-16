@@ -53,7 +53,6 @@ public class StringOperation {
 		int flag = 0, flag1 = 0, flag2 = 0, idx = 0;
 		LinkedList<String> words = new LinkedList<String>();
 		String maxLenWord = null;
-
 		while(str.charAt(idx) == ' '){
 			idx+=1;
 		}
