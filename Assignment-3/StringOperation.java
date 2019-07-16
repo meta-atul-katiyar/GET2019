@@ -47,12 +47,12 @@ public class StringOperation {
 		return tempStr;
 	}
 	//return largest words list
-	public static LinkedList<String> largeWord(String str){
+	public static String largestLastWord(String str){
 		String word = "";
 		int maxLength = 0;
 		int flag = 0, flag1 = 0, flag2 = 0, idx = 0;
 		LinkedList<String> words = new LinkedList<String>();
-		LinkedList<String> maxLenWords = new LinkedList<String>();
+		String maxLenWord = null;
 
 		while(str.charAt(idx) == ' '){
 			idx+=1;
@@ -62,24 +62,19 @@ public class StringOperation {
             			word = word + str.charAt(count);    
           		}    
           		else{  
-            			words.add(word);
             			int wordLength = word.length();
-            			if(wordLength > maxLength){
+            			if(wordLength >= maxLength){
             				maxLength = wordLength;
+            				maxLenWord = word;
             			}       
             			word = "";    
           		} 
 		}
-		for(String strWord : words){
-			if(strWord.length() == maxLength){
-				maxLenWords.add(strWord);
-			}
-		}
-		return maxLenWords;
+		return maxLenWord;
 	}
 
 	public static void main(String[] args) {
 		String uStr = "  Code, Compile, Run and Debug java program online.. Write your code in this editor and press button to exe.cute it.";
-		System.out.println(largeWord(uStr+" "));
+		System.out.println(largestLastWord(uStr+" "));
 	}
 }
