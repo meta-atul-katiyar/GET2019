@@ -39,7 +39,7 @@ public class Marksheet{
 	public static String percentStuPass(LinkedList<Integer> marks){
 		int pass =0, stuNum = 0;
 		for (int sGrade : marks){
-			count += 1;
+			stuNum += 1;
 			if (sGrade >= 40){
 				pass += 1;
 			}
@@ -48,33 +48,31 @@ public class Marksheet{
 	}
 	
 	public static void main(String[] args){
+		int stuNum = 0;
 		Scanner reader = new Scanner(System.in);
 		System.out.println("enter number of students: ");
 		try{
-			int stuNum = reader.nextInt();
+			stuNum = reader.nextInt();
 		}catch(NumberFormatException e){
 	  		System.out.println("Number format exception occurred");
        		}
-		for (int count = 0; count < stuNum; count++){
+		while (stuNum > 0){
+			int grade = 0;
 			System.out.println("enter Grade: ");
 			try{
-				int grade = reader.nextInt();
-			}catch(NumberFormatException e){
+				grade = reader.nextInt();
+			}catch(ArithmeticException e){
 	  			System.out.println("Number format exception occurred");
        			}
-			if(grade < 0 || grade > 100){
-				System.out.println("try something between 0 and 100");
-				try{
-					grade = reader.nextInt();
-				}catch(NumberFormatException e){
-	  				System.out.println("Number format exception occurred");
-       				}
-				stuMarks.add(grade);	
+			if(grade >= 0 || grade <= 100){
+				stuMarks.add(grade);
+				stuNum -= 1;
 			}
 			else{
-				stuMarks.add(grade);
+				System.out.println("try something between 0 and 100.");
+				
 			}
 		}
-		System.out.println(avgGrade(stuMarks, stuNum));
+		System.out.println(avgGrade(stuMarks));
 	}
 }
