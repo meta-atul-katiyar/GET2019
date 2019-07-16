@@ -3,7 +3,7 @@ public class Area {
 	static double PI = 3.14;
 	//area of triangle
 	public static double areaTriangle(double base, double height) {
-		return (base*height/2);
+		return (base*height)/2;
 	}
 	//area of rectangle
 	public static double areaRectangle(double side1, double side2) {
