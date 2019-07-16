@@ -1,5 +1,5 @@
 
-public class Area { 
+public class Area {  
 	static double PI = 3.14;
 	//area of triangle
 	public static double areaTriangle(double base, double height) {
