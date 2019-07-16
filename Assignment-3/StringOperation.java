@@ -3,16 +3,11 @@ import java.util.*;
 public class StringOperation { 
 	//return 1 if str1=str2, else 0
 	public static int strComp(String str1, String str2){
-		int flag = 0;
 		if(str1.length() == str2.length()){
 			for (int count = 0; count < str1.length(); count++){
 				if(str1.charAt(count) != str2.charAt(count)){
-					flag = 1;
-					break;
+					return 0;
 				}
-			}
-			if(flag == 1){
-				return 0;
 			}
 		}
 		else{
@@ -41,7 +36,7 @@ public class StringOperation {
 				tempStr += (char)(num + 32);
 			}
 			else{
-				tempStr += (char)num;
+				tempStr += strChar;
 			}
 		}
 		return tempStr;
@@ -50,8 +45,6 @@ public class StringOperation {
 	public static String largestLastWord(String str){
 		String word = "";
 		int maxLength = 0;
-		int flag = 0, flag1 = 0, flag2 = 0, idx = 0;
-		LinkedList<String> words = new LinkedList<String>();
 		String maxLenWord = null;
 		while(str.charAt(idx) == ' '){
 			idx+=1;
