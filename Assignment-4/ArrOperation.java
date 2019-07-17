@@ -24,7 +24,7 @@ public class ArrOperation {
 						countForward = arrLength;
 					}
 				}
-				largestSection = 0;				
+				largestSection = 0;
 			}
 		}
 		return max;
