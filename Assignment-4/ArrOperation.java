@@ -1,10 +1,8 @@
-import java.util.*;
 
 public class ArrOperation {
 	//return largest mirror section
 	public static int maxMirror(int[] arr){
 		int arrLength = arr.length;
-		int [] tempArray = new int [arrLength];
 		int largestSection = 0, max = 0;
 		for (int countForward = 0; countForward <= arrLength; countForward++){
 			for (int countReverse = arrLength-1; countReverse >= 0; countReverse--){
@@ -90,45 +88,17 @@ public class ArrOperation {
 					}
 					int xIndex = count;
 					countX += 1;
-					if(yIndex > xIndex){
-						for (int index = yIndex; index > xIndex+1; index--){
-							if(arr[index-1] == X){
-								index -= 1;
-							}
-							else{
-								arr[index] = arr[index-1];
-								arr[index-1] = Y;
-							}
-						}
-						int tempYIndex = yIndex + 1;
-						while((tempYIndex < arrLength && arr[tempYIndex] != Y) ||
-								(arr[tempYIndex -1] == X && arr[tempYIndex] == Y)){
-							tempYIndex +=1;
-						}
-						if(tempYIndex > yIndex){
-							yIndex = tempYIndex;
-							countY += 1;
-						}
+					arr[yIndex] = arr[xIndex+1];
+					arr[xIndex+1] = Y;
+					//updating index value of Y to next position
+					int tempYIndex = yIndex + 1;
+					while((tempYIndex < arrLength && arr[tempYIndex] != Y) ||
+							(arr[tempYIndex -1] == X && arr[tempYIndex] == Y)){
+						tempYIndex +=1;
 					}
-					else{
-						for (int index = yIndex; index <= xIndex+1; index++){
-							int next = index+1;
-							if(arr[index+1] == X){
-								next += 1;
-							}
-							arr[index] = arr[next];
-							arr[next] = Y;
-							index = next;
-						}
-						int tempYIndex = yIndex + 1;
-						while((tempYIndex < arrLength && arr[tempYIndex] != Y) ||
-								(arr[tempYIndex -1] == X && arr[tempYIndex] == Y)){
-							tempYIndex +=1;
-						}
-						if(tempYIndex > yIndex){
-							yIndex = tempYIndex;
-							countY += 1;
-						}
+					if(tempYIndex > yIndex){
+						yIndex = tempYIndex;
+						countY += 1;
 					}
 				}
 			}
@@ -161,7 +131,7 @@ public class ArrOperation {
 	}
 
 	public static void main(String[] args) {
-		int[] arr = {5, 4, 9, 4, 9, 5};
+		int[] arr = {1, 4, 1, 5};
 		System.out.println(countClumps(arr));
 		int[] fixedXY = fixXY((arr),4,5);
 		for (int count = 0; count < fixedXY.length; count++){
