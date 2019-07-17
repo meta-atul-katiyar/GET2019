@@ -1,7 +1,6 @@
 import java.util.*;
 
 public class ArrOperation {
-
 	//return largest mirror section
 	public static int maxMirror(int[] arr){
 		int arrLength = arr.length;
