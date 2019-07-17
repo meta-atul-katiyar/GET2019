@@ -1,4 +1,3 @@
-
 public class ArrOperation {
 	//return largest mirror section
 	public static int maxMirror(int[] arr){
