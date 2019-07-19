@@ -5,13 +5,9 @@ public class LCMHCF {
 		if(y==0){
 			return x;
 		}
-		if(x>y){
-			int mod = x%y;
-			return lcm(y, mod);
-		}
 		else{
-			int mod = y%x;
-			return lcm(x,mod);
+			int mod = x%y;
+			return HCF(x,mod);
 		}
 	}
 	// return LCM of Two numbers recursively
