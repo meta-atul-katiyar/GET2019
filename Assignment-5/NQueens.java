@@ -1,22 +1,17 @@
 
 public class NQueens {
-	static int N = 8;
-	static int [][] board = new int [][] 
-			{
-            { 0,  0,  0,  0, 0,  0,  0,  0},
-            { 0,  0,  0,  0, 0,  0,  0,  0},
-            { 0,  0,  0,  0, 0,  0,  0,  0},
-            { 0,  0,  0,  0, 0,  0,  0,  0},
-            { 0,  0,  0,  0, 0,  0,  0,  0},
-            { 0,  0,  0,  0, 0,  0,  0,  0},
-            { 0,  0,  0,  0, 0,  0,  0,  0},
-            { 0,  0,  0,  0, 0,  0,  0,  0} 
-	};
-	
+	static int N;
+	static int [][] board;
 	//crate board
-	public static void createBoard(int n){
+	public static int[][] createBoard(int n){
 		N = n;
-		
+		board = new int[N][N];
+		for(int i = 0; i<N;i++){
+			for (int j=0;j<N;j++){
+				board[i][j] = 0;
+			}
+		}
+		return board;
 	}
 	//check the next chosen place is valid or not
 	public static boolean isValid(int [][]board, int rowValue, int columnValue, int n){
@@ -40,6 +35,22 @@ public class NQueens {
 				return false;
 			}
 			row+=1; column+=1;
+		}
+		row = rowValue; column = columnValue;
+		while(row<n && column>=0){
+			if(board[row][column] == 1){
+				return false;
+			}
+			row += 1;
+			column -= 1;
+		}
+		row = rowValue; column = columnValue;
+		while(row>=0 && column<n){
+			if(board[row][column] == 1){
+				return false;
+			}
+			row -= 1;
+			column += 1;
 		}
 		return true;
 	}
@@ -87,6 +98,7 @@ public class NQueens {
 	
 	
 	public static void main(String[] args){
+		createBoard(3);
 		System.out.print(nQueen(board, 0, N));
 	}
 }
