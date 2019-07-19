@@ -4,6 +4,9 @@ public class NQueens {
 	static int [][] board;
 	//crate board
 	public static int[][] createBoard(int n){
+		if(n<0){
+			throw new AssertionError("number must be positive.");
+		}
 		N = n;
 		board = new int[N][N];
 		for(int i = 0; i<N;i++){
@@ -79,17 +82,37 @@ public class NQueens {
 			displayBoard();
 			return true;
 		}
-		for (int countRow = startRow; countRow < N; countRow++){
-			for (int countColumn = 0; countColumn < N; countColumn++){
-				if( isValid(board, countRow, countColumn, N)){
-					applyValue(board, countRow, countColumn);
-					dimensionOfMatrix -= 1;
-					
-					if(nQueen(board, countRow, dimensionOfMatrix)){
-						return true;
+		//
+		if(startRow>0){
+			for (int countRow = 0; countRow < N; countRow++){
+				for (int countColumn = startRow; countColumn < N; countColumn++){
+					if( isValid(board, countRow, countColumn, N)){
+						applyValue(board, countRow, countColumn);
+						dimensionOfMatrix -= 1;
+						
+						if(nQueen(board, countRow, dimensionOfMatrix)){
+							return true;
+						}
+						removeValue(board, countRow, countColumn);
+						dimensionOfMatrix += 1;
 					}
-					removeValue(board, countRow, countColumn);
-					dimensionOfMatrix += 1;
+				}
+			}
+		}
+		//
+		else{
+			for (int countRow = startRow; countRow < N; countRow++){
+				for (int countColumn = 0; countColumn < N; countColumn++){
+					if( isValid(board, countRow, countColumn, N)){
+						applyValue(board, countRow, countColumn);
+						dimensionOfMatrix -= 1;
+						
+						if(nQueen(board, countRow, dimensionOfMatrix)){
+							return true;
+						}
+						removeValue(board, countRow, countColumn);
+						dimensionOfMatrix += 1;
+					}
 				}
 			}
 		}
@@ -98,7 +121,7 @@ public class NQueens {
 	
 	
 	public static void main(String[] args){
-		createBoard(3);
-		System.out.print(nQueen(board, 0, N));
+		createBoard(9);
+		System.out.print(nQueen(board, 4, N));
 	}
 }
