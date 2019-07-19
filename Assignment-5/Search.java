@@ -1,28 +1,36 @@
-import java.util.Arrays;
 
 public class Search {
-	public static int linearSearch(int[] arr, int number, int index){
+	//take array the number to search
+	public static int linearSearch(int[] arr, int number){
+		int arrLength = arr.length;
+		return linearSearchInternal(arr, number, --arrLength);
+	}
+	// does internal linear search operation
+	public static int linearSearchInternal(int[] arr, int number, int index){
+		if(index == 0){
+			throw new AssertionError("number not found.");
+		}
 		if(arr[index] == number){
 			return (index);
 		}
-		return linearSearch(arr, number, ++index);
+		return linearSearchInternal(arr, number, --index);
 	}
-	
+	//binary search
 	public static int binarySearch(int[] arr, int number, int start, int end){
-		int mid = end-start/2;
+		int mid = (end+start)/2;
 		if(arr[mid] == number){
 			return mid;
 		}
 		else if(arr[mid] > number){
-			return (binarySearch(Arrays.copyOfRange(arr, 0, mid), number, start, mid-1));
+			return (binarySearch(arr, number, start, mid));
 		}
 		else{
-			return (binarySearch(Arrays.copyOfRange(arr, mid, end), number, mid, end));
+			return (binarySearch(arr, number, mid, end));
 		}
 	}
 	
 	public static void main(String[] args){
-		int[] arr = {1,21,22,33,12,3,4,5,6,7,8,9,10};
-		System.out.print(binarySearch(arr, 6, 0, 12 ));
+		int[] arr = {1,2,3,4,5,6,7,8,9,10,11,12};
+		System.out.print(binarySearch(arr, 6, 0, 11));
 	}
 }
