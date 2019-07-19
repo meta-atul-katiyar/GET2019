@@ -19,10 +19,27 @@ public class LCMHCF {
 		int mod = num1%num2;
 		return HCF(num2, mod);
 	}
+	//run recurrsively
+	public static int LCMInternal(int x,int y,int twiceOfLargest){
+		if((twiceOfLargest % x == 0) && (twiceOfLargest % y == 0)){
+			return twiceOfLargest;
+		}
+		return LCMInternal(x,y,++twiceOfLargest);
+	}
 	// return LCM of Two numbers recursively
 	public static int LCM(int x, int y){
-		int hcf = hcfLCMInput(x,y);
-		return (x*y/hcf);
+		if(x>y){
+			if(x % y == 0){
+				return x;
+			}
+			return LCMInternal(x,y,2*x);
+		}
+		else{
+			if(y%x == 0){
+				return y;
+			}
+			return LCMInternal(x,y,2*y);
+		}
 	}
 	
 	public static void main(String[] args){
