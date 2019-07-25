@@ -178,10 +178,8 @@ public class ZooManagementSystem {
 			case "birdsZones":
 				return removeBird(animalType, id);
 		}
-		return 0;
-			
+		return 0;	
 	}
-	
 	
 	/**
 	 * @param animalType
@@ -285,14 +283,11 @@ public class ZooManagementSystem {
 					
 				case "Ostrich":
 					Ostrich ostrich = new Ostrich(age, weight, gender);
-					return addBirdsZone("Ostrich",ostrich.getId());	
-					
+					return addBirdsZone("Ostrich",ostrich.getId());			
 			}
 		return 0;
 	}
 	
-	
-
 	public static void main(String[] args){
 		addToCategory();
 		addZones(4, "Tiger");
