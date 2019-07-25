@@ -7,13 +7,6 @@ public abstract class Birds extends Animal {
 		// TODO Auto-generated constructor stub
 	}
 
-	private static List<Cage> cages;
-
-	@Override
-	public String getSound() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	@Override
 	public boolean isWarmBlooded() {
@@ -24,12 +17,11 @@ public abstract class Birds extends Animal {
 	@Override
 	public boolean isColdBlooded() {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	@Override
 	public boolean hasFeathers() {
-		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 }
