@@ -11,6 +11,7 @@ public class Zone {
 	Zone(int cageNumber){
 		this.id = 110000 + count++;
 		this.cageNumber = cageNumber;
+		
 	}
 	
 	public void addCage(int capacity, String animalType){
@@ -19,20 +20,39 @@ public class Zone {
 		this.cageNumber -= 1;
 	}
 	
-	public int cageCapcity(String animalType){
-		if(cages == null){
-			addCage(4, animalType);
-		}
+	public int animalToCage(String animalType, int id){
+		int flag = 0;
 		for(Cage cage : cages){
 			if(cage.animalType == animalType && cage.capacity > 0){
-				return cage.capacity;
+				cage.addAnimal(id);
+				flag = 1;
+				System.out.println("animal with id- "+id+" added to cage- "+cage.id);
+				return id;
 			}
 		}
-		if(Zone.cageNumber > 0){
-			addCage(4,animalType);
-			return 4;
-			//throw new AssertionError ("add new cage in the zone.");
+		if(Zone.cageNumber > 0 && flag == 0){
+			throw new AssertionError ("add new cage in the zone.");
+		}
+		else if(Zone.cageNumber <= 0 && flag == 0){
+			throw new AssertionError("no space in existing cages.");
 		}
 		return 0;
 	}
+	
+	
+	public int removeAnimal(String animalType, int id){
+		for(Cage cage : cages){
+			if(cage.animalType == animalType){
+				for(int cageAnimalId : cage.animals){
+					if(cageAnimalId == id){
+						cage.animals.removeFirstOccurrence( id);
+						return id;
+					}
+				}
+			}
+			
+		}
+		return 0;
+	}
+	
 }
