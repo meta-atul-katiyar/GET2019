@@ -1,0 +1,30 @@
+
+public class Gharial extends Reptiles{
+	String foodHabit;
+	Gharial(float age, float weight, String gender) {
+		super(age, weight, gender);
+		this.foodHabit = "Carnivorus";
+
+	}
+
+	@Override
+	public String getSound() {
+		return "GHARIAL";
+	}
+
+	@Override
+	public boolean isWarmBlooded() {
+		return false;
+	}
+
+	@Override
+	public boolean isColdBlooded() {
+		return true;
+	}
+
+	@Override
+	public boolean hasFeathers() {
+		return false;
+	}
+
+}
