@@ -13,8 +13,9 @@ public abstract class Animal {
 	int isAlive;
 	Date admissionDate;
 
-	Animal(float age, float weight, String gender) {
+	Animal( float age, float weight, String gender) {
 		this.id = 120000 + count++;
+		this.name = Integer.toString(this.id);
 		this.age = age;
 		this.weight = weight;
 		this.gender = gender;
