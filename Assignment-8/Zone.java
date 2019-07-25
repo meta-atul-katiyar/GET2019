@@ -14,12 +14,22 @@ public class Zone {
 		
 	}
 	
+	/**
+	 * @param capacity
+	 * @param animalType
+	 * add cage to the cage list
+	 */
 	public void addCage(int capacity, String animalType){
 		Cage cage = new Cage(capacity, animalType);
 		cages.add(cage);
 		this.cageNumber -= 1;
 	}
 	
+	/**
+	 * @param animalType
+	 * @param id
+	 * @return id of animal if added else return 0
+	 */
 	public int animalToCage(String animalType, int id){
 		int flag = 0;
 		for(Cage cage : cages){
@@ -40,6 +50,11 @@ public class Zone {
 	}
 	
 	
+	/**
+	 * @param animalType
+	 * @param id
+	 * @return id if animal is removed else 0
+	 */
 	public int removeAnimal(String animalType, int id){
 		for(Cage cage : cages){
 			if(cage.animalType == animalType){
