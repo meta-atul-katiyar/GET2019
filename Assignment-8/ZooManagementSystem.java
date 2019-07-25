@@ -9,6 +9,20 @@ public class ZooManagementSystem {
 	private static LinkedList<String>mammals = new LinkedList<String>();
 	private static LinkedList<String>reptiles = new LinkedList<String>();
 	private static LinkedList<String>birds = new LinkedList<String>();
+	//list of objects of animals
+	private static LinkedList<Tiger>tigerList = new LinkedList<Tiger>();
+	private static LinkedList<Lion>lionList = new LinkedList<Lion>();
+	private static LinkedList<Panther>pantherList = new LinkedList<Panther>();
+	private static LinkedList<Elephant>elephantList = new LinkedList<Elephant>();
+	private static LinkedList<Gorilla>gorillaList = new LinkedList<Gorilla>();
+	private static LinkedList<Deer>deerList = new LinkedList<Deer>();
+	private static LinkedList<Crocodile>crocodileList = new LinkedList<Crocodile>();
+	private static LinkedList<Gharial>gharialList = new LinkedList<Gharial>();
+	private static LinkedList<Peacock>peacockList = new LinkedList<Peacock>();
+	private static LinkedList<Flamingo>flamingoList = new LinkedList<Flamingo>();
+	private static LinkedList<Ostrich>ostrichList = new LinkedList<Ostrich>();
+	private static LinkedList<Parrot>parrotList = new LinkedList<Parrot>();
+	
 	
 	/**
 	 * add animals to their category list
@@ -178,8 +192,10 @@ public class ZooManagementSystem {
 			case "birdsZones":
 				return removeBird(animalType, id);
 		}
-		return 0;	
+		return 0;
+			
 	}
+	
 	
 	/**
 	 * @param animalType
@@ -235,55 +251,90 @@ public class ZooManagementSystem {
 			switch(animalType){
 				case "Tiger":
 					Tiger tiger = new Tiger(age, weight, gender);
-					return addMammalsZone("Tiger",tiger.getId());
+					if(addMammalsZone("Tiger",tiger.getId()) > 0){
+						tigerList.add(tiger);
+						return tiger.getId();
+					}
+					return 0;
 				
 				case "Lion":
 					Lion lion = new Lion(age, weight, gender);
-					return addMammalsZone("Lion",lion.getId());
+					if(addMammalsZone("Lion",lion.getId()) > 0){
+						lionList.add(lion);
+						return lion.getId();
+					}
+					return 0;
 				
 				case "Elephant":
 					Elephant elephant = new Elephant(age, weight, gender);
-					return addMammalsZone("Elephant",elephant.getId());
+					if(addMammalsZone("Elephant",elephant.getId()) > 0){
+						elephantList.add(elephant);
+						return elephant.getId();
+					}
+					return 0;
 				
 				case "Panther":
 					Panther panther = new Panther(age, weight, gender);
-					return addMammalsZone("Panther",panther.getId());
+					if(addMammalsZone("Panther",panther.getId()) > 0){
+						pantherList.add(panther);
+					}
+					return 0;
 				
 				case "Deer":
 					Deer deer = new Deer(age, weight, gender);
-					return addMammalsZone("Deer",deer.getId());
-					
-				case "Leopard":
-					Leopard leopard = new Leopard(age, weight, gender);
-					return addMammalsZone("Leopard",leopard.getId());
+					if(addMammalsZone("Deer",deer.getId()) > 0){
+						deerList.add(deer);
+					}
+					return 0;
 					
 				case "Gorilla":
 					Gorilla gorilla = new Gorilla(age, weight, gender);
-					return addMammalsZone("Gorilla",gorilla.getId());
+					if(addMammalsZone("Gorilla",gorilla.getId()) > 0){
+						gorillaList.add(gorilla);
+					}
+					return 0;
 					
 				case "Crocodile":
 					Crocodile crocodile = new Crocodile(age, weight, gender);
-					return addReptilesZone("Crocodile",crocodile.getId());
+					if(addReptilesZone("Crocodile",crocodile.getId()) > 0){
+						crocodileList.add(crocodile);
+					}
+					return 0;
 					
 				case "Gharial":
 					Gharial gharial = new Gharial(age, weight, gender);
-					return addReptilesZone("Gharial",gharial.getId());
+					if(addReptilesZone("Gharial",gharial.getId())> 0){
+						gharialList.add(gharial);
+					}
+					return 0;
 					
 				case "Flamingo":
 					Flamingo flamingo = new Flamingo(age, weight, gender);
-					return addBirdsZone("Flamingo",flamingo.getId());
+					if(addBirdsZone("Flamingo",flamingo.getId()) > 0){
+						flamingoList.add(flamingo);
+					}
+					return 0;
 					
 				case "Peacock":
 					Peacock peacock = new Peacock(age, weight, gender);
-					return addBirdsZone("Peacock",peacock.getId());	
+					if(addBirdsZone("Peacock",peacock.getId()) > 0){
+						peacockList.add(peacock);
+					}
+					return 0;	
 					
 				case "Parrot":
 					Parrot parrot = new Parrot(age, weight, gender);
-					return addBirdsZone("Parrot",parrot.getId());
+					if(addBirdsZone("Parrot",parrot.getId()) > 0){
+						parrotList.add(parrot);
+					}
+					return 0;
 					
 				case "Ostrich":
 					Ostrich ostrich = new Ostrich(age, weight, gender);
-					return addBirdsZone("Ostrich",ostrich.getId());			
+					if(addBirdsZone("Ostrich",ostrich.getId()) > 0){
+						ostrichList.add(ostrich);
+					}
+					return 0;				
 			}
 		return 0;
 	}
@@ -298,6 +349,6 @@ public class ZooManagementSystem {
 		System.out.println(addAnimal("Tiger",1,6,"Male"));
 		System.out.println(addAnimal("Lion",10,10,"Male"));
 		System.out.println(addAnimal("Parrot",3,2,"Female"));
-		System.out.println( removeAnimal("Tiger", 120001));
+		System.out.println( removeAnimal("Tiger", 120001));	
 	}
 }
