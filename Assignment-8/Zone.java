@@ -1,6 +1,5 @@
 import java.util.*;
 
-
 public class Zone {
 	private int id;
 	private static int count = 0;
@@ -10,8 +9,7 @@ public class Zone {
 	
 	Zone(int cageNumber){
 		this.id = 110000 + count++;
-		this.cageNumber = cageNumber;
-		
+		this.cageNumber = cageNumber;	
 	}
 	
 	/**
@@ -49,7 +47,6 @@ public class Zone {
 		return 0;
 	}
 	
-	
 	/**
 	 * @param animalType
 	 * @param id
@@ -61,13 +58,12 @@ public class Zone {
 				for(int cageAnimalId : cage.animals){
 					if(cageAnimalId == id){
 						cage.animals.removeFirstOccurrence( id);
+						cage.capacity += 1;
 						return id;
 					}
 				}
 			}
-			
 		}
 		return 0;
 	}
-	
 }
