@@ -143,38 +143,9 @@ public class ShapeFactory{
 				shapeArray[count++] = shape;
 			}
 		}
-
 		else{
 			return null;
 		}
-
 		return shapeArray;
 	}
-
-	public static void main(String[] args) {
-		List<Double> sizeParam = new ArrayList<Double>();
-		double[] point1 = new double[]{20,20},
-				point2 = new double[]{40,40},
-				point3 = new double[]{60,60};
-		sizeParam.add(0,10.0);
-    	ShapeFactory shapeFactory = new ShapeFactory();
-
-    	Shape shape1 = shapeFactory.createShape("SQUARE", point3, sizeParam);
-    	Shape shape = shapeFactory.createShape("CIRCLE", point1, sizeParam);
-    	shape = shapeFactory.createShape("SQUARE", point2, sizeParam);
-    	//shape = shapeFactory.createShape("SQUARE", point2, sizeParam);
-    	sizeParam.add(0,11.0);
-    	shape = shapeFactory.createShape("SQUARE", point3, sizeParam);
-    	//System.out.println(shape.typeOfObject());
-    	shapeFactory.shapesOnScreen();
-    	//shapeFactory.deleteFromScreen(shape1);
-    	//shapeFactory.deleteShapeFromScreen("SQUARE");
-    	//System.out.println("after deletion");
-    	Shape[] shapeArr = shapeInOrder("timestamp");
-    	for (Shape tempShape : shapeArr){
-    		System.out.println(tempShape.typeOfObject()+" "+tempShape.timeStamp());
-    	}
-    	//shapeFactory.shapesOnScreen();
-
-    }
 }
