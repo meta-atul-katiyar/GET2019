@@ -13,11 +13,10 @@ public class LinkedList {
 			list.start = newNode;
 			list.end = newNode;
 		}
-		else{
-			Node lastNode = list.end;
-			lastNode.next = newNode;
-			list.end = newNode;
-		}
+
+		Node lastNode = list.end;
+		lastNode.next = newNode;
+		list.end = newNode;
 		return list;
 	 }
 	
@@ -43,42 +42,38 @@ public class LinkedList {
 	 * @return specified rotated list
 	 */
 	public static LinkedList clockwiseRotation(LinkedList list, int L, int R, int N){
-		if(N > R-L+1){
-			N %= (R-L+1);
-		}
 		if(list == null){
 			throw new AssertionError("enpty list.");
+		}
+		if(N > R-L+1){
+			N %= (R-L+1);
 		}
 		if(N <= 0){
 			return list;
 		}
-		else{
-			Node leftNode = list.start;
-			int l = L;
-			while(l-- > 2){
-				leftNode = leftNode.next;
-			}
-			Node rightNode = leftNode;
-			int r = R-L;
-			while(r-- > 1){
-				if(rightNode.next.next == null){
-					throw new AssertionError("right element is not in list,");
-				}
-				rightNode = rightNode.next;
-			}
-			if(L == 1){
-				Node currNode = list.start;
-				list.start = rightNode.next;
-				rightNode.next = rightNode.next.next;
-				list.start.next = currNode;
-			}
-			else{
-				Node currNode = leftNode.next;
-				leftNode.next = rightNode.next;
-				rightNode.next = rightNode.next.next;
-				leftNode.next.next = currNode;
-			}
+		Node leftNode = list.start;
+		int l = L;
+		while(l-- > 2){
+			leftNode = leftNode.next;
 		}
+		Node rightNode = leftNode;
+		int r = R-L;
+		while(r-- > 1){
+			if(rightNode.next.next == null){
+				throw new AssertionError("right element is not in list,");
+			}
+			rightNode = rightNode.next;
+		}
+		if(L == 1){
+			Node currNode = list.start;
+			list.start = rightNode.next;
+			rightNode.next = rightNode.next.next;
+			list.start.next = currNode;
+		}
+		Node currNode = leftNode.next;
+		leftNode.next = rightNode.next;
+		rightNode.next = rightNode.next.next;
+		leftNode.next.next = currNode;
 		return clockwiseRotation(list, L, R, --N);
 	}
 	
