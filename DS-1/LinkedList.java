@@ -14,6 +14,11 @@ public class LinkedList {
 		}
 	}
 	
+	/**
+	 * @param list
+	 * @param data
+	 * @return list with values inserted in it
+	 */
 	public static LinkedList insert(LinkedList list, int data){
 		Node newNode = new Node(data);
 		if(list.start == null){
@@ -28,6 +33,10 @@ public class LinkedList {
 		return list;
 	 }
 	
+	/**
+	 * @param list
+	 * print list on console
+	 */
 	public static void printList(LinkedList list) {
 		Node currNode = list.start;
 		System.out.println("linked list:");
@@ -38,6 +47,13 @@ public class LinkedList {
 		System.out.println();
 	}
 	
+	/**
+	 * @param list
+	 * @param L
+	 * @param R
+	 * @param N
+	 * @return specified rotated list
+	 */
 	public static LinkedList clockwiseRotation(LinkedList list, int L, int R, int N){
 		if(N > R-L+1){
 			N %= (R-L+1);
@@ -78,6 +94,10 @@ public class LinkedList {
 		return clockwiseRotation(list, L, R, --N);
 	}
 	
+	/**
+	 * @param list
+	 * @return true if loop exist else false
+	 */
 	public boolean loopInList(LinkedList list){
 		Node singleStep = list.start,
 				doubleStep = list.start.next;
@@ -90,24 +110,5 @@ public class LinkedList {
 			doubleStep = doubleStep.next.next;
 		}
 		return true;
-	}
-		
-	
-	public static void main(String[]args){
-		LinkedList list = new LinkedList();
-		list = insert(list, 2);
-		list = insert(list, 3);
-		list = insert(list, 4);
-		list = insert(list, 5);
-		list = insert(list, 6);
-		list = insert(list, 7);
-		//list.end.next = list.start;
-		
-		printList(list);
-
-		list = clockwiseRotation(list, 1, 6, 4);
-		printList(list);
-		
-		System.out.println(list.loopInList(list));
 	}
 }
