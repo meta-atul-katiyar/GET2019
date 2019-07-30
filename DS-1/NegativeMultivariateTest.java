@@ -4,7 +4,7 @@ import org.junit.Test;
 import org.junit.Before;
 
 public class NegativeMultivariateTest {
-	private MultivariatePoly.Degree multivariatePolyDegree;
+	private Degree multivariatePolyDegree;
 	private MultivariatePoly.Coefficient multivariatePolymultivariatePoly;
 	
 	 @Test (expected = AssertionError.class)
