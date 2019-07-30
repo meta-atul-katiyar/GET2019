@@ -1,18 +1,6 @@
 
 public class LinkedList {
-
 	Node start = null, end;
-	
-	// This inner class is made static so that main() can access it 
-	static class Node{
-		int data;
-		Node next;
-		
-		Node (int data){
-			this.data = data;
-			next = null;
-		}
-	}
 	
 	/**
 	 * @param list
