@@ -4,7 +4,7 @@ import org.junit.Test;
 
 public class NegativeLinkedListTest {
 	private LinkedList linkedList;
-	private LinkedList.Node node;
+	private Node node;
 	
 	 @Test (expected = java.lang.NullPointerException.class)
 	 public void testList(){
