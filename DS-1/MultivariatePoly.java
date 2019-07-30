@@ -3,31 +3,6 @@ public class MultivariatePoly {
 	int variableNum;
 	Degree start = null, end;
 	
-	//list of Degree that contains list of coefficient and array of power variables
-	static class Degree{
-		int data;
-		Degree nextDegree;
-		Coefficient nextCoeff;
-		
-		Degree (int data, Coefficient coefficientObject){
-			this.data = data;
-			nextCoeff = coefficientObject;
-			nextDegree = null;
-		}
-	}
-	//list of coefficient and array of power of variables
-	static class Coefficient{
-		int[] varPowArray;
-		int coeffValue;
-		Coefficient next;
-		
-		Coefficient (int[] data, int coeffValue){
-			this.varPowArray = data;
-			this.coeffValue = coeffValue;
-			next = null;
-		}
-	}
-	
 	MultivariatePoly(int n){
 		variableNum = n;
 	}
