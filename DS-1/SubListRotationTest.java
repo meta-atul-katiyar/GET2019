@@ -6,7 +6,7 @@ import org.junit.Before;
 public class SubListRotationTest {
 	private int[] expected = new int[]{4, 5, 6, 7, 2, 3};
 	private LinkedList linkedList;
-	private LinkedList.Node node;
+	private Node node;
 	 
 	 @Test
 	 public void testListRotation(){
