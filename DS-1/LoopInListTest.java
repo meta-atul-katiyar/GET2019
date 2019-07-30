@@ -6,7 +6,7 @@ import org.junit.Before;
 public class LoopTest {
 	private boolean expected = true;
 	private LinkedList linkedList;
-	private LinkedList.Node node;
+	private Node node;
 	 
 	 @Test
 	 public void testListRotation(){
