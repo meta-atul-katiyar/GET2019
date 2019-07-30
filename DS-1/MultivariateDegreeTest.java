@@ -5,8 +5,8 @@ import org.junit.Test;
 public class MultivariateDegreeTest {
 	private int expected = 8;
 	private MultivariatePoly multivariatePoly;
-	private MultivariatePoly.Degree multivariatePolyDegree;
-	private MultivariatePoly.Coefficient multivariatePolymultivariatePoly;
+	private Degree multivariatePolyDegree;
+	private Coefficient multivariatePolymultivariatePoly;
 	 
 	 @Test 
 	 public void testPolyDegree(){
