@@ -5,5 +5,4 @@ interface Stack {
 	public String pop();
 	public String peep();
 	boolean isEmpty();
-	//boolean isFull();
 }
