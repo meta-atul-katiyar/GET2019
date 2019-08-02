@@ -8,6 +8,13 @@ public class ViratAndBowler {
 		this.bowlerNum = bowlerNum;
 		this.viratBowls = viratBowls;
 		this.bowlArray = bowlArray;
+		int bowlSum = 0;
+		for(int count = 0; count < bowlArray.length; count++){
+			bowlSum += bowlArray[count][1];
+		}
+		if(viratBowls > bowlSum){
+			throw new AssertionError("virat cannot play more bowls, then left");
+		}
 	}
 	
 	
