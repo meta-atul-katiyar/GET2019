@@ -17,9 +17,21 @@ public class PriorityQueueImplement implements PriorityQueue{
 		}
 		else if(flag == 1){
 			int index = this.end++;
-				while(index >= start && array[index][1] < num[1]){
+			if(end >= N){
+				end = 0;
+			}
+			
+			while(index != start-1 && array[index][1] < num[1]){
+				if(index+1 >= N && start < index){
+					array[0] = array[index--];
+				}
+				{
 					array[index+1] = array[index--];
 				}
+				if(index < 0 && start-1 > index){
+					index = N-1;
+				}
+			}
 				array[index+1] = num;
 
 		}
