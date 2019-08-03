@@ -1,7 +1,4 @@
 
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.Set;
 import java.util.*;
 
 public class EmployNaturalSort{
@@ -9,8 +6,8 @@ public class EmployNaturalSort{
 	Set<Employ> employSet = new HashSet<Employ>();
 	LinkedList<Employ> sortedEmpList = new LinkedList<Employ>();
 
-	public void addToEmploy(String name, String address){
-		Employ employ = new Employ(name, address);
+	public void addToEmploy(int id, String name, String address){
+		Employ employ = new Employ(id, name, address);
 		employSet.add(employ);
 	}
 
@@ -31,15 +28,23 @@ public class EmployNaturalSort{
 				sortedEmpList.add(index, emp);
 			}
 		}
-		
+	}
+	
+	public int[] sortedEmpID(){
+		int empNum = sortedEmpList.size(), index = 0;
+		int [] empID = new int[empNum];
+		for(Employ emp : this.sortedEmpList){
+			empID[index++] = emp.getEmpId();
+		}
+		return empID;
 	}
 	
 	public static void main(String[]args){
 		EmployNaturalSort ens = new EmployNaturalSort();
-		ens.addToEmploy("jvv vv", "asdfghj");
-		ens.addToEmploy("fvv vv", "asdfghj");
-		ens.addToEmploy("dvv vv", "asdfghj");
-		ens.addToEmploy("avd vv", "asdfghj");
+		ens.addToEmploy(14, "jvv vv", "asdfghj");
+		ens.addToEmploy(2, "fvv vv", "asdfghj");
+		ens.addToEmploy(5, "dvv vv", "asdfghj");
+		ens.addToEmploy(11, "avd vv", "asdfghj");
 		
 		ens.sort();
 		for(Employ emp: ens.sortedEmpList){
