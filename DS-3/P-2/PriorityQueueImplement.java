@@ -25,15 +25,12 @@ public class PriorityQueueImplement implements PriorityQueue{
 				if(index+1 >= N && start < index){
 					array[0] = array[index--];
 				}
-				{
-					array[index+1] = array[index--];
-				}
+				array[index+1] = array[index--];
 				if(index < 0 && start-1 > index){
 					index = N-1;
 				}
 			}
 				array[index+1] = num;
-
 		}
 		
 	}
