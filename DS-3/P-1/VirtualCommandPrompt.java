@@ -187,9 +187,18 @@ public class VirtualCommandPrompt{
 	 * print tree structure
 	 */
 	public void tree(Node rootNode){
-		System.out.println(rootNode.getDirName());
-		for(Node node: rootNode.innerDir){
-			tree(node);
+		if(rootNode.visited == false){
+			System.out.print(rootNode.getDirName()+"-");
+			if(rootNode.innerDir.peek() == null){
+				System.out.print("\n");
+				rootNode.visited = true;
+				System.out.print(rootNode.parent.getDirName()+"-");
+				tree(this.root);				
+			}
+			rootNode.visited = true;
+			for(Node node: rootNode.innerDir){
+				tree(node);
+			}
 		}
 	}
 
@@ -264,14 +273,19 @@ public class VirtualCommandPrompt{
 		vcp.performOp(getUserInput("     mkdir p"));
 		vcp.performOp(getUserInput("     mkdir p/q"));
 		vcp.performOp(getUserInput("     mkdir p/m"));
+		vcp.performOp(getUserInput("     mkdir p/m/c"));
+		vcp.performOp(getUserInput("     mkdir p/m/l"));
+		vcp.performOp(getUserInput("     mkdir p/n"));
 		vcp.performOp(getUserInput("     mkdir p/q/a"));
 		vcp.performOp(getUserInput("     mkdir p/q/b"));
 		vcp.performOp(getUserInput("     mkdir p/q/d"));
 		vcp.performOp(getUserInput("     mkdir p/q/d/f"));
-		address = vcp.find(currentDir, "f", address);
+
+		vcp.tree(root);
+		/*address = vcp.find(currentDir, "f", address);
 		for(String node: address){
 			System.out.print(node+"/");
-		}
+		}*/
 		
 	}
 }
