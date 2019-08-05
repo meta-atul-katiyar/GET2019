@@ -6,6 +6,7 @@ public class Node{
 	LinkedList<Node> innerDir = new LinkedList<Node>();
 	Date createTime;
 	Node parent = null;
+	boolean visited = false;
 	
 	Node(String name){
 		for(int count = 0; count < name.length(); count++){
