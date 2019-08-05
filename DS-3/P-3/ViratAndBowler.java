@@ -8,13 +8,6 @@ public class ViratAndBowler {
 		this.bowlerNum = bowlerNum;
 		this.viratBowls = viratBowls;
 		this.bowlArray = bowlArray;
-		int bowlSum = 0;
-		for(int count = 0; count < bowlArray.length; count++){
-			bowlSum += bowlArray[count][1];
-		}
-		if(viratBowls > bowlSum){
-			throw new AssertionError("virat cannot play more bowls, then left");
-		}
 	}
 	
 	
@@ -22,20 +15,20 @@ public class ViratAndBowler {
 	 * @param bArray
 	 * @return max heap array
 	 */
-	public int[][] minHeapyfy(int[][]bArray){
+	public int[][] maxHeapyfy(int[][]bArray){
 		int arrLength = bArray.length;
 		int hNum = (int)Math.log(arrLength);
-		for(int heapyfyNum = 0; heapyfyNum <= arrLength- hNum; heapyfyNum++){
-			for(int count = 0; count < arrLength-2; count++){
-				if(bArray[count][1] < bArray[count+1][1]){
+		for(int heapyfyNum = 0; heapyfyNum <= hNum; heapyfyNum++){
+			for(int count = 0; count < arrLength/2-2; count++){
+				if( bArray[count][1] < bArray[2*count+1][1]){
 					int[] temp = bArray[count];
-					bArray[count] = bArray[count+1];
-					bArray[count+1] = temp;
+					bArray[count] = bArray[2*count+1];
+					bArray[2*count+1] = temp;
 				}
-				if(bArray[count][1] < bArray[count+2][1]){
+				if(bArray[count][1] < bArray[2*count+2][1]){
 					int[] temp = bArray[count];
-					bArray[count] = bArray[count+2];
-					bArray[count+2] = temp;
+					bArray[count] = bArray[2*count+2];
+					bArray[2*count+2] = temp;
 				}
 			}
 		}
@@ -50,7 +43,7 @@ public class ViratAndBowler {
 		int vBowls = this.viratBowls;
 		int[] bowlerOrder = new int[vBowls];
 		for(int index = 0; index< vBowls; index++){
-			this.bowlArray = minHeapyfy(this.bowlArray);
+			this.bowlArray = maxHeapyfy(this.bowlArray);
 			this.bowlArray[0][1]-=1;
 			bowlerOrder[index] = bowlArray[0][0];
 		}
