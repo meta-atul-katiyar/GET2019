@@ -1,60 +1,61 @@
-package question2;
+public class Employee{
+ 	private int empId;
+ 	private String name;
+ 	private int salary;
+ 	private String dob;
 
-/**
- *Represent the employee.
- */
-public class Employee 
-{
-	private int age;
-    private String name;
-    private int salary;  
-    
-    /**
-     * Initialize the value of employee.
-     * @param name
-     * @param salary
-     * @param dateOfBirth
-     */
-    public Employee(String name, int salary, int age)
-    {
-    	this.setAge(age);
-    	this.setName(name);
-    	this.setSalary(salary);
-    }
+ 	Employee(int id, String name, int salary, String dob){
+ 		String[] str = dob.split("-");
+ 		int [] dobInt = new int[]{
+ 				Integer.parseInt(str[0]),
+ 				Integer.parseInt(str[1]),
+ 				Integer.parseInt(str[2])
+ 		};
+ 		if(dobInt[2]<1950 ){
+ 			throw new AssertionError("wrong date");
+ 		}
+ 		if(dobInt[1] > 0 && dobInt[1] < 13){
+ 			if(dobInt[1] == 2){
+ 				if(dobInt[0] < 0 && dobInt[0] > 29){
+ 					throw new AssertionError("wrong date");
+ 				}
+ 			}
+ 			else if (dobInt[1] == 4 || dobInt[1] == 6 || dobInt[1] == 9||
+ 					dobInt[1] == 11){
+					if(dobInt[0]< 0 && dobInt[0] > 30){
+						throw new AssertionError("wrong date");
+					}
+			}
+ 			else{
+ 				if(dobInt[0]< 0 && dobInt[0] > 31){
+					throw new AssertionError("wrong date");
+				}
+ 			}
+ 		}
+ 		this.empId = id;
+ 		this.name = name;
+ 		this. salary = salary;
+ 		this. dob = dob;
+ 	}
 
-    //Return the date of birth.
-	public int getAge()
-	{
-		return age;
-	}
+ 	String getName(){
+ 		return this.name;
+ 	}
 
-	//Set the date of birth.
-	public void setAge(int age) 
-	{
-		this.age = age;
-	}
+ 	String getdob(){
+ 		return this.dob;
+ 	}
+ 	
+ 	int getSalary(){
+ 		return this.salary;
+ 	}
 
-	//Return the name.
-	public String getName() 
-	{
-		return name;
-	}
-
-	//Set the name.
-	public void setName(String name) 
-	{
-		this.name = name;
-	}
-
-	//Return the salary.
-	public int getSalary()
-	{
-		return salary;
-	}
-
-	//Set the salary.
-	public void setSalary(int salary) 
-	{
-		this.salary = salary;
-	}
-}
+ 	int getEmpId(){
+ 		return empId;
+ 	}
+ 	
+ 	int getAge(){
+ 		String[] str = this.dob.split("-");
+ 		return Integer.parseInt(str[2]);
+ 	}
+ }
