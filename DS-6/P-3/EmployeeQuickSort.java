@@ -35,43 +35,27 @@ public class EmployeeQuickSort {
 	@SuppressWarnings("null")
 	public EmployeeNode partition(EmployeeNode low, EmployeeNode high){
 		int x = high.emp.getSalary(); 
-		int dob = high.emp.getBirthYear();
 		EmployeeNode i = low.prev; 
-		for(EmployeeNode j=low; j!=high; j=j.next){ 
-        if(j.emp.getSalary() >= x){ 
-            i = (i==null) ? low : i.next;
-            if(i.emp.getSalary() == j.emp.getSalary()){
-            	//System.out.println("a");
-            	 int salary = j.emp.getSalary(),
-                 		id = j.emp.getEmpId();
-                 String name = j.emp.getName(),
-                 		dob1 = j.emp.getdob();
-                 j.emp.salary = i.emp.getSalary();
-                 j.emp.dob = i.emp.getdob();
-                 j.emp.empId = i.emp.getEmpId();
-                 j.emp.name = i.emp.getName();
-                 i.emp.salary = salary;
-                 i.emp.dob = dob1;
-                 i.emp.empId = id;
-                 i.emp.name = name;
-            }
-            else{
-            	int salary = i.emp.getSalary(),
-                		id = i.emp.getEmpId();
-                String name = i.emp.getName(),
-                		dob1 = i.emp.getdob();
-                i.emp.salary = j.emp.getSalary();
-                i.emp.dob = j.emp.getdob();
-                i.emp.empId = j.emp.getEmpId();
-                i.emp.name = j.emp.getName();
-                j.emp.salary = salary;
-                j.emp.dob = dob1;
-                j.emp.empId = id;
-                j.emp.name = name;
-            }
-        }
-    }
+		for(EmployeeNode j=low; j!=high; j=j.next){
+			if(j.emp.getSalary() >= x){ 
+	            i = (i==null) ? low : i.next;
+	            //System.out.println(j.next.emp.getSalary());
+	            int salary = i.emp.getSalary(),
+	            		id = i.emp.getEmpId();
+	            String name = i.emp.getName(),
+	            		dob1 = i.emp.getdob();
+	            i.emp.salary = j.emp.getSalary();
+	            i.emp.dob = j.emp.getdob();
+	            i.emp.empId = j.emp.getEmpId();
+	            i.emp.name = j.emp.getName();
+	            j.emp.salary = salary;
+	            j.emp.dob = dob1;
+	            j.emp.empId = id;
+	            j.emp.name = name;
+	        }
+       }
     i = (i==null) ? low : i.next;  // Similar to i++ 
+    //System.out.println(i.emp.getSalary());
     int temp = i.emp.getSalary(); 
     i.emp.salary = high.emp.getSalary(); 
     high.emp.salary = temp; 
@@ -84,6 +68,27 @@ public class EmployeeQuickSort {
 			EmployeeNode temp = partition(low,high); 
             quickSortBySalary(low,temp.prev); 
             quickSortBySalary(temp.next,high); 
+            
+            for(EmployeeNode j=low; j!=high; j=j.next){
+            	if(j != high && j.next.emp.getSalary() == j.emp.getSalary()){
+                	if(j.next.emp.getBirthYear() > j.emp.getBirthYear()){// && i.next == j){
+                		int salary1 = j.next.emp.getSalary(),
+                         		id1 = j.next.emp.getEmpId();
+                         String name1 = j.next.emp.getName(),
+                         		dob11 = j.next.emp.getdob();
+                         
+                         j.next.emp.salary = j.emp.getSalary();
+                         j.next.emp.dob = j.emp.getdob();
+                         j.next.emp.empId = j.emp.getEmpId();
+                         j.next.emp.name = j.emp.getName();
+                         
+                         j.emp.salary = salary1;
+                         j.emp.dob = dob11;
+                         j.emp.empId = id1;
+                         j.emp.name = name1;
+                	}
+            	}
+            }
         } 
 	}
 
@@ -114,7 +119,7 @@ public class EmployeeQuickSort {
 		ess.insert(1, "a", 1, "1-2-1997");
 		ess.insert(1, "a", 6, "1-2-1998");
 		ess.insert(1, "a", 1600, "1-2-1997");
-		ess.insert(1, "a", 1600, "1-2-1996");
+		ess.insert(1, "a", 1600, "1-2-1998");
 		ess.insert(1, "a", 1060, "1-2-1995");
 		ess.insert(1, "a", 1500, "1-2-1997");
 
