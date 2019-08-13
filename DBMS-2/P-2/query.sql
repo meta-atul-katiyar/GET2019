@@ -7,7 +7,7 @@ SELECT * FROM products
 WHERE idproducts not in(SELECT idproducts FROM productImages );
 
 
-SELECT C.idcategory, C.categoryName, (SELECT categoryName FROM category where idcategory = C.parentCategoryId) FROM category as C
+SELECT C.idcategory, C.categoryName, (SELECT categoryName FROM category where idcategory = C.parentCategoryId) as topCategory FROM category as C
 ORDER BY C.parentCategoryId ASC , C.idcategory ASC;
 
 
