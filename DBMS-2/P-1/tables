@@ -1,0 +1,116 @@
+
+CREATE SCHEMA `StoreFront` ;
+
+
+CREATE  TABLE `storefront`.`products` (
+  `idproducts` INT UNSIGNED NOT NULL ,
+  `productDescription` VARCHAR(100) NOT NULL ,
+  `idbrands` INT UNSIGNED NOT NULL REFERENCES brands(idbrands),
+  `idcategory` INT UNSIGNED NOT NULL REFERENCES category(idcategory),
+  `unitPrice` DOUBLE UNSIGNED NOT NULL ,
+  `quantity` INT UNSIGNED NOT NULL ,
+  PRIMARY KEY (`idproducts`) );
+
+
+
+//
+CREATE  TABLE `storefront`.`category` (
+  `idcategory` INT NOT NULL ,
+  `categoryName` VARCHAR(100) NOT NULL ,
+  `parentCategoryId` INT NULL ,
+  PRIMARY KEY (`idcategory`) ,
+  UNIQUE INDEX `idcategory_UNIQUE` (`idcategory` ASC) ,
+  UNIQUE INDEX `categoryName_UNIQUE` (`categoryName` ASC) );
+
+
+//userRole
+CREATE  TABLE `storefront`.`user_role` (
+  `iduser_role` INT NOT NULL ,
+  `roleName` VARCHAR(45) NOT NULL ,
+  PRIMARY KEY (`iduser_role`) );
+
+//user
+CREATE  TABLE `storefront`.`user` (
+  `iduser` INT UNSIGNED NOT NULL ,
+  `userName` VARCHAR(45) NOT NULL ,
+  `mobileNumber` DECIMAL(10) NOT NULL ,
+  `emailId` VARCHAR(100) NOT NULL ,
+  `iduserrole` INT NOT NULL  REFERENCES userrole(iduserrole),
+  PRIMARY KEY (`iduser`) ,
+  UNIQUE INDEX `iduser_UNIQUE` (`iduser` ASC) ,
+  UNIQUE INDEX `userName_UNIQUE` (`userName` ASC) ,
+  UNIQUE INDEX `mobileNumber_UNIQUE` (`mobileNumber` ASC) ,
+  UNIQUE INDEX `emailId_UNIQUE` (`emailId` ASC) );
+
+//
+CREATE  TABLE `storefront`.`userrole` (
+  `iduserrole` INT NOT NULL ,
+  `roleName` VARCHAR(45) NOT NULL ,
+  PRIMARY KEY (`iduserrole`) ,
+  UNIQUE INDEX `roleName_UNIQUE` (`roleName` ASC) ,
+  UNIQUE INDEX `iduserrole_UNIQUE` (`iduserrole` ASC) );
+
+//
+CREATE  TABLE `storefront`.`shippingAddress` (
+  `idshippingAddress` INT NOT NULL ,
+  `houseNumber` INT NOT NULL ,
+  `streetName` VARCHAR(45) NULL ,
+  `landMark` VARCHAR(45) NULL ,
+  `city` VARCHAR(45) NOT NULL ,
+  `state` VARCHAR(45) NOT NULL ,
+  `country` VARCHAR(45) NOT NULL ,
+  `zip` DECIMAL(6) NOT NULL ,
+  PRIMARY KEY (`idshippingAddress`) );
+
+
+//
+CREATE  TABLE `storefront`.`brands` (
+  `idbrands` INT NOT NULL ,
+  `brandName` VARCHAR(100) NOT NULL ,
+  PRIMARY KEY (`idbrands`) );
+
+
+//
+CREATE  TABLE `storefront`.`shopperAddress` (
+  `idshopperAddress` INT(11) NOT NULL ,
+  `iduser` INT(11) NOT NULL REFERENCES user(iduser),
+  `idshippingAddress` INT(11) NOT NULL REFERENCES shippingAddress(shippingAddress),
+  PRIMARY KEY (`idshopperAddress`) ,
+  INDEX `idshippingAddress` (`idshippingAddress` ASC) ,
+  INDEX `iduser` (`iduser` ASC) );
+
+//
+CREATE  TABLE `storefront`.`shopperOrders` (
+  `idshopperOrders` INT NOT NULL ,
+  `timestamp` DATETIME NULL ,
+  `totalamount` DOUBLE NULL ,
+  `idshippingAddress` INT(11) NULL REFERENCES shippingAddress(shippingAddress),
+  `status` VARCHAR(20) NULL ,
+  PRIMARY KEY (`idshopperOrders`) ,
+  INDEX `idshippingAddress` (`idshippingAddress` ASC) );
+
+//
+CREATE  TABLE `storefront`.`orderDetail` (
+  `idorderDetail` INT(11) NOT NULL ,
+  `idshopperorders` INT(11) NOT NULL REFERENCES shopperOrders(idshopperOrders),
+  `idproducts` INT(11) NOT NULL REFERENCES products(idproducts),
+  `quantity` INT NOT NULL ,
+  `unirPrice` DOUBLE NOT NULL ,
+  PRIMARY KEY (`idorderDetail`) ,
+  UNIQUE INDEX `idorderDetail_UNIQUE` (`idorderDetail` ASC) ,
+  INDEX `idshopperorders` (`idshopperorders` ASC) ,
+  INDEX `idproducts` (`idproducts` ASC) );
+
+//
+drop table `storefront`.`products`;
+
+//
+CREATE  TABLE `storefront`.`producIimages` (
+  `idproductImages` INT(11) NOT NULL ,
+  `imageName` VARCHAR(45) NULL ,
+  `idproducts` INT(11) NULL REFERENCES products(idproducts),
+  PRIMARY KEY (`idproductImages`) ,
+  INDEX `idproducts` (`idproducts` ASC) );
+
+
+//
