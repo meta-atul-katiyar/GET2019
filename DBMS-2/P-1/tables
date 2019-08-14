@@ -5,19 +5,31 @@ CREATE SCHEMA `StoreFront` ;
 
 CREATE  TABLE `storefront`.`products` (
 
-  `idproducts` INT UNSIGNED NOT NULL ,
+  `idproducts` INT(11) NOT NULL ,
 
-  `productDescription` VARCHAR(100) NOT NULL ,
+  `idbrands` INT(11) NOT NULL ,
 
-  `idbrands` INT UNSIGNED NOT NULL REFERENCES brands(idbrands),
+  `productDescription` VARCHAR(45) NOT NULL ,
 
-  `idcategory` INT UNSIGNED NOT NULL REFERENCES category(idcategory),
+  `idcategory` INT(11) NOT NULL ,
 
-  `unitPrice` DOUBLE UNSIGNED NOT NULL ,
+  `unitPrice` DOUBLE NOT NULL ,
 
-  `quantity` INT UNSIGNED NOT NULL ,
+  `quantity` INT(11) NOT NULL ,
 
-  PRIMARY KEY (`idproducts`) );
+  PRIMARY KEY (`idproducts`) ,
+  
+  FOREIGN KEY(`idcategory` ) REFERENCES category(`idcategory` )
+  ON DELETE CASCADE
+  ON UPDATE CASCADE,
+  
+  FOREIGN KEY(`idbrands`) REFERENCES brands(idbrands)
+  ON DELETE CASCADE
+  ON UPDATE CASCADE,
+
+  INDEX `idbrands` (`idbrands` ASC) ,
+
+  INDEX `idcategory` (`idcategory` ASC) );
 
 
 
@@ -61,9 +73,13 @@ CREATE  TABLE `storefront`.`user` (
 
   `emailId` VARCHAR(100) NOT NULL ,
 
-  `iduserrole` INT NOT NULL  REFERENCES userrole(iduserrole),
+  `iduserrole` INT NOT NULL  ,
 
   PRIMARY KEY (`iduser`) ,
+  
+  FOREIGN KEY(`iduserrole` ) REFERENCES userrole(iduserrole)
+  ON DELETE CASCADE
+  ON UPDATE CASCADE,
 
   UNIQUE INDEX `iduser_UNIQUE` (`iduser` ASC) ,
 
@@ -127,11 +143,19 @@ CREATE  TABLE `storefront`.`shopperAddress` (
 
   `idshopperAddress` INT(11) NOT NULL ,
 
-  `iduser` INT(11) NOT NULL REFERENCES user(iduser),
+  `iduser` INT(11) NOT NULL ,
 
-  `idshippingAddress` INT(11) NOT NULL REFERENCES shippingAddress(shippingAddress),
+  `idshippingAddress` INT(11) NOT NULL ,
 
   PRIMARY KEY (`idshopperAddress`) ,
+  
+  FOREIGN KEY(`iduser` ) REFERENCES user(iduser)
+  ON DELETE CASCADE
+  ON UPDATE CASCADE,
+  
+  FOREIGN KEY(`idshippingAddress` ) REFERENCES shippingAddress(shippingAddress)
+  ON DELETE CASCADE
+  ON UPDATE CASCADE,
 
   INDEX `idshippingAddress` (`idshippingAddress` ASC) ,
 
@@ -152,6 +176,10 @@ CREATE  TABLE `storefront`.`shopperOrders` (
   `status` VARCHAR(20) NULL ,
 
   PRIMARY KEY (`idshopperOrders`) ,
+  
+  FOREIGN KEY(`idshippingAddress` ) REFERENCES shippingAddress(shippingAddress)
+  ON DELETE CASCADE
+  ON UPDATE CASCADE,
 
   INDEX `idshippingAddress` (`idshippingAddress` ASC) );
 
@@ -161,9 +189,9 @@ CREATE  TABLE `storefront`.`orderDetail` (
 
   `idorderDetail` INT(11) NOT NULL ,
 
-  `idshopperorders` INT(11) NOT NULL REFERENCES shopperOrders(idshopperOrders),
+  `idshopperorders` INT(11) NOT NULL ,
 
-  `idproducts` INT(11) NOT NULL REFERENCES products(idproducts),
+  `idproducts` INT(11) NOT NULL ,
 
   `quantity` INT NOT NULL ,
 
@@ -172,6 +200,14 @@ CREATE  TABLE `storefront`.`orderDetail` (
   PRIMARY KEY (`idorderDetail`) ,
 
   UNIQUE INDEX `idorderDetail_UNIQUE` (`idorderDetail` ASC) ,
+  
+  FOREIGN KEY(`idshopperorders` ) REFERENCES shopperOrders(idshopperOrders)
+  ON DELETE CASCADE
+  ON UPDATE CASCADE,
+
+  FOREIGN KEY(`idproducts` ) REFERENCES products(idproducts)
+  ON DELETE CASCADE
+  ON UPDATE CASCADE,
 
   INDEX `idshopperorders` (`idshopperorders` ASC) ,
 
@@ -192,6 +228,10 @@ CREATE  TABLE `storefront`.`producIimages` (
   `idproducts` INT(11) NULL REFERENCES products(idproducts),
 
   PRIMARY KEY (`idproductImages`) ,
+  
+  FOREIGN KEY(`idproducts` ) REFERENCES products(idproducts)
+  ON DELETE CASCADE
+  ON UPDATE CASCADE,
 
   INDEX `idproducts` (`idproducts` ASC) );
 
