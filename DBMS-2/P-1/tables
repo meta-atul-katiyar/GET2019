@@ -3,69 +3,75 @@ CREATE SCHEMA `StoreFront` ;
 
 
 
-CREATE  TABLE `storefront`.`products` (
 
-  `idproducts` INT(11) NOT NULL ,
-
-  `idbrands` INT(11) NOT NULL ,
-
-  `productDescription` VARCHAR(45) NOT NULL ,
-
-  `idcategory` INT(11) NOT NULL ,
-
-  `unitPrice` DOUBLE NOT NULL ,
-
-  `quantity` INT(11) NOT NULL ,
-
-  PRIMARY KEY (`idproducts`) ,
-  
-  FOREIGN KEY(`idcategory` ) REFERENCES category(`idcategory` )
-  ON DELETE CASCADE
-  ON UPDATE CASCADE,
-  
-  FOREIGN KEY(`idbrands`) REFERENCES brands(idbrands)
-  ON DELETE CASCADE
-  ON UPDATE CASCADE,
-
-  INDEX `idbrands` (`idbrands` ASC) ,
-
-  INDEX `idcategory` (`idcategory` ASC) );
-
-
-
-
-
-//
+//category
 CREATE  TABLE `storefront`.`category` (
 
-  `idcategory` INT NOT NULL ,
+  `categoryId` INT UNSIGNED NOT NULL ,
 
   `categoryName` VARCHAR(100) NOT NULL ,
 
-  `parentCategoryId` INT NULL ,
+  `parentCategoryId` INT UNSIGNED NULL ,
 
-  PRIMARY KEY (`idcategory`) ,
+  PRIMARY KEY (`categoryId`) ,
 
-  UNIQUE INDEX `idcategory_UNIQUE` (`idcategory` ASC) ,
+  UNIQUE INDEX `categoryId_UNIQUE` (`categoryId` ASC) ,
 
   UNIQUE INDEX `categoryName_UNIQUE` (`categoryName` ASC) );
 
 
+// userRole
+CREATE  TABLE `storefront`.`userRole` (
 
-//userRole
-CREATE  TABLE `storefront`.`user_role` (
-
-  `iduser_role` INT NOT NULL ,
+  `userRoleId` INT UNSIGNED NOT NULL ,
 
   `roleName` VARCHAR(45) NOT NULL ,
 
-  PRIMARY KEY (`iduser_role`) );
+  PRIMARY KEY (`userRoleId`) ,
+
+  UNIQUE INDEX `roleName_UNIQUE` (`roleName` ASC) ,
+
+  UNIQUE INDEX `userRole_UNIQUE` (`userRoleId` ASC) );
+
+
+
+
+//brand
+CREATE  TABLE IF NOT EXISTS `storefront`.`brand` (
+
+  `brandId` INT UNSIGNED NOT NULL ,
+
+  `brandName` VARCHAR(100) NOT NULL ,
+
+  PRIMARY KEY (`brandId`) );
+
+
+//product
+CREATE  TABLE IF NOT EXISTS `storefront`.`product` (
+
+  `productId` INT UNSIGNED  NOT NULL ,
+
+  `brandId` INT UNSIGNED NOT NULL ,
+
+  `productDescription` VARCHAR(45) NOT NULL ,
+
+  `unitPrice` DOUBLE NOT NULL ,
+
+  `quantity` INT UNSIGNED  NOT NULL ,
+  `addTime` DateTime NOT NULL ,
+
+  PRIMARY KEY (`productId`) ,
+  FOREIGN KEY(`brandId`) REFERENCES brands(brandId)
+  ON DELETE CASCADE
+  ON UPDATE CASCADE,
+
+  INDEX `brandId` (`brandId` ASC) );
 
 
 //user
 CREATE  TABLE `storefront`.`user` (
 
-  `iduser` INT UNSIGNED NOT NULL ,
+  `userId` INT UNSIGNED NOT NULL ,
 
   `userName` VARCHAR(45) NOT NULL ,
 
@@ -73,15 +79,14 @@ CREATE  TABLE `storefront`.`user` (
 
   `emailId` VARCHAR(100) NOT NULL ,
 
-  `iduserrole` INT NOT NULL  ,
+  `userRoleId` INT UNSIGNED NOT NULL ,
 
-  PRIMARY KEY (`iduser`) ,
-  
-  FOREIGN KEY(`iduserrole` ) REFERENCES userrole(iduserrole)
+  PRIMARY KEY (`userId`) ,
+  FOREIGN KEY(`userRoleId` ) REFERENCES userRole (`userRoleId` )
   ON DELETE CASCADE
-  ON UPDATE CASCADE,
+  ON UPDATE CASCADE 
 
-  UNIQUE INDEX `iduser_UNIQUE` (`iduser` ASC) ,
+  UNIQUE INDEX `userId_UNIQUE` (`userId` ASC) ,
 
   UNIQUE INDEX `userName_UNIQUE` (`userName` ASC) ,
 
@@ -90,26 +95,14 @@ CREATE  TABLE `storefront`.`user` (
   UNIQUE INDEX `emailId_UNIQUE` (`emailId` ASC) );
 
 
-//
-CREATE  TABLE `storefront`.`userrole` (
-
-  `iduserrole` INT NOT NULL ,
-
-  `roleName` VARCHAR(45) NOT NULL ,
-
-  PRIMARY KEY (`iduserrole`) ,
-
-  UNIQUE INDEX `roleName_UNIQUE` (`roleName` ASC) ,
-
-  UNIQUE INDEX `iduserrole_UNIQUE` (`iduserrole` ASC) );
 
 
-//
-CREATE  TABLE `storefront`.`shippingAddress` (
+//shippingAddress
+CREATE  TABLE IF NOT EXISTS `storefront`.`shippingAddress` (
 
-  `idshippingAddress` INT NOT NULL ,
+  `shippingAddressId` INT UNSIGNED  NOT NULL ,
 
-  `houseNumber` INT NOT NULL ,
+  `houseNumber` INT UNSIGNED NOT NULL ,
 
   `streetName` VARCHAR(45) NULL ,
 
@@ -122,119 +115,101 @@ CREATE  TABLE `storefront`.`shippingAddress` (
   `country` VARCHAR(45) NOT NULL ,
 
   `zip` DECIMAL(6) NOT NULL ,
+  `userId` INT UNSIGNED NOT NULL ,
 
-  PRIMARY KEY (`idshippingAddress`) );
-
-
-
-//
-CREATE  TABLE `storefront`.`brands` (
-
-  `idbrands` INT NOT NULL ,
-
-  `brandName` VARCHAR(100) NOT NULL ,
-
-  PRIMARY KEY (`idbrands`) );
-
-
-
-//
-CREATE  TABLE `storefront`.`shopperAddress` (
-
-  `idshopperAddress` INT(11) NOT NULL ,
-
-  `iduser` INT(11) NOT NULL ,
-
-  `idshippingAddress` INT(11) NOT NULL ,
-
-  PRIMARY KEY (`idshopperAddress`) ,
-  
-  FOREIGN KEY(`iduser` ) REFERENCES user(iduser)
+  PRIMARY KEY (`shippingAddressId`) ,
+  FOREIGN KEY(`userId` ) REFERENCES user(`userId` )
   ON DELETE CASCADE
-  ON UPDATE CASCADE,
-  
-  FOREIGN KEY(`idshippingAddress` ) REFERENCES shippingAddress(shippingAddress)
-  ON DELETE CASCADE
-  ON UPDATE CASCADE,
-
-  INDEX `idshippingAddress` (`idshippingAddress` ASC) ,
-
-  INDEX `iduser` (`iduser` ASC) );
+  ON UPDATE CASCADE );
 
 
-//
-CREATE  TABLE `storefront`.`shopperOrders` (
 
-  `idshopperOrders` INT NOT NULL ,
+
+
+
+//shopperOrders
+CREATE  TABLE IF NOT EXISTS `storefront`.`shopperOrders` (
+
+  `idshopperOrders` INT UNSIGNED  NOT NULL ,
 
   `timestamp` DATETIME NULL ,
 
   `totalamount` DOUBLE NULL ,
 
-  `idshippingAddress` INT(11) NULL REFERENCES shippingAddress(shippingAddress),
+  `shippingAddressId` INT UNSIGNED  NULL REFERENCES shippingAddress(shippingAddressId),
 
   `status` VARCHAR(20) NULL ,
+  `userId` INT UNSIGNED NOT NULL ,
 
-  PRIMARY KEY (`idshopperOrders`) ,
-  
-  FOREIGN KEY(`idshippingAddress` ) REFERENCES shippingAddress(shippingAddress)
+  PRIMARY KEY (`shopperOrderId`) ,
+  FOREIGN KEY (`userId`) REFERENCES user(`userId`)
   ON DELETE CASCADE
   ON UPDATE CASCADE,
 
-  INDEX `idshippingAddress` (`idshippingAddress` ASC) );
+  INDEX `shippingAddressId` (`shippingAddressId` ASC));
 
 
-//
-CREATE  TABLE `storefront`.`orderDetail` (
 
-  `idorderDetail` INT(11) NOT NULL ,
+//orderDetail
+CREATE  TABLE IF NOT EXISTS `storefront`.`orderDetail` (
 
-  `idshopperorders` INT(11) NOT NULL ,
+  `orderDetailId` INT UNSIGNED  NOT NULL ,
 
-  `idproducts` INT(11) NOT NULL ,
+  `shopperOrderId` INT UNSIGNED  NOT NULL REFERENCES shopperOrders(idshopperOrders),
+
+  `products` INT UNSIGNED  NOT NULL REFERENCES products(idproducts),
 
   `quantity` INT NOT NULL ,
 
   `unirPrice` DOUBLE NOT NULL ,
 
   PRIMARY KEY (`idorderDetail`) ,
-
-  UNIQUE INDEX `idorderDetail_UNIQUE` (`idorderDetail` ASC) ,
-  
-  FOREIGN KEY(`idshopperorders` ) REFERENCES shopperOrders(idshopperOrders)
+  FOREIGN KEY(`shopperOrderId` ) REFERENCES shopperOrder(`shopperOrderId` )
+  ON DELETE CASCADE
+  ON UPDATE CASCADE,
+  FOREIGN KEY (`productId`) REFERENCES products(`productId`)
   ON DELETE CASCADE
   ON UPDATE CASCADE,
 
-  FOREIGN KEY(`idproducts` ) REFERENCES products(idproducts)
+  UNIQUE INDEX `orderDetailId_UNIQUE` (`orderDetailId` ASC) ,
+
+  INDEX `shopperOrderID` (`shopperOrderId` ASC) ,
+
+  INDEX `productId` (`productId` ASC) );
+
+
+
+//productImage
+CREATE  TABLE IF NOT EXISTS `storefront`.`productImage` (
+
+  `productImageId` INT UNSIGNED  NOT NULL ,
+
+  `imageName` VARCHAR(45) NOT NULL ,
+
+  `productsId` INT UNSIGNED  NOT NULL ,
+
+  PRIMARY KEY (`productImageId`) ,
+  FOREIGN KEY (`productId`) REFERENCES product(`productId`)
   ON DELETE CASCADE
   ON UPDATE CASCADE,
 
-  INDEX `idshopperorders` (`idshopperorders` ASC) ,
-
-  INDEX `idproducts` (`idproducts` ASC) );
+  INDEX `productId` (`productId` ASC) );
 
 
-//
-SET FOREIGN_KEY_CHECKS=0; DROP TABLE products; SET FOREIGN_KEY_CHECKS=1;
 
 
-//
-CREATE  TABLE `storefront`.`producIimages` (
-
-  `idproductImages` INT(11) NOT NULL ,
-
-  `imageName` VARCHAR(45) NULL ,
-
-  `idproducts` INT(11) NULL REFERENCES products(idproducts),
-
-  PRIMARY KEY (`idproductImages`) ,
-  
-  FOREIGN KEY(`idproducts` ) REFERENCES products(idproducts)
+//productCategory
+CREATE  TABLE IF NOT EXISTS `storefront`.`productCategory` (
+  `productCategoryId` INT UNSIGNED NOT NULL ,
+  `productId` INT UNSIGNED NOT NULL ,
+  `categoryId` INT UNSIGNED NOT NULL,
+  PRIMARY KEY (`productCategoryId`),
+  FOREIGN KEY (`productId`) REFERENCES product(`productId`)
   ON DELETE CASCADE
   ON UPDATE CASCADE,
-
-  INDEX `idproducts` (`idproducts` ASC) );
-
-
+  FOREIGN KEY (`categoryId`) REFERENCES category(`categoryId`)
+  ON DELETE CASCADE
+  ON UPDATE CASCADE);
 
 //
+SET FOREIGN_KEY_CHECKS=0; DROP IF EXISTS TABLE products; SET FOREIGN_KEY_CHECKS=1;
