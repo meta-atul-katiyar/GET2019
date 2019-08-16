@@ -5,7 +5,7 @@ CREATE SCHEMA `StoreFront` ;
 
 
 //category
-CREATE  TABLE `storefront`.`category` (
+CREATE  TABLE IF NOT EXISTS `storefront`.`category` (
 
   `categoryId` INT UNSIGNED NOT NULL ,
 
@@ -21,7 +21,7 @@ CREATE  TABLE `storefront`.`category` (
 
 
 // userRole
-CREATE  TABLE `storefront`.`userRole` (
+CREATE  TABLE IF NOT EXISTS `storefront`.`userRole` (
 
   `userRoleId` INT UNSIGNED NOT NULL ,
 
@@ -150,24 +150,24 @@ CREATE  TABLE IF NOT EXISTS `storefront`.`shopperOrders` (
 
 
 
-//orderDetail
+
 CREATE  TABLE IF NOT EXISTS `storefront`.`orderDetail` (
 
-  `orderDetailId` INT UNSIGNED  NOT NULL ,
+  `orderDetailId` INT UNSIGNED NOT NULL ,
 
-  `shopperOrderId` INT UNSIGNED  NOT NULL REFERENCES shopperOrders(idshopperOrders),
+  `shopperOrderId` INT UNSIGNED NOT NULL ,
 
-  `products` INT UNSIGNED  NOT NULL REFERENCES products(idproducts),
+  `productID` INT UNSIGNED NOT NULL ,
 
-  `quantity` INT NOT NULL ,
+  `quantity` INT UNSIGNED NOT NULL ,
 
-  `unirPrice` DOUBLE NOT NULL ,
-
-  PRIMARY KEY (`idorderDetail`) ,
+  `unitPrice` DOUBLE NOT NULL ,
+  `status` VARCHAR(20) NULL ,
+  PRIMARY KEY (`orderDetailId`) ,
   FOREIGN KEY(`shopperOrderId` ) REFERENCES shopperOrder(`shopperOrderId` )
   ON DELETE CASCADE
   ON UPDATE CASCADE,
-  FOREIGN KEY (`productId`) REFERENCES products(`productId`)
+  FOREIGN KEY (`productId`) REFERENCES product(`productId`)
   ON DELETE CASCADE
   ON UPDATE CASCADE,
 
