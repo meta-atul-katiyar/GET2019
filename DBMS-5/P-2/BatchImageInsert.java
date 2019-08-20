@@ -1,11 +1,11 @@
-import java.sql.Connection;
+
 import java.sql.SQLException;
 import java.sql.PreparedStatement;
 
 public class BatchImageInsert {
 
-	int productId;
-
+	int productId;	
+	PreparedStatement ps = null;
 	/**
 	 * @param numId
 	 * INSERT PRODUCT ID
@@ -19,16 +19,12 @@ public class BatchImageInsert {
 	 * INSERT IMAGES OF SPECIFIED PRODUCT BY BATCH TECHNIQUE
 	 */
 	public void batchInsert(int productId) {
-		PreparedStatement ps = null;
 		DBConnection dbConn = new DBConnection("storefront");
-		String query = "INSERT INTO `storefront`.`productimage` "
-				+ "(`imageName`, `productId`) VALUES (?, ?);";
-		Connection connection = dbConn.estabConn();
-		;
+		Query queryObj = new Query();
+		String query = queryObj.getInsertQuery();
 
 		try {
-			connection = dbConn.estabConn();
-			ps = connection.prepareStatement(query);
+			ps = dbConn.estabConn(query);
 			int size = 9, row = 0;
 
 			for (row = 0; row < size; row++) {
@@ -44,12 +40,10 @@ public class BatchImageInsert {
 			System.out.println(row + " rows added");
 
 		} catch (SQLException e) {
-
 			e.printStackTrace();
-		} finally {
+		} finally{
 			try {
 				ps.close();
-				connection.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
