@@ -1,5 +1,6 @@
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class DBConnection {
@@ -10,6 +11,8 @@ public class DBConnection {
 	String userId;
 	String password;
 
+	Connection connection = null;
+	PreparedStatement ps = null;
 	/**
 	 * @param db
 	 * CREATE URL FOR GIVEN DB NAME
@@ -27,8 +30,8 @@ public class DBConnection {
 	/**
 	 * @return Connection type object
 	 */
-	public Connection estabConn() {
-		Connection connection = null;
+	public PreparedStatement estabConn(String query) {
+		
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
 		} catch (ClassNotFoundException cnfe) {
@@ -40,13 +43,21 @@ public class DBConnection {
 		}
 
 		try {
-			connection = DriverManager
-					.getConnection(mysqlURL, userId, password);
+			connection = DriverManager.getConnection(mysqlURL, userId, password);
+			ps = connection.prepareStatement(query);
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
-		return connection;
+		return ps;
 	}
-
+	
+	public void closeConnection(){
+		try {
+			ps.close();
+			connection.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 }
