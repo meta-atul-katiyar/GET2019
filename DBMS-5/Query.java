@@ -3,8 +3,8 @@ public class Query {
 
 	public String getQuery(String shopperId){
 		String query = "SELECT SO.shopperorderId, SO.timestamp, SO.totalamount "
-				+ "FROM shopperorder AS SO NATURAL JOIN orderdetail AS OD WHERE "
-				+ "SO.userId = "+ shopperId +" AND OD.status = 'shipped' AND "
+				+ "FROM shopperorder AS SO WHERE "
+				+ "SO.userId = "+ shopperId +" AND "
 				+ "SO.shopperorderId NOT IN (SELECT so.shopperorderId FROM shopperorder AS so NATURAL JOIN "
 				+ "orderdetail AS od WHERE od.status <> 'shipped')  ";
 		return query;
@@ -26,7 +26,7 @@ public class Query {
 	public String getCategoryQuery(){
 		String query = "SELECT C.categoryName, count(C.categoryId) FROM category AS P "
 				+ "INNER JOIN category AS C ON P.parentCategoryId = C.categoryId "
-				+ "WHERE C.parentCategoryId is NULL GROUP BY P.parentCategoryId ORDER BY C.categoryName ";
+				+ "WHERE C.parentCategoryId is NULL GROUP BY C.CategoryId ORDER BY C.categoryName ";
 		return query;
 	}
 }
