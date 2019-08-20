@@ -2,11 +2,12 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.LinkedList;
 
 
 public class OrderByUID {
 	String shopperId;
-
+	LinkedList<OrdersInShippedState> orders = new LinkedList<OrdersInShippedState>();
 	
 	/**
 	 * @param id
@@ -38,8 +39,7 @@ public class OrderByUID {
 			
 			rSet = stmt.executeQuery(query);
 			while (rSet.next())
-				System.out.println(rSet.getString(1) + " " + rSet.getString(2)
-						+ " " + rSet.getString(3));
+				orders.add(new OrdersInShippedState(rSet.getString(1), rSet.getString(2), rSet.getString(3)));
 		}
 		catch (SQLException e) {
 
