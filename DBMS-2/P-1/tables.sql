@@ -4,7 +4,7 @@ CREATE SCHEMA `StoreFront` ;
 
 
 
-//category
+#category
 CREATE  TABLE IF NOT EXISTS `storefront`.`category` (
 
   `categoryId` INT UNSIGNED NOT NULL ,
@@ -20,7 +20,7 @@ CREATE  TABLE IF NOT EXISTS `storefront`.`category` (
   UNIQUE INDEX `categoryName_UNIQUE` (`categoryName` ASC) );
 
 
-// userRole
+#userRole
 CREATE  TABLE IF NOT EXISTS `storefront`.`userRole` (
 
   `userRoleId` INT UNSIGNED NOT NULL ,
@@ -36,7 +36,7 @@ CREATE  TABLE IF NOT EXISTS `storefront`.`userRole` (
 
 
 
-//brand
+#brand
 CREATE  TABLE IF NOT EXISTS `storefront`.`brand` (
 
   `brandId` INT UNSIGNED NOT NULL ,
@@ -46,7 +46,7 @@ CREATE  TABLE IF NOT EXISTS `storefront`.`brand` (
   PRIMARY KEY (`brandId`) );
 
 
-//product
+#product
 CREATE  TABLE IF NOT EXISTS `storefront`.`product` (
 
   `productId` INT UNSIGNED  NOT NULL ,
@@ -68,7 +68,7 @@ CREATE  TABLE IF NOT EXISTS `storefront`.`product` (
   INDEX `brandId` (`brandId` ASC) );
 
 
-//user
+#user
 CREATE  TABLE `storefront`.`user` (
 
   `userId` INT UNSIGNED NOT NULL ,
@@ -97,7 +97,7 @@ CREATE  TABLE `storefront`.`user` (
 
 
 
-//shippingAddress
+#shippingAddress
 CREATE  TABLE IF NOT EXISTS `storefront`.`shippingAddress` (
 
   `shippingAddressId` INT UNSIGNED  NOT NULL ,
@@ -127,7 +127,7 @@ CREATE  TABLE IF NOT EXISTS `storefront`.`shippingAddress` (
 
 
 
-//shopperOrders
+#shopperOrders
 CREATE  TABLE IF NOT EXISTS `storefront`.`shopperOrders` (
 
   `idshopperOrders` INT UNSIGNED  NOT NULL ,
@@ -179,7 +179,7 @@ CREATE  TABLE IF NOT EXISTS `storefront`.`orderDetail` (
 
 
 
-//productImage
+#productImage
 CREATE  TABLE IF NOT EXISTS `storefront`.`productImage` (
 
   `productImageId` INT UNSIGNED  NOT NULL ,
@@ -198,7 +198,7 @@ CREATE  TABLE IF NOT EXISTS `storefront`.`productImage` (
 
 
 
-//productCategory
+#productCategory
 CREATE  TABLE IF NOT EXISTS `storefront`.`productCategory` (
   `productCategoryId` INT UNSIGNED NOT NULL ,
   `productId` INT UNSIGNED NOT NULL ,
@@ -210,6 +210,20 @@ CREATE  TABLE IF NOT EXISTS `storefront`.`productCategory` (
   FOREIGN KEY (`categoryId`) REFERENCES category(`categoryId`)
   ON DELETE CASCADE
   ON UPDATE CASCADE);
+                             
+  # order status                          
+  CREATE  TABLE IF NOT EXISTS `storefront`.`orderstatus` (
+  `orderstatusId` INT UNSIGNED NOT NULL,
+  `orderDetailId` INT UNSIGNED NOT NULL ,
+  `status` VARCHAR(20) NULL ,
+  `ondate` DATETIME, 
+  PRIMARY KEY (`orderstatusId`) ,
+  FOREIGN KEY(`orderDetailId` ) REFERENCES orderDetail(`orderDetailId` )
+  ON DELETE CASCADE
+  ON UPDATE CASCADE,
 
-//
+  UNIQUE INDEX `orderstatusId` (`orderstatusId` ASC));                        
+  
+
+#
 SET FOREIGN_KEY_CHECKS=0; DROP IF EXISTS TABLE products; SET FOREIGN_KEY_CHECKS=1;
