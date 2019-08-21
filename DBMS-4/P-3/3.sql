@@ -1,5 +1,10 @@
-# order, product, category PRIMARYPRIMARY
+# order, product, category
 
-ALTER TABLE shopperorder  ADD PRIMARY KEY(shopperorderId);
-ALTER TABLE product  ADD PRIMARY KEY(productId);
-ALTER TABLE category  ADD PRIMARY KEY(categoryId);
+# timestamp often called in where clause
+ALTER TABLE shopperorder  ADD INDEX time_index(timestamp);
+
+# quantity must be checked before any order
+ALTER TABLE product  ADD INDEX quant_index(quantity);
+
+
+ALTER TABLE category  ADD INDEX name_index(categoryName);
