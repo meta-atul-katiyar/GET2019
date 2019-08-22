@@ -34,7 +34,7 @@ DELIMITER //
 DROP PROCEDURE IF EXISTS order_status //
 CREATE PROCEDURE `storefront`.`order_status`(IN start_date DATE, end_date DATE )
 BEGIN
-  IF(start_date >= end_date) THEN
+  IF(start_date > end_date) THEN
    SET start_date = end_date - INTERVAL DAY(end_date) DAY;
    END IF;
   Select OD.orderdetailId, OD.productId, OS.status, OS.ondate 
