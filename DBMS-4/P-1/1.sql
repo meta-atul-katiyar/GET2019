@@ -24,7 +24,7 @@ CREATE FUNCTION `storefront`.`month_of_max_orders`( year_value INT ) RETURNS int
 BEGIN 
  DECLARE number INT;
  SET number = (Select MONTH(SO.timestamp) AS monthNumber  FROM shopperorder AS SO 
-  WHERE YEAR(timestamp) = 2019 GROUP BY MONTH(timestamp) 
+  WHERE YEAR(timestamp) = year_value GROUP BY MONTH(timestamp) 
   ORDER BY count(SO.shopperorderId) DESC LIMIT 1);
   RETURN number;
 END 
