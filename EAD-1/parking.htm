@@ -1,0 +1,111 @@
+<!DOCTYPE html> 
+
+<html>
+    <head>
+        <meta charset="UTF-8" >
+        <meta  content="width=device-width, initial-scale=1.0">
+        <title>Metacube Parking System</title>
+
+        <script src="checks.js"></script>
+        <style>
+           
+        </style>
+    </head>
+    <body>
+        
+        <div id="empDetail" align = center>
+            <h1>Register Employee</h1><hr><br><br>
+            <form id="employeeDetails" action="#">
+                    Full name:
+                    <input type="text" id="firstname" minlength="2" onchange="allLetter()" required><br><br>
+
+                    Gender:
+                    <input type="radio" id="gender" value="male" checked> Male
+                    <input type="radio" id="gender" value="female"> Female
+                    <input type="radio" id="gender" value="other"> Other<br><br>
+
+                    Email Id:
+                    <input type="text" id="email" placeholder="abc@gmail.com" onchange="ValidateEmail()" required>
+                    <br><br>
+
+                    Password:
+                    <input type="text" id="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required><br><br>
+
+                    Confirm Password:
+                    <input type="text" id="confirmpassword" onchange="passEqual()" required><br><br>
+
+                    Contact Number:
+                    <input type="text" id="contact number" pattern="(?=.*\d).{8}" required><br><br>
+
+                    <input type="submit" onclick="hideEmpDetail()"/>
+
+                    <input type="reset">
+            </form>
+        </div>
+
+
+        <div id = "vehicleForm" align = center style="display:none">
+            <h1>Add Vehicle</h1><hr><br><br>
+            <form id = "vehicleInformation" action="#" method=>
+                Name:
+                <input type="text" id="vehicleName" minlength="2" required><br><br>
+
+                Type:
+                <select id="vehicleType" >
+                    <option>select type</option>
+                    <option id = "cycle" value="cycle">cycle</option>
+                    <option id = "twoWheeler" value="twoWheeler">two Wheeler</option>
+                    <option id = "fourWheeler" value="fourWheeler">Four Wheeler</option>
+                </select><br><br>
+
+                Vehicle Number:
+                <input type="text" id="vehicleNumber" pattern="[A-Z]{2}[0-9]{2}[A-Z0-9]{2}[0-9]{4}" placeholder="RJ14AA0000" required><br><br>
+
+                Employee Id
+                <input type="text" id="employeeId" pattern=[Ee]{1}[0-9]{2}[/]{1}[0-9]{6} required><br><br>
+
+
+                Identification:
+                <textarea rows="2" cols="50">
+                </textarea><br><br>
+
+                <input type="submit" onclick = "displayRate()"/>
+                <input type="reset">
+
+            </form>
+        </div> <br><br>
+
+        <div id="rateInfo" style="display:none" align="center">
+                <select id="currencyName" onchange="rateCard()">
+                        <option>select type</option>
+                        <option id="INR" value="INR">Indian Rupees</option>
+                        <option id="USD" value="USD">US Dollars</option>
+                        <option id="YEN" value="YEN">Japanese Yen</option>
+                    </select><br><br>
+            <div id = "rateTable" style="display:none">
+                <table>
+                    <tr id="vehicleTypeName">
+                    </tr>
+                    <tr>
+                        <th> Duration</th>
+                        <th id="NameOfCurrency"></th> 
+                    </tr>
+                    <tr>
+                        <th>one day  </th>
+                        <th id="dailyPrice"></th>    
+                    </tr>
+                    <tr>
+                        <th>one month  </th> 
+                        <th id="monthlyPrice"></th> 
+                    </tr>
+                    <tr>
+                        <th>one year  </th> 
+                        <th id="yearlyPrice"></th>
+                    </tr>
+                </table>
+            </div> <br><br>
+        </div>
+    </body>
+
+</html>
+
