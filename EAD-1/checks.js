@@ -15,7 +15,7 @@ function ValidateEmail(){
 
 
 function allLetter(){
-  var letters = /^[A-Za-z]+$/;
+  var letters = /^[A-Za-z\s]+$/;
   var inputtxt = document.getElementById("firstname");
   if((inputtxt.value.match(letters))){
     return true;
@@ -95,3 +95,18 @@ function displayRate(){
     document.getElementById("rateInfo").style.display = "block";
   }
 }
+
+var  duration;
+function priceList(duration){
+ //duration = time;
+ console.log(duration);
+ var price = document.getElementById(duration).innerHTML;
+ document.getElementById("pass").innerHTML = price;
+}
+
+function generatePass(){
+  //var price = documnet.getElementById(duration).value;
+  //documnet.getElementById("pass").value = price;
+  document.getElementById("pass").style.display = "block";
+}
+
