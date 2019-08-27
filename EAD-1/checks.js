@@ -96,17 +96,12 @@ function displayRate(){
   }
 }
 
-var  duration;
 function priceList(duration){
- //duration = time;
- console.log(duration);
  var price = document.getElementById(duration).innerHTML;
  document.getElementById("pass").innerHTML = price;
 }
 
 function generatePass(){
-  //var price = documnet.getElementById(duration).value;
-  //documnet.getElementById("pass").value = price;
   document.getElementById("pass").style.display = "block";
 }
 
