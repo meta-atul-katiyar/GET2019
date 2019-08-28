@@ -29,13 +29,13 @@
                     <br><br>
 
                     Password:
-                    <input type="text" id="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required><br><br>
+                    <input type="text" id="password" onchange="passValid()" required><br><br>
 
                     Confirm Password:
                     <input type="text" id="confirmpassword" onchange="passEqual()" required><br><br>
 
                     Contact Number:
-                    <input type="text" id="contact number" pattern="(?=.*\d).{8}" required><br><br>
+                    <input type="text" id="contactnumber"  onchange="contactValid()" required><br><br>
 
                     <input type="submit" onclick="hideEmpDetail()"/>
 
@@ -43,6 +43,7 @@
             </form>
         </div>
 
+        <p id="successfulRegister"></p>
 
         <div id = "vehicleForm" align = center style="display:none">
             <h1>Add Vehicle</h1><hr><br><br>
@@ -51,7 +52,7 @@
                 <input type="text" id="vehicleName" minlength="2" required><br><br>
 
                 Type:
-                <select id="vehicleType" >
+                <select id="vehicleType" onchange="showRate()">
                     <option>select type</option>
                     <option id = "cycle" value="cycle">cycle</option>
                     <option id = "twoWheeler" value="twoWheeler">two Wheeler</option>
@@ -59,10 +60,10 @@
                 </select><br><br>
 
                 Vehicle Number:
-                <input type="text" id="vehicleNumber" pattern="[A-Z]{2}[0-9]{2}[A-Z0-9]{2}[0-9]{4}" placeholder="RJ14AA0000" required><br><br>
+                <input type="text" id="vehicleNumber" onchange="vNumValid()" placeholder="RJ14AA0000" required><br><br>
 
                 Employee Id
-                <input type="text" id="employeeId" pattern=[Ee]{1}[0-9]{2}[/]{1}[0-9]{6} required><br><br>
+                <input type="text" id="employeeId" onchange="empIdValid()" placeholder="E12/000000" required><br><br>
 
 
                 Identification:
