@@ -97,11 +97,16 @@ function displayRate(){
 }
 
 function priceList(duration){
- var price = document.getElementById(duration).innerHTML;
- document.getElementById("pass").innerHTML = price;
+ var price = document.getElementById(duration).innerHTML,
+ currency = document.getElementById("currencyName").value,
+  message = "welcome total paid amount: "+price + " "+ currency;
+ document.getElementById("pass").innerHTML = message;
 }
 
 function generatePass(){
+  document.getElementById("rateInfo").style.display = "none";
   document.getElementById("pass").style.display = "block";
 }
+
+
 
