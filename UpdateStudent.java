@@ -42,8 +42,8 @@ public class UpdateStudent extends HttpServlet {
 			out.print("Last Name:<input name='lastName' value='"+lName+"'/><br><br>");
 			out.print("Father Name:<input name='fatherName' value='"+fatherName+"'/><br><br>");			
 			out.print("Email:<input name='email' value='"+email+"'  onchange='ValidateEmail()'/><br><br>");
-			out.print("Class:<input name='class' value='"+classId+"' onchange='classValid()'/><br><br>");
-			out.print("Age:<input name='age' value='"+age+"' onchange='ageValid()'/><br><br>");
+			out.print("Class:<input type='number' name='class' value='"+classId+"' onchange='classValid()'/><br><br>");
+			out.print("Age:<input type='number' name='age' value='"+age+"' onchange='ageValid()'/><br><br>");
 			out.print("<input type='submit'>");  
 
 			 
