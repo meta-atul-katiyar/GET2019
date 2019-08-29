@@ -1,0 +1,43 @@
+<!DOCTYPE html> 
+
+<html>
+    <head>
+        <meta charset="UTF-8" >
+        <meta  content="width=device-width, initial-scale=1.0">
+        <title>search student</title>
+
+        <script></script>
+        <style>
+           
+        </style>
+    </head>
+    <body>
+        <br><br>
+		<p>Search by First Name and Last Name:</p>
+        <form id = "studentInformation" action="./searchStudent" method="get">
+            <input id="firstName" name="firstName" placeholder="first name"><br><br>
+            <input id="lastName" name="lastName" placeholder="last name"><br><br>
+            <input type="submit"/>
+        </form><br><br>
+        
+        <p>Class Filter:</p>
+         <form id = "classSearch" action="./classFilter" method="get">
+            <select id="classList" name="classList">
+            	<option id="1" name="1">1</option>
+            	<option id="2" name="2">2</option>
+            	<option id="3" name="3">3</option>
+            	<option id="4" name="4">4</option>
+            	<option id="5" name="5">5</option>
+            	<option id="6" name="6">6</option>
+            	<option id="7" name="7">7</option>
+            	<option id="8" name="8">8</option>
+            	<option id="9" name="9">9</option>
+            	<option id="10" name="10">10</option>
+            	<option id="11" name="11">11</option>
+            	<option id="12" name="12">12</option>
+            </select>
+            <input type="submit"/>
+		</form>
+    </body>
+
+</html>
