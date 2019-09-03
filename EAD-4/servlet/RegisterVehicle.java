@@ -55,10 +55,10 @@ public class RegisterVehicle extends HttpServlet {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		/*catch(java.sql.SQLIntegrityConstraintViolationException e){
+		catch(java.sql.SQLIntegrityConstraintViolationException e){
 		PrintWriter out = response.getWriter();
 		out.println("<html><body><b>email already exists"
 				+ "</b><br/><br/></body></html>");
-	}*/
+		}
 	}
 }
