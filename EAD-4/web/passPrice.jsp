@@ -6,7 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
 
- <script src="main.js"></script>
+ <script src="checks.js"></script>
  
 </head>
 <body>
@@ -57,12 +57,13 @@
                 rs.next(); 
                 
                 System.out.println("daily-monthly-yearly");
-                daily = rs.getString(2); 
+                
+                daily = rs.getString(3); 
                 
                 
                 System.out.println("daily: " + daily);
-                monthly = rs.getString(3); 
-                yearly = rs.getString(4); 
+                monthly = rs.getString(4); 
+                yearly = rs.getString(5); 
                }
             	catch (SQLException e) {
             			e.printStackTrace();
@@ -120,9 +121,7 @@
       else if(currency == "YEN"){
         exchangeFromRupee = 1.47;
       }
-  
-//      document.getElementById("vehicleTypeName").innerHTML = document.getElementById(type).innerHTML;
-//      document.getElementById("NameOfCurrency").innerHTML = document.getElementById(currency).innerHTML;
+
   
       if("${type}" == "cycle"){
         document.getElementById("dailyPrice").innerHTML = exchangeFromRupee * 5;
