@@ -22,13 +22,6 @@ public class vehicleForm extends HttpServlet {
  
 	        out.println("<h1>Add Vehicle</h1>");
 
-			/*int ID = Integer.parseInt(request.getParameter("id")),
-					classId = Integer.parseInt(request.getParameter("class")),
-					age = Integer.parseInt(request.getParameter("age"));
-			String fName = request.getParameter("firstName"),
-					lName = request.getParameter("lastName"),
-					fatherName = request.getParameter("fatherName"),
-					email = request.getParameter("email");*/
 	        int empId = Integer.parseInt(request.getParameter("empId"));
 			out.print("<form action='./InsertVehicleData?empId="+empId+"' method='post'>");  
 
