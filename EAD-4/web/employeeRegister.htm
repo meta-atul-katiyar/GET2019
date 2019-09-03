@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Employee Registration</title>
+<script src="checks.js"></script>
+</head>
+<body>
+  <div id="empDetail" align = center>
+            <h1>Register Employee</h1><hr><br/><br/>
+            <form id="employeeDetails" action="./InsertEmployeeData" method="post">
+                    Full name:
+                    <input type="text" id="fullName" name="fullName" minlength="2" onchange="allLetter()" required/><br/><br/>
+
+                    Gender:
+                    <input type="radio" id="gender" name="gender" value="male" checked/> Male
+                    <input type="radio" id="gender" name="gender" value="female"/> Female
+                    <input type="radio" id="gender" name="gender" value="other"/> Other<br/><br/>
+
+                    Email Id:
+                    <input type="text" id="email" name="email" placeholder="abc@gmail.com" onchange="ValidateEmail()" required/>
+                    <br/><br>
+
+                    Password:
+                    <input type="text" id="password" name="password" onchange="passValid()" required/><br/><br/>
+
+                    Confirm Password:
+                    <input type="text" id="confirmPassword" onchange="passEqual()" required/><br/><br/>
+
+                    Contact Number:
+                    <input type="number" id="contactNumber" name="contactNumber" pattern="[0-9]{8,}" onchange="contactValid()" required/><br/><br/>
+
+					Organization:
+					<select id="organization" name="organization" onchange="">
+                    	<option name = "xyz" id = "xyz" value="xyz">xyz</option>
+                    	<option name = "abc" id = "abc" value="abc">abc</option>
+                    	<option name = "bcd" id = "bcd" value="bcd">bcd</option>
+                    	<option name = "efg" id = "efg" value="efg">efg</option>
+                	</select><br><br>
+                
+                    <input type="submit" value="submit" onclick="hideEmpDetail()"/>
+
+                    <input type="reset"/><br/><br/>
+                    
+                    Already registered?<br/>
+                    <a href="login.htm">Login</a>
+                    
+                    
+            </form>
+        </div>
+</body>
+</html>
