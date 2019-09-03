@@ -22,14 +22,6 @@ public class FriendList extends HttpServlet {
 		try {
  
 	        out.println("<h1>Friend List</h1>");
-
-			/*int ID = Integer.parseInt(request.getParameter("id")),
-					classId = Integer.parseInt(request.getParameter("class")),
-					age = Integer.parseInt(request.getParameter("age"));
-			String fName = request.getParameter("firstName"),
-					lName = request.getParameter("lastName"),
-					fatherName = request.getParameter("fatherName"),
-					email = request.getParameter("email");*/
 	        
 	        String empId = request.getParameter("empId");
 	        DBConnection dbConn = new DBConnection();
