@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 //Servlet Name 
 @WebServlet("/InsertVehicleData")
@@ -48,9 +49,12 @@ public class RegisterVehicle extends HttpServlet {
 			PrintWriter out = response.getWriter();
 			out.println("<b>Successfully Inserted"
 					+ "</b>");
-			RequestDispatcher rd = request.getRequestDispatcher("/GeneratePass?type="
-					+request.getParameter("vehicleType")
-					+"&currency="+defaultCurrency); 
+
+			HttpSession session = request.getSession();
+			session.setAttribute("empId", Integer.parseInt(request.getParameter("empId")));
+			session.setAttribute("type", request.getParameter("vehicleType"));
+			session.setAttribute("vehicleNumber", request.getParameter("vehicleNumber"));
+			RequestDispatcher rd = request.getRequestDispatcher("passPrice.jsp");
 			rd.forward(request, response);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -59,6 +63,6 @@ public class RegisterVehicle extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		out.println("<html><body><b>email already exists"
 				+ "</b><br/><br/></body></html>");
-		}
+	}
 	}
 }
