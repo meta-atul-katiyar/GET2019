@@ -33,12 +33,15 @@ public class FriendList extends HttpServlet {
 			ResultSet rs = st.executeQuery(query);
 	        
 	        
-	       while(rs.next()){
+	        while(rs.next()){
 	    	   String friendDetails = "SELECT * FROM `EAD-4`.`employee_detail` AS ED "
 						+ " WHERE ED.ID="+rs.getInt(1)+";";
 	    	   ResultSet rs1 = st1.executeQuery(friendDetails);
 	    	   rs1.next();
-	    	   out.println("<a href='FetchEmployeeData?email="+rs1.getString(4)+"&password="+rs1.getString(5)+"'>"+rs1.getString(2)+"</a>");
+	    	   //System.out.println(rs.getString(4));
+	    	  
+	    	   out.println("<a href='FetchEmployeeData?email="+rs1.getString(4)+"&password="+rs1.getString(5)+"'>"+rs1.getString(2)+"</a>"
+	    	   		+ "<br/><br/><br/>");
 	       }  
 			
 			out.close();
