@@ -55,10 +55,12 @@ public class RegisterEmployee extends HttpServlet {
 				// Get a writer pointer
 				// to display the successful result
 				PrintWriter out = response.getWriter();
-				out.println("<b>Successfully Inserted"
-						+ "</b>");
-				RequestDispatcher rd = request.getRequestDispatcher("VehicleForm?empId="+empId); 
-				rd.forward(request, response); 
+				out.println("<b>Successfully registered"
+						+ "</b></br></br>");
+			/*	RequestDispatcher rd = request.getRequestDispatcher("VehicleForm?empId="+empId); 
+				rd.forward(request, response); */
+				
+				request.getRequestDispatcher("VehicleForm?empId="+empId).include(request, response);
 			} catch(java.sql.SQLIntegrityConstraintViolationException e){
 				PrintWriter out = response.getWriter();
 				out.println("<html><body><b>email already exists"
