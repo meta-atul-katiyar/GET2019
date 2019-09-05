@@ -13,26 +13,37 @@
 
      <div id="rateInfo" style="display:block" align="center">
             <select id="currencyName" onchange="rateCard()">
-                    <option>select type</option>
+            		<option id="USD" value="USD">US Dollars</option>
+            
                     <option id="INR" value="INR">Indian Rupees</option>
-                    <option id="USD" value="USD">US Dollars</option>
+                    
                     <option id="YEN" value="YEN">Japanese Yen</option>
                 </select><br><br>
                 
 				<%!
 				
-				String daily = null;
-				String monthly = null;
-				String yearly = null;
+				double daily, monthly ,yearly;
 				
 				%>                
                 <% 
             	
 
     			
-                String vehicleType =  (String)session.getAttribute("type");
+                String vehicleType =  (String)session.getAttribute("type"),
+                	vehicleNumber = (String)session.getAttribute("vehicleNumber");
+                int vehicleId = -1, 
+                		empId = (int)session.getAttribute("empId");
                 
-                
+                // assign name to vehicle type
+                if(vehicleType.equals("cycle")){
+                	vehicleType = "Cycle";
+                }
+                else if(vehicleType.equals("twoWheeler")){
+                	vehicleType = "Two Wheeler";
+                }
+                else if(vehicleType.equals("fourWheeler")){
+                	vehicleType = "Four Wheeler";
+                }
                 System.out.println("vehicle type: " + vehicleType);
                 
                 Connection connection = null;
@@ -46,7 +57,7 @@
                 
                 System.out.println("connection reference: " + connection);
                 
-
+				
                 
                 // fetching plans for the selected vehicleType
 
@@ -58,22 +69,34 @@
                 
                 System.out.println("daily-monthly-yearly");
                 
-                daily = rs.getString(3); 
+                daily = rs.getInt(3); 
                 
                 
                 System.out.println("daily: " + daily);
-                monthly = rs.getString(4); 
-                yearly = rs.getString(5); 
+                monthly = rs.getInt(4); 
+                yearly = rs.getInt(5); 
+                
+            	// fetch vehicle Id
+            	System.out.println("vNUM:"+vehicleNumber);
+				String queryID = "select * from `EAD-4`.`vehicle_detail` AS VD WHERE VD.vehicleNumber = \""+vehicleNumber+ "\";";
+				ResultSet rs1 = st.executeQuery(queryID);
+				rs1.next();
+				System.out.println("vId: "+rs1.getInt(1));
+				vehicleId = rs1.getInt(1); 
+				
+				if(vehicleId == -1){
+					throw new AssertionError("this vehicle is not registered.");
+				}
                }
             	catch (SQLException e) {
             			e.printStackTrace();
             	}
                 
                 %>
-                
+          <form action='/GeneratePass' method='post'>      
         <div id = "rateTable" style="display:block">
-            <table>
-                <tr id="vehicleType">
+            <table border='5px'>
+                <tr id="vehicleType">Vehicle Type:  
 	            <%=vehicleType %> </tr>
                 <tr>
                     <th> Duration</th>
@@ -81,25 +104,34 @@
                     
                 </tr>
                 <tr>
-                    <th>one day  </th>
-                    <th id="dailyPrice"><%=daily%></th>  
-                    <th><button id = "dayPlanButton" type="button" onclick="priceList('dailyPrice')">SELECT</button></input></th>  
+                    <th>Daily </th>
+                    <th id="dailyPrice">$<%=daily%></th>  
+                    <th><input id='pricePlan' type="radio"  name='pricePlan' value='daily'" onclick="setAmount('daily')"></input></th>  
                 </tr>
                 <tr>
-                    <th>one month  </th> 
-                    <th id="monthlyPrice"><%=monthly%></th> 
-                    <th><button id = "monthPlanButton" type="button" onclick="priceList('monthlyPrice')">SELECT</button></input></th>
+                    <th>Monthly  </th> 
+                    <th id="monthlyPrice">$<%=monthly%></th> 
+                    <th><input type='radio' id='pricePlan' name='pricePlan' value='monthly' onclick="setAmount('monthly')"></input></th>
                 </tr>
                 <tr>
-                    <th>one year  </th> 
-                    <th id="yearlyPrice"><%=yearly%></th> 
-                    <th><button id = "yearPlanButton" type="button" onclick="priceList('yearlyPrice')">SELECT</button></input></th>
+                    <th>Yearly  </th> 
+                    <th id="yearlyPrice">$<%=yearly%></th> 
+                    <th><input type='radio' id='pricePlan' name='pricePlan' value='yearly' onclick="setAmount('yearly')"></input></th>
                 </tr>
-            </table>
+            </table></div>
+			<input type='button' value= 'get pass' onclick='getPass()'/>
+           </form>
+			
+			
+			
+<!--   			<label><input type='radio' id='pricePlan' name='pricePlan' value='daily' >Daily</label> -->
+<!--                   <label><input type='radio' id='pricePlan' name='pricePlan' value='monthly'>Monthly</label> -->
+<!--                    <label><input type='radio' id='pricePlan' name='pricePlan' value='yearly'>Yearly</label> -->
+<!--                        <br> <br> -->
 
+                
 
-
-            <button id = "getPass" type="button" onclick="generatePass()">GET PASS</button>
+<!--             <button id = "getPass" type="button" onclick="GeneratePass?currency="+>GET PASS</button> -->
 
             <p id = "passID" style ="display:none"></p>
         </div> <br><br>
@@ -107,39 +139,69 @@
 </body>
 <script>
  // used to show the rate cards in different currency
+ var vehicleId=<%=vehicleId%>, currency='USD', amount, planName, symbol="USD", empId=<%=empId%>;
   function rateCard()
   {
-
-      var type1 = document.getElementById("vehicleType").value,
-        currency = document.getElementById("currencyName").value, 
-        exchangeFromRupee = 1;
+      var type1 = document.getElementById("vehicleType").value, 
+        exchangeFromRupee = 1; 
+      currency = document.getElementById("currencyName").value;
+      
       console.log("fffff: ",currency);
       console.log("dddd: ","${type}");
-      if(currency == "USD"){
-        exchangeFromRupee = 0.014;
+      if(currency == "INR"){
+        exchangeFromRupee = 72.02;
+        symbol = "INR";
       }
       else if(currency == "YEN"){
-        exchangeFromRupee = 1.47;
+        exchangeFromRupee = 106.24;
+        symbol = "JPY";
       }
-
   
+//      document.getElementById("vehicleTypeName").innerHTML = document.getElementById(type).innerHTML;
+//      document.getElementById("NameOfCurrency").innerHTML = document.getElementById(currency).innerHTML;
+  
+  		const formatter = new Intl.NumberFormat('en-US', {
+  style: 'currency',
+  currency: symbol
+})
       if("${type}" == "cycle"){
-        document.getElementById("dailyPrice").innerHTML = exchangeFromRupee * 5;
-        document.getElementById("monthlyPrice").innerHTML = exchangeFromRupee * 100;
-        document.getElementById("yearlyPrice").innerHTML = exchangeFromRupee * 500;
+        document.getElementById("dailyPrice").innerHTML = formatter.format(exchangeFromRupee * 5) ;
+        document.getElementById("monthlyPrice").innerHTML = formatter.format(exchangeFromRupee * 100);
+        document.getElementById("yearlyPrice").innerHTML = formatter.format(exchangeFromRupee * 500);
       }
       else if("${type}" == "twoWheeler"){
-        document.getElementById("dailyPrice").innerHTML = exchangeFromRupee * 10;
-        document.getElementById("monthlyPrice").innerHTML = exchangeFromRupee * 200;
-        document.getElementById("yearlyPrice").innerHTML = exchangeFromRupee * 1000;
+        document.getElementById("dailyPrice").innerHTML = formatter.format(exchangeFromRupee * 10);
+        document.getElementById("monthlyPrice").innerHTML = formatter.format(exchangeFromRupee * 200);
+        document.getElementById("yearlyPrice").innerHTML = formatter.format(exchangeFromRupee * 1000);
       }
       else if("${type}" == "fourWheeler"){
-        document.getElementById("dailyPrice").innerHTML = exchangeFromRupee * 20;
-        document.getElementById("monthlyPrice").innerHTML = exchangeFromRupee * 500;
-        document.getElementById("yearlyPrice").innerHTML = exchangeFromRupee * 3500;
+        document.getElementById("dailyPrice").innerHTML = formatter.format(exchangeFromRupee * 20);
+        document.getElementById("monthlyPrice").innerHTML = formatter.format(exchangeFromRupee * 500);
+        document.getElementById("yearlyPrice").innerHTML = formatter.format(exchangeFromRupee * 3500);
       }
       document.getElementById("rateTable").style.display = "block";
   } 
+  
+  function setAmount(plan){
+	  if(plan=="daily"){
+		  amount = document.getElementById("dailyPrice").innerHTML;
+		  planName = "daily";
+	  }
+	  else if(plan=="monthly"){
+		  amount = document.getElementById("monthlyPrice").innerHTML;
+		  planName = "monthly";
+	  }
+	  else if(plan == "yearly"){
+		  amount = document.getElementById("yearlyPrice").innerHTML;
+		  planName = "yearly";
+	  }
+	  //amount = amount.substring(0, str.length - 1);
+  }
+  console.log(currency);
+  function getPass(){
+	  window.location.assign("GeneratePass?planName="+planName+"&amount="+amount+"&vehicleId="+vehicleId+"&currency="+currency
+			  +"&empId="+empId);
+  }
   
   </script>
 </html>
