@@ -22,9 +22,7 @@ public class LogoutServlet extends HttpServlet {
               
             HttpSession session=request.getSession();  
             session.invalidate();  
-              
-            
-              
+
             out.close();  
     }  
 } 
