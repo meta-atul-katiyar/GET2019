@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@WebFilter("/FetchEmployeeData")
+@WebFilter("/FetchData")
 public class EmployeeSessionFilter implements Filter{
 	
 	public void init(FilterConfig arg0) throws ServletException {
