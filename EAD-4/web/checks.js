@@ -137,21 +137,6 @@ function rateCard()
 } 
 
 
-
-//// display the price
-//function displayRate()
-//{
-//	 
-//  var varvehicleType = document.getElementById("vehicleType").value,
-//    vehicleNumber = document.getElementById("vehicleNumber").value,
-//    employeeId = document.getElementById("employeeId").value;
-//
-//  if(vehicleName != "" && vehicleType != "select type" && vehicleNumber != "" && employeeId != ""){
-//    document.getElementById("vehicleForm").style.display = "none";
-//    document.getElementById("rateInfo").style.display = "block";
-//  }
-//}
-
 // generate a price message for selected of selected plan
 function priceList(duration)
 {
