@@ -1,4 +1,8 @@
 
+create database `EAD-4`;
+
+use `EAD-4`;
+
 CREATE  TABLE IF NOT EXISTS `EAD-4`.`employee_detail` (
 
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -68,7 +72,6 @@ CREATE  TABLE IF NOT EXISTS `EAD-4`.`vehicle_detail` (
   
 
   
-  select * from pass_details;
   
     CREATE  TABLE IF NOT EXISTS `EAD-4`.`pass_details` (
 
@@ -96,8 +99,11 @@ CREATE  TABLE IF NOT EXISTS `EAD-4`.`vehicle_detail` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
 
   `userId` INT UNSIGNED NOT NULL,
-  
-  `friendId` INT UNSIGNED NOT NULL  ,
+  `gender` VARCHAR(10) NOT NULL,
+  `friendName` VARCHAR(30)  NOT NULL  ,
+  `imageName` VARCHAR(40) NOT NULL,
+  `address` VARCHAR(100) NOT NULL,
+  `contactNumber` VARCHAR(10) NOT NULL,
 
   PRIMARY KEY (`ID`) ,
   FOREIGN KEY(`userId`) REFERENCES employee_detail(ID)
@@ -107,10 +113,11 @@ CREATE  TABLE IF NOT EXISTS `EAD-4`.`vehicle_detail` (
 
   );
   
+  #drop table friends_list
   
   CREATE  TABLE IF NOT EXISTS `EAD-4`.`price_list` (
 
-  `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `ID` INT UNSIGNED AUTO_INCREMENT,
 
   `vehicleType` VARCHAR(30) NOT NULL,
   
@@ -124,24 +131,20 @@ CREATE  TABLE IF NOT EXISTS `EAD-4`.`vehicle_detail` (
 
   );
   
+  
   INSERT INTO `EAD-4`.`price_list` VALUES(1, "cycle", 5,100,500);
   INSERT INTO `EAD-4`.`price_list` VALUES(2, "twoWheeler", 10,200,1000);
   INSERT INTO `EAD-4`.`price_list` VALUES(3, "fourWheeler", 20,500,3500);
   
 
   
-  INSERT INTO `EAD-4`.`friends_list` (`userId`, `FriendId`) VALUES (5, 25);
+  INSERT INTO `EAD-4`.`friends_list` VALUES (1, 1, `male`, 'abc', 'visual-reverse-image-search-v2_intro.jpg', 'address1', '111111111');
+  INSERT INTO `EAD-4`.`friends_list` VALUES (2, 1, `male`, 'abc', 'visual-reverse-image-search-v2_intro.jpg', 'address1', '111111111');
+  INSERT INTO `EAD-4`.`friends_list` VALUES (3, 2, `male`, 'abc', 'visual-reverse-image-search-v2_intro.jpg', 'address1', '111111111');
+  INSERT INTO `EAD-4`.`friends_list` VALUES (4, 2, `male`, 'abc', 'visual-reverse-image-search-v2_intro.jpg', 'address1', '111111111');
+  INSERT INTO `EAD-4`.`friends_list` VALUES (5, 3, `male`, 'abc', 'visual-reverse-image-search-v2_intro.jpg', 'address1', '111111111');
+  INSERT INTO `EAD-4`.`friends_list` VALUES (6, 3, `male`, 'abc', 'visual-reverse-image-search-v2_intro.jpg', 'address1', '111111111');
+  INSERT INTO `EAD-4`.`friends_list` VALUES (7, 4, `male`, 'abc', 'visual-reverse-image-search-v2_intro.jpg', 'address1', '111111111');
+  INSERT INTO `EAD-4`.`friends_list` VALUES (8, 1, `male`, 'abc', 'visual-reverse-image-search-v2_intro.jpg', 'address1', '111111111');
    
-  INSERT INTO `EAD-4`.`friends_list` (`userId`, `FriendId`) VALUES (5, 6); 
-  INSERT INTO `EAD-4`.`friends_list` (`userId`, `FriendId`) VALUES (5, 7); 
-  INSERT INTO `EAD-4`.`friends_list` (`userId`, `FriendId`) VALUES (5, 18); 
-  INSERT INTO `EAD-4`.`friends_list` (`userId`, `FriendId`) VALUES (5, 29); 
-  INSERT INTO `EAD-4`.`friends_list` (`userId`, `FriendId`) VALUES (5, 20); 
-  INSERT INTO `EAD-4`.`friends_list` (`userId`, `FriendId`) VALUES (5, 31); 
-  INSERT INTO `EAD-4`.`friends_list` (`userId`, `FriendId`) VALUES (5, 42); 
-  INSERT INTO `EAD-4`.`friends_list` (`userId`, `FriendId`) VALUES (5, 33); 
-  INSERT INTO `EAD-4`.`friends_list` (`userId`, `FriendId`) VALUES (5, 34); 
-
-  
-  
   
