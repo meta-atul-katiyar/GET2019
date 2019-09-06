@@ -28,9 +28,13 @@ public class UserHome extends HttpServlet {
 					+ " WHERE ED.ID=\"" + empId + "\";",
 					queryImage = "SELECT * FROM `EAD-4`.`profile` AS PP"
 					+ " WHERE PP.employeeId=\"" + empId + "\";";
+			
+			String queryPass = "SELECT * FROM (employee_detail AS ED NATURAL JOIN vehicle_detail AS VD)"
+					+ " NATURAL JOIN pass_details AS PD WHERE ED.ID=\""+empId+"\";";
 					
-			PreparedStatement st = dbConn.estabConn(query), st1 = dbConn
-					.estabConn(queryImage);
+			PreparedStatement st = dbConn.estabConn(query), 
+					st1 = dbConn.estabConn(queryImage),
+					st2 = dbConn.estabConn(queryPass);
 
 			ResultSet rs = st.executeQuery(query);
 			rs.next();
@@ -38,8 +42,9 @@ public class UserHome extends HttpServlet {
 			String name = rs.getString(2), gender = rs.getString(3), contact = rs
 					.getString(6), organization = rs.getString(7);
 			
-			ResultSet rs1 = st1.executeQuery(queryImage);
-
+			ResultSet rs1 = st1.executeQuery(queryImage),
+					rs2 = st2.executeQuery(queryPass);
+			
 			rs1.next();
 			if (rs1.getRow() > 0) {
 				photo = rs1.getString(2);
@@ -113,6 +118,17 @@ public class UserHome extends HttpServlet {
 			out.print("<p>gender: " + gender + "<br/>");
 			out.print("<p>contact: " + contact + "<br/>");
 			out.print("<p>organization: " + organization + "</p><br/><br/>");
+			
+			while(rs2.next()){
+				out.print("<p>vehicle name: " + rs2.getString("vehicleName") + "<br/>");
+				out.print("<p>vehicle type: " + rs2.getString("type") + "<br/>");
+				out.print("<p>vehicle number: " + rs2.getString("vehicleNumber") + "<br/>");
+				out.print("<p>identification: " + rs2.getString("identification") + "<br/>");
+				out.print("<p>plan name: " + rs2.getString("planName") + "<br/>");
+				out.print("<p>amount paid(USD): " + rs2.getString("amount") + "<br/>");
+				out.print("<p>pass generation time: " + rs2.getString("generationTime") + "<br/><br/><br/>");
+				
+			}
 
 			out.print("<button type=button onclick=\"window.location.href = 'EditEmployeeData?id="
 					+ rs.getInt(1)
