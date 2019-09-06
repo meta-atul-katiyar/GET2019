@@ -25,10 +25,10 @@ public class UserHome extends HttpServlet {
 			String photo = null;
 			DBConnection dbConn = new DBConnection();
 			String query = "SELECT * FROM `EAD-4`.`employee_detail` AS ED  "
-					+ " WHERE ED.ID=\"" + empId + "\";";
-
-			String queryImage = "SELECT * FROM `EAD-4`.`profile` AS PP"
+					+ " WHERE ED.ID=\"" + empId + "\";",
+					queryImage = "SELECT * FROM `EAD-4`.`profile` AS PP"
 					+ " WHERE PP.employeeId=\"" + empId + "\";";
+					
 			PreparedStatement st = dbConn.estabConn(query), st1 = dbConn
 					.estabConn(queryImage);
 
@@ -37,7 +37,7 @@ public class UserHome extends HttpServlet {
 
 			String name = rs.getString(2), gender = rs.getString(3), contact = rs
 					.getString(6), organization = rs.getString(7);
-
+			
 			ResultSet rs1 = st1.executeQuery(queryImage);
 
 			rs1.next();
@@ -80,8 +80,10 @@ public class UserHome extends HttpServlet {
 					+ "</style>");
 
 			out.print("<div class='topnav' name='topnav'>"
-					+ "<a  href='#home'>Home</a>" + "<a href='friends?empId="
+					+ "<a  href='#home'>Home</a>" 
+					+ "<a href='friends?empId="
 					+ empId + "'>Friends</a>"
+					+ "<a href='CoworkersList?organizationName="+organization+"&empId="+empId+"'>Coworkers</a>"
 					+ "<a href='Logout' style=\"float:right;\">Logout</a>"
 					+ "</div>" + "<br/>");
 			out.print("<div id='profile-container' '>");
@@ -136,5 +138,4 @@ public class UserHome extends HttpServlet {
 			e.printStackTrace();
 		}
 	}
-
 }
