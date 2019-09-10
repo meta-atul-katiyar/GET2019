@@ -1,8 +1,5 @@
 package inventory;
 
-import javax.xml.bind.annotation.XmlRootElement;
-
-//@XmlRootElement
 public class Item {
 
 	private String name;
