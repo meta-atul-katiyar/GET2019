@@ -1,9 +1,7 @@
 package inventory;
 
 import java.util.*;
-
 import java.util.concurrent.atomic.AtomicLong;
-
 import javax.websocket.server.PathParam;
 
 import org.springframework.beans.BeanUtils;
@@ -92,12 +90,19 @@ public class InventoryFunction {
 		return inventoryList.add(item);
 	}
 
+	/**
+	 * @return list of inventory object which is empty
+	 */
 	@DeleteMapping("")
 	public Object deleteAllItems() {
 		inventoryList.clear();
 		return inventoryList;
 	}
 
+	/**
+	 * @param name
+	 * @return delete the given item
+	 */
 	@DeleteMapping("/{name}")
 	public Object deleteItem(@PathVariable String name) {
 		for (Item i : inventoryList) {
@@ -107,5 +112,4 @@ public class InventoryFunction {
 		}
 		return inventoryList;
 	}
-
 }
