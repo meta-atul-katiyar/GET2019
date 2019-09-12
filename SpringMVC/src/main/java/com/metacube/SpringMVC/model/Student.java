@@ -21,7 +21,7 @@ public class Student {
 	@NotBlank(message = "{blankFatherName}")
 	private String fatherName;
 
-	@Email(message = "{validEmail}")
+	@Pattern(regexp = "^\\w+([\\.-]?\\w+)*@\\w+([\\.-]?\\w+)*(\\.\\w{2,3})+$", message = "{validEmail}")
 	@NotBlank(message = "{blankEmail}")
 	private String email;
 
