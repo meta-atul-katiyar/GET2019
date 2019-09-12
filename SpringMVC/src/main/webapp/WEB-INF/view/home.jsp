@@ -13,8 +13,8 @@
 <body>
         <div  align="center">
              <h2>${message}</h2>
-             <a href="AddStudentDetails">Add Student Detail</a><br>
-             <a href="showStudent">Show All Student</a><br>
+             <a href="AddStudentDetails">Add Student Detail</a><br/>
+             <a href="showStudent">Show All Student</a><br/>
        </div>
 </body>
 </html>
