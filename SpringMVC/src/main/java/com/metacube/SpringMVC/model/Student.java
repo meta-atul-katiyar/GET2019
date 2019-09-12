@@ -10,13 +10,14 @@ import javax.validation.constraints.Pattern;
 public class Student {
 
 	@NotBlank(message = "{blankFirstName}")
-	@Pattern(regexp="^[a-zA-Z]")
+	@Pattern(regexp="^[a-zA-Z]{1,}", message = "{validStudentFirstName}")
 	private String firstName;
-	@Pattern(regexp="^[a-zA-Z]")
+	
+	@Pattern(regexp="^[a-zA-Z]{1,}", message = "{validStudentLastName}")
 	@NotBlank(message = "{blankLastName}")
 	private String lastName;
 	
-	@Pattern(regexp="^[a-zA-Z]")
+	@Pattern(regexp="^[a-zA-Z ]{1,}", message = "{validFatherName}")
 	@NotBlank(message = "{blankFatherName}")
 	private String fatherName;
 
