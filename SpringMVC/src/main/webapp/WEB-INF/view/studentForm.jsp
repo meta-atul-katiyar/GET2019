@@ -21,32 +21,32 @@
 					First Name :
 					<form:input path="firstName"  /><br/>
 					<form:errors path = "firstName" cssClass="text-danger"></form:errors>
-					<br/>
+					<br/><br/>
 				
 					Last Name
 					<form:input path="lastName"  /><br/>
 					<form:errors path = "lastName" cssClass="text-danger"></form:errors>
-					<br/>
+					<br/><br/>
 				
 					Father Name
 					<form:input path="fatherName"  /><br/>
 					<form:errors path = "fatherName" cssClass="text-danger"></form:errors>
-					<br/>
+					<br/><br/>
 		
 					Email
 					<form:input path="email" /><br/>
-			    	<form:errors path = "email" cssClass="text-danger"></form:errors>
-			    	<br/>
+			    		<form:errors path = "email" cssClass="text-danger"></form:errors>
+			    		<br/><br/>
 				
 					Class
 					<form:input path="studentClass"  /><br/>
 					<form:errors path = "studentClass" cssClass="text-danger"></form:errors>
-					<br/>
+					<br/><br/>
 				
 					Age
 					<form:input path="age" /><br/>
 					<form:errors path = "age" cssClass="text-danger"></form:errors>
-					<br/>
+					<br/><br/>
 		
 			<button type="submit">Submit</button>
 		</form:form>
