@@ -148,10 +148,20 @@ public class ParkingController {
 			@RequestParam("vehicleId") int vehicleId, @RequestParam("employeeId") int employeeId,
 			Model model, RedirectAttributes attribute) {
 		PassDetailDB passDetailDB = new PassDetailDB();
+		
+		List<String> currencyList = new ArrayList<>();
+
+		currencyList.add("USD");
+		currencyList.add("INR");
+		currencyList.add("YEN");
+
+		model.addAttribute("currencyList", currencyList);
+		
 		passDetailDB.setVehicleId(vehicleId);
 		model.addAttribute(passDetailDB);
 		model.addAttribute("priceList",employeeService.getPriceList(vehicleType));
 		attribute.addAttribute("employeeId", employeeId);
+		model.addAttribute("vehicleType", vehicleType);
 		return "PassDetails";
 	}
 	

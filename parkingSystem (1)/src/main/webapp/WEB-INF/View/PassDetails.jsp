@@ -37,9 +37,11 @@
 <%-- 	           </c:forEach> --%>
 <!-- 	     </table> -->
 <%-- 	     </form:form> --%>
+
+
 <form:form modelAttribute="passDetailDB">
+<p>Vehicle Type: ${vehicleType}</p>
  <table border='5px'>
-           
                 <tr>
                     <th>Plan name</th>
                     <th>Price</th>
@@ -48,7 +50,7 @@
     		<c:forEach items="${priceList}" var="price" >
     		<tr>
     	  	<td> ${price.getPlanName()}</td>
-          	<td> ${price.getPrice()*5}</td>
+          	<td> ${price.getPrice()}$</td>
           	<td> <form:radiobutton path="priceListId" value="${price.getID()}" /> </td>
           	</tr><br/>
     		</c:forEach>
@@ -61,4 +63,5 @@
 	</div>
 
 </body>
+
 </html>
