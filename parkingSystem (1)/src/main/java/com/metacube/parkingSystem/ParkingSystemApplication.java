@@ -6,6 +6,7 @@ import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
+import org.springframework.web.multipart.support.StandardServletMultipartResolver;
 
 @SpringBootApplication
 public class ParkingSystemApplication {
@@ -23,7 +24,7 @@ public class ParkingSystemApplication {
         bean.setValidationMessageSource(messageSource());
         return bean;
     }
-	
+
 	public static void main(String[] args) {
 		SpringApplication.run(ParkingSystemApplication.class, args);
 	}

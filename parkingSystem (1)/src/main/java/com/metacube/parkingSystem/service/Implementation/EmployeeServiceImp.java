@@ -34,12 +34,6 @@ public class EmployeeServiceImp implements IEmployeeSevice{
 	public boolean addVehicle(Vehicle v) {
 		return employeeDao.addVehicle(v);
 	}
-	
-	@Override
-	public int getPriceListId(String planName, String vehicleType) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 
 	@Override
 	public ArrayList<PassJoinVehicle> getPassDetail(int employeeId) {
@@ -47,20 +41,17 @@ public class EmployeeServiceImp implements IEmployeeSevice{
 	}
 
 	@Override
-	public String getImageName() {
-		// TODO Auto-generated method stub
-		return null;
+	public String getImageName(int employeeId) {
+		return employeeDao.getImageName(employeeId);
 	}
 
 	@Override
 	public EmployeeDB getEmployeeDetail(String email, String password) {
-		// TODO Auto-generated method stub
 		return employeeDao.getEmployeeDetail(email, password);
 	}
 
 	@Override
 	public int getEmployeeId(String email) {
-		// TODO Auto-generated method stub
 		return employeeDao.getEmployeeId(email);
 	}
 
@@ -71,7 +62,6 @@ public class EmployeeServiceImp implements IEmployeeSevice{
 
 	@Override
 	public ArrayList<VehicleDB> getVehicleDetail(int employeeId) {
-		// TODO Auto-generated method stub
 		return employeeDao.getVehicleDetail(employeeId);
 	}
 
@@ -105,6 +95,20 @@ public class EmployeeServiceImp implements IEmployeeSevice{
 	public boolean updateEmployee(Employee e, int employeeId) {
 		return employeeDao.updateEmployee(e, employeeId);
 	}
-	
-	
+
+	@Override
+	public ArrayList<EmployeeDB> getCoworkerDetail(String organization) {
+		return employeeDao.getCoworkerDetail(organization);
+	}
+
+	@Override
+	public boolean addImage(int employeeId, String imageName) {
+		return employeeDao.addImage(employeeId, imageName);
+	}
+
+	@Override
+	public int getPriceListId(String planName, String vehicleType) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 }

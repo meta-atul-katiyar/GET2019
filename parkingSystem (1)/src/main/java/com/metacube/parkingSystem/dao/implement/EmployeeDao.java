@@ -74,6 +74,26 @@ public class EmployeeDao implements IEmployeeDao {
 	}
 	
 	@Override
+	public ArrayList<EmployeeDB> getCoworkerDetail(String organization) {
+		String query = "SELECT * FROM `ead-9`.`employee_detail` AS ED WHERE "
+				+ "ED.organization ='"+organization+"'";
+		return (ArrayList<EmployeeDB>) jdbcTemplate.query(query, new RowMapper<EmployeeDB>() {
+			 @Override  
+			    public EmployeeDB mapRow(ResultSet rs, int rownumber) throws SQLException {  
+				 EmployeeDB e=new EmployeeDB();  
+			        e.setID(rs.getInt(1));
+			        e.setFullName(rs.getString(2));  
+			        e.setGender(rs.getString(3)); 
+			        e.setEmail(rs.getString(4));
+			        e.setContactNumber(rs.getString(6));
+			        e.setOrganization(rs.getString(7));
+			       
+			        return e;  
+			    }  
+		});
+	}
+	
+	@Override
 	public EmployeeDB getEmployeeDetail(int employeeId) {
 		String query = "SELECT * FROM `ead-9`.`employee_detail` AS ED WHERE "
 				+ "ED.ID ="+employeeId;
@@ -174,9 +194,10 @@ public class EmployeeDao implements IEmployeeDao {
 	}
 
 	@Override
-	public String getImageName() {
-		// TODO Auto-generated method stub
-		return null;
+	public String getImageName(int employeeId) {
+		String query = "SELECT ED.ID FROM `EAD-9`.`profile` AS P WHERE "
+				+"P.employeeId ="+employeeId;
+		return jdbcTemplate.queryForObject(query, String.class);
 	}
 
 
@@ -241,6 +262,14 @@ public class EmployeeDao implements IEmployeeDao {
 		String query = "SELECT VD.ID FROM vehicle_detail AS VD WHERE VD.vehicleNumber='"
 				+ vehicleNumber+"';";
 		return jdbcTemplate.queryForObject(query, int.class);
+	}
+
+
+	@Override
+	public boolean addImage(int employeeId, String imageName) {
+		String query="INSERT INTO `ead-9`.`profile` (`image`, `employeeId`, `timeOfUpload`) VALUES ('"
+				+imageName+"',"+employeeId+", now());";
+		return jdbcTemplate.update(query)>0;
 	}
 	
 

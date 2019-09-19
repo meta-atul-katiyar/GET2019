@@ -10,8 +10,60 @@
 <link href="webjars/bootstrap/3.3.6/css/bootstrap.min.css"
 	rel="stylesheet">
 <title>Edit User Info</title>
+
+<style>
+
+
+.topnav {
+	overflow: hidden;
+	background-color: #333;
+}
+
+.topnav a {
+	float: left;
+	color: #f2f2f2;
+	text-align: center;
+	padding: 14px 16px;
+	text-decoration: none;
+	font-size: 17px;
+}
+
+.topnav a:hover {
+	background-color: #ddd;
+	color: black;
+}
+
+.topnav a.active {
+	background-color: #4CAF50;
+	color: white;
+}
+.profile-container {position: absolute;
+					right: 0px;
+					top: 60px;
+					background-color: white
+					}
+					
+.profile-container img{position: relative;
+					right: 0px;
+					top: 0px;
+					background-color: white;
+					width: 150;
+					height: 180}
+					
+.profile-container button{postion:relative;
+					top:240px;right:0px}
+
+</style>
 </head>
 <body>
+	<div class="topnav">
+		<a class="active" href="/UserHome">Home</a>
+		<a href="/CoWorkers">CoWorkers</a>
+		<a href="/Friends">Friends</a>
+		<a href="/About">About</a>
+		<a href="/Logout" style="float:right;">Logout</a>
+
+	</div>
 		<div id="empDetail" class="container" align=center>
 		<h1>Register Employee</h1>
 		<hr>

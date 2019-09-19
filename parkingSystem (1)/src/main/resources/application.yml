@@ -9,3 +9,10 @@ spring:
    view:
     prefix: /WEB-INF/View/
     suffix: .jsp
+    
+    
+  servlet:
+    multipart:
+      enabled : true
+      location : /images
+      max-file-size : 1280KB

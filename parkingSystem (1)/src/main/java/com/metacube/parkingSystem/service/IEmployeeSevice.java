@@ -22,12 +22,14 @@ public interface IEmployeeSevice {
 	public int getVehicleId(String vehicleNumber);
 	public int getPriceListId(String planName, String vehicleType); 
 	public ArrayList<PassJoinVehicle> getPassDetail(int employeeId);
-	public String getImageName();
+	public String getImageName(int employeeId);
+	public boolean addImage(int employeeId, String imageName);
 	public ArrayList<PriceListDB> getPriceList(String vehicleType);
 	boolean addPassDetail(PassDetailDB passDetailDB);
 	EmployeeDB getEmployeeDetail(int employeeId);
 	ArrayList<FriendsDB> getFriendsDetail(int employeeId);
 	FriendsDB getFriendDetail(int friendId);
 	boolean updateEmployee(Employee e, int employeeId);
+	ArrayList<EmployeeDB> getCoworkerDetail(String organization);
 
 }

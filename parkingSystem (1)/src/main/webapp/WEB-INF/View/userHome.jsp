@@ -59,6 +59,7 @@
 <body>
 	<div class="topnav">
 		<a class="active" href="/UserHome">Home</a>
+		<a href="/CoWorkers">CoWorkers</a>
 		<a href="/Friends">Friends</a>
 		<a href="/About">About</a>
 		<a href="/Logout" style="float:right;">Logout</a>
@@ -67,7 +68,7 @@
 
 	<div class='profile-container'>
 		<img src="images/${imageName}" width="150px" height="180px"/>
-		<button type=submit value='change'  onclick= "window.location.href = 'imageForm'">change</button>
+		<button type=submit value='change'  onclick= "window.location.href = '/uploadImage'">change</button>
 	</div>
 	<div class="container">
 	<table>

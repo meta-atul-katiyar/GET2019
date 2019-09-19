@@ -42,6 +42,7 @@
 <body>
 	<div class="topnav">
 		<a class="active" href="/UserHome">Home</a>
+		<a href="/CoWorkers">CoWorkers</a>
 		<a href="/Friends">Friends</a>
 		<a href="/About">About</a>
 		<a href="/Logout" style="float:right;">Logout</a>

@@ -1,21 +1,32 @@
 package com.metacube.parkingSystem.controller;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+
+import javax.servlet.ServletContext;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.metacube.parkingSystem.model.Employee;
@@ -23,17 +34,20 @@ import com.metacube.parkingSystem.model.EmployeeDB;
 import com.metacube.parkingSystem.model.FriendsDB;
 import com.metacube.parkingSystem.model.PassDetailDB;
 import com.metacube.parkingSystem.model.PassJoinVehicle;
+import com.metacube.parkingSystem.model.UploadImage;
 import com.metacube.parkingSystem.model.Vehicle;
 import com.metacube.parkingSystem.service.IEmployeeSevice;
 
 
 
 @Controller
-@SessionAttributes({"employeeId", "gender"})
+@SessionAttributes({"employeeId", "gender", "organization"})
 public class ParkingController {
 
 	@Autowired
 	private IEmployeeSevice employeeService;
+	@Autowired
+	ServletContext context; 
 
 	private static final Logger log = LoggerFactory.getLogger(ParkingController.class);
 
@@ -63,6 +77,7 @@ public class ParkingController {
 		if(emp.getID() > 0){
 			model.addAttribute("employeeId", emp.getID());
 			model.addAttribute("gender", emp.getGender());
+			model.addAttribute("organization", emp.getOrganization());
 			return "redirect:/UserHome";
 		}
 		else {
@@ -96,6 +111,7 @@ public class ParkingController {
 			log.info(String.valueOf(employee.getContactNumber()));
 			log.info(employee.getOrganization());
 			model.addAttribute("gender", employee.getGender());
+			model.addAttribute("organization", employee.getOrganization());
 			if(employeeService.addEmployee(employee) == true) {
 				attribute.addFlashAttribute("ID" , employeeService.getEmployeeId(employee.getEmail()));
 				return "redirect:/vehicleForm";
@@ -149,13 +165,6 @@ public class ParkingController {
 			Model model, RedirectAttributes attribute) {
 		PassDetailDB passDetailDB = new PassDetailDB();
 		
-		List<String> currencyList = new ArrayList<>();
-
-		currencyList.add("USD");
-		currencyList.add("INR");
-		currencyList.add("YEN");
-
-		model.addAttribute("currencyList", currencyList);
 		
 		passDetailDB.setVehicleId(vehicleId);
 		model.addAttribute(passDetailDB);
@@ -207,6 +216,33 @@ public class ParkingController {
 		return "about";
 		
 	}
+	
+	@GetMapping("/CoWorkers")
+	public String CoworkersList(@SessionAttribute("employeeId") int employeeId, 
+			@SessionAttribute("gender") String gender,Model model,
+			@SessionAttribute("organization") String organization,
+			RedirectAttributes attribute) {
+		ArrayList<EmployeeDB> coworkerList = employeeService.getCoworkerDetail(organization);
+		if(gender.equals("male")) {
+			model.addAttribute("imageName", "default-profile-picture.jpg");
+		}
+		else {
+			model.addAttribute("imageName", "user_profile_female.jpg");
+		}
+		model.addAttribute("coworkerList", coworkerList);
+		return "coworkers";
+		
+	}
+	
+	@GetMapping("/CoWorkersHome")
+	public String CoworkerHome(@RequestParam("coworkerId") int coworkerId,  Model model,
+			RedirectAttributes attribute) {
+		EmployeeDB coworker = employeeService.getEmployeeDetail(coworkerId);
+		
+		model.addAttribute("coworker", coworker);
+		return "coworkerHome";
+	}
+	
 	
 	@GetMapping("/Friends")
 	public String friendsList(@SessionAttribute("employeeId") int employeeId, 
@@ -283,7 +319,35 @@ public class ParkingController {
 		}
 	}
 	
-	
+	 @RequestMapping(value = "/uploadImage", method = RequestMethod.GET)
+	   public String fileUploadPage(Model model) {
+	      model.addAttribute(new UploadImage());
+	      return "uploadImage";
+	   }
+
+	   @RequestMapping(value="/uploadImage", method = RequestMethod.POST)
+	   public String fileUpload(@Validated UploadImage file, BindingResult result, 
+			   @SessionAttribute("employeeId") int employeeId, ModelMap model) throws IOException {
+	      if (result.hasErrors()) {
+	         System.out.println("validation errors");
+	         return "fileUploadPage";
+	      } else {            
+	         System.out.println("Fetching file");
+	         MultipartFile multipartFile = file.getFile();
+	         String uploadPath = context.getRealPath("") + File.separator + "temp" + File.separator;
+	         //Now do something with file...
+	         FileCopyUtils.copy(file.getFile().getBytes(), new File(uploadPath+file.getFile().getOriginalFilename()));
+	         String fileName = multipartFile.getOriginalFilename();
+	         if(employeeService.addImage(employeeId, fileName) == true) {
+	         model.addAttribute("fileName", fileName);
+	         return "redirect:/UserHome";
+	         }
+	         else {
+	        	 model.addAttribute(new UploadImage());
+	        	 return "uploadImage";
+	         }
+	      }
+	   }
 	
 	@GetMapping("/Logout")	
 	public String logout(@SessionAttribute("employeeId") int employeeId,  Model model) {
