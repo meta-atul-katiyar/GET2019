@@ -6,11 +6,6 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import com.metacube.demo.entity.StudentEntity;
 
-/**
- * interface is used to implement same method in diffrent child funtion
- * @author Rivak
- *
- */
 @Service
 public interface StudentService {
 
