@@ -85,21 +85,17 @@ public class Home {
 			errorResult.addError(oe);
 			return "addStudent";
 		} else {
-			System.out.println("^^^^^^^^^^^^^^^^^11111111");
-			List<StudentEntity> studentData = studentObj.duplicateEmail(DtoUtil.map(student,StudentEntity.class));
 			
-			System.out.println(" ^^^^^^^^^^^^^^^^2222222222");
-			for(StudentEntity s: studentData) {
-				System.out.println(s.getEmail());
-			}
 			if(studentData.size()>0) {
 				
-				System.out.println(" ****************************");
+				studentObj.insertData(DtoUtil.map(student,StudentEntity.class));
+			}
+			catch(Exception e){
 				
 				model.addAttribute("success", "Student Email Exist");
 				return "addStudent";
 			} 
-			studentObj.insertData(DtoUtil.map(student,StudentEntity.class));
+			
 			model.addAttribute("success", "Student Added Successfuly");
 			return "addStudent";
 		}
