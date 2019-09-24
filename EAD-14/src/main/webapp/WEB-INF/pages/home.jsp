@@ -11,14 +11,6 @@
 </head>
 <body>
 	
-	
-<!-- <div class = "container" > -->
-<!-- 	<div class="jumbotron text-center bg-warning text-white"> -->
-<%-- 		<h1>${message }</h1> --%>
-<!--   		<p>In this Assignment we are static show the data add the data !</p>  -->
-<!--      </div> -->
-<!-- </div> -->
-  
 <div class="container ">
   <div class="row">
     <div class="col-sm-4">

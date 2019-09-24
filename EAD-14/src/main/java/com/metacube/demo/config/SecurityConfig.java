@@ -29,17 +29,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	protected void configure(final HttpSecurity http)throws Exception{
 		http
 		.authorizeRequests()
-		.antMatchers("/userHome").hasAuthority("user")
-		.antMatchers("/home").hasAuthority("admin")
-		.and()
-		.formLogin()
-		.loginPage("/login")
-		.defaultSuccessUrl("/home",true)
-		.failureUrl("/login?error=true")
-		.and()
-		.logout().logoutSuccessUrl("/login?logout")
-		.and()
-		.csrf().disable();
+		.antMatchers("/home").hasAnyAuthority("USER", "ADMIN")
+		.antMatchers("/showUser").hasAuthority("ADMIN")
+		.anyRequest().authenticated().and().formLogin().loginPage("/login")
+        .permitAll().defaultSuccessUrl("/home").failureUrl("/login?error=true").
+        and().logout().permitAll();
+		http.csrf().disable();
 	}
 	
 	@Bean

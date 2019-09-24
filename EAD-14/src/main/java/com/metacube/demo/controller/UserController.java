@@ -106,9 +106,6 @@ public class UserController {
 		else if (logout != null) {
 			model.addAttribute("errorMsg", "Logged out successfully.");
 		}
-//		else {
-//			model.addAttribute(attributeName, attributeValue)
-//		}
 		
 		return "login";
 	}
@@ -133,17 +130,4 @@ public class UserController {
 		return "userHome";
 	}
 	
-	
-	
-//	@GetMapping("/logout")
-//	public String logout(
-//			@RequestParam(value = "logout",	required = false) String logout, Model model){
-//		 if (logout != null) {
-//			model.addAttribute("errorMsg", "Logged out successfully.");
-//		}
-//		else
-//			return "home";
-//		
-//		return "login";
-//	}
 }
