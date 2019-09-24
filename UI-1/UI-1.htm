@@ -1,0 +1,149 @@
+<!--
+    It is web page for metacube parking system.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title> Metacube Parking System</title>
+</head>
+<body >
+    <div>
+        <span><a href="#addEmployee">Add Employee</a>&nbsp;</span> 
+        <span><a href="#addVehicle">Add Vehicle</a>&nbsp;</span>  
+        <span><a href="#feedback">Feedback</a>&nbsp;</span>
+        <span><a href="#Price">Pricing</a>&nbsp;</span>
+    </div>
+    <h1 align = "center ">Welcome to Metacube Parking System</h1> 
+    <img src="ac1975e4-f8ee-4b5c-b76d-321325562de3.jpg" width="100%"  align="center" />
+     
+    <!--
+        Register form for employee.
+    -->
+    <div align="center" id="addEmployee">
+        <form action="" name="registrationForm" method = "GET"> 
+                <h2 >Employee Registration</h1>
+                <label>Full name :</label>
+                <input type="text" name="name" id="name" pattern="[A-Za-z]{3,}" required />
+                <br/><br/>
+
+                 <label>Email :</label>
+                <input type="email" id="email" name="email" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"  required />
+                <br/><br/>
+
+               <label>Gender :</label>
+                <input type="radio" name="gender" value="male" checked/> Male
+                <input type="radio" name="gender" value="female"/> Female
+                <input type="radio" name="gender" value="other"/> Other
+                <br/><br/>
+
+                <label>Password :</label>
+                <input type="password" id="password" name="password" pattern="(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,20}" required />
+                <br/><br/>
+
+                <label>Confirm Password :</label>
+                <input type="password" id ="confirmPassword" name="Confirm password"  required />
+                <br/><br/>
+
+                <label> Contact Number :</label>
+                <input type="number" id="contact" name="ContactNumber" pattern="(7|8|9)\d{9}" required />
+                <br/><br/>
+
+                <input type="submit" value="Submit" />
+          </form> 
+    </div>
+   
+    <!--
+        Form to add vehicle of employee.
+    -->
+    <div id="addVehicle" align ="center">
+            <form action="" name = "VehicleDetails" method="GET">
+                <h2>Vehicle Details Form</h2>
+               <label>Vehicle Name :</label>  
+                <input id="vehicleName" type="text"  name="vehicleName" pattern="[A-Za-z]{3,}" required />
+                <br/><br/>
+               <label>Type : </label>
+                <select id="type" value ="type" required>
+                        <option >Select Type</option>
+                        <option value="cycle" >Cycle</option>
+                        <option value="motorCycle" >Motor Cycle</option>
+                        <option value="fourWheelers" >Four Wheelers </option>
+                </select>
+                <br/><br/>
+
+               <label> Vehicle Number :</label>
+                <input id="vehicleNumber" type="text" name="vehicleNumber" pattern="[A-Z][A-Z]\d\d[A-Z][A-Z]\d{4}" required />
+                <br/><br/>
+
+                <label>EmployeeId :</label>
+                <input id="empId" type="text" name= "empId" required />
+                <br/><br/>
+                
+                <label>Indentification :</label>
+                <textarea  cols="20" name="identification"></textarea><br/><br/>
+
+                <input type="submit" value="Add Vehicle"  />
+        </div>
+
+	<!-- Feedback -->
+	<div align="center" id="feedback">
+            <form action = "" method = "GET" name="FeedbackForm">
+                <h2>Get In Touch</h2>
+              
+                       <label>Name :</label>
+                        <input type="text" name="name" id = "name"   pattern="[A-Za-z]{3,}" required/>
+                        <br/><br/>
+                    
+                        <label>Email :</label>
+                        <input type="email" name="email" id= "email" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" required/>
+                        <br/><br/>
+                    
+                        <label>Subject :</label>
+                        <input type="text" name="subject" id = "subject " required/>
+                        <br/><br/>
+        
+                        <label>Message :</label>
+                        <textarea cols = "20" name="message" required></textarea>
+                        <br/><br/>
+                   
+                   <input type="submit" value="Send feedback" />
+            </form>
+        </div>
+
+
+        <!--
+            This div section to show the price sheet.
+        -->
+            <div id="Price"  align = "center">
+                    <!-- Cycle Pricing -->
+                <div align="center" id="cycle">
+                    <h2>Cycle</h2>
+                        <input type="radio" id="cycleDaily"/><em>$5 Daily</em><br/>
+                        <input type="radio" id="cycleMonthly"/><em>$100 Monthly</em><br/>
+                        <input type="radio" id="cycleYearly"/><em>$500 Yearly</em><br/><br/>
+                        <input type="button" value="Purchase" />
+                </div>
+
+                <!-- MotorCycle Pricing -->
+                <div align="center" id="motorcycle">
+                  <h2>MotorCycle</h2>
+                  <input type="radio" id="motorcycleDaily"/><em>$10 Daily</em> <br/>
+                  <input type="radio" id="motorcycleMonthly"/> <em>$200 Monthly</em><br/>
+                  <input type="radio" id="motorcycleYearly"/><em>$1000 Yearly</em><br/><br/>
+                    <input type="button" value="Purchase" />
+                </div>
+        
+                <!-- FourWheeler Pricing -->
+                <div align="center" id="fourwheeler">
+                <h2>Four Wheelers</h2>
+                <input type="radio" id="fourwheelerDaily"/><em>$20 Daily</em> <br/>
+                <input type="radio" id="fourwheelerMonthly"/><em>$500 Monthly</em><br/>
+                <input type="radio" id="fourwheelerYearly"/><em>$3500 Yearly</em><br/><br/>
+                    <input type="button" value="Purchase" />
+                </div>
+                    
+    </div>
+</body>
+</html>
