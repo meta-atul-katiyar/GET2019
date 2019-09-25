@@ -7,13 +7,47 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<link href="webjars/bootstrap/3.3.6/css/bootstrap.min.css"
-	rel="stylesheet">
+	 <meta charset="utf-8">
+	 <meta name="viewport" content="width=device-width, initial-scale=1">
+ 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <title>User Home</title>
+	<style>
+	
+.topnav {
+	overflow: hidden;
+	background-color: #333;
+}
 
+.topnav a {
+	float: left;
+	color: #f2f2f2;
+	text-align: center;
+	padding: 14px 16px;
+	text-decoration: none;
+	font-size: 17px;
+}
+
+.topnav a:hover {
+	background-color: #ddd;
+	color: black;
+}
+
+.topnav a.active {
+	background-color: #4CAF50;
+	color: white;
+}
+	</style>
 
 </head>
-<body>
+<body style="margin:0">
+<div class = "topnav">
+<a href="home"> Home</a>
+<a href="UserHome">About</a>
+<a href="AddUser">Add User</a>
+<a href="showUser">Show User</a>
+<a style="float:right"  href="logout">logout</a>
+</div>
+
 	
 	<div class="table-responsive">
     <table class="table table-bordered">
@@ -26,11 +60,12 @@
           <th>contactNumber</th>
           <th>Email</th>
           <th>username</th>
+          <th> ClickTo Edit</th>
         </tr>
       </thead>
       <tbody>
-      <c:if test="${not empty user}">
-    	 <c:forEach var="user" items="${user}" varStatus="loopcounter">
+      <c:if test="${not empty users}">
+    	 <c:forEach var="user" items="${users}" varStatus="loopcounter">
     	
          <tr>
           <td> ${loopcounter.count }</td>
@@ -40,6 +75,7 @@
           <td> ${user.contactNumber }</td>
           <td> ${user.email}</td>
           <td> ${user.username}</td>
+          <td> <a href="EditUserDetails">Edit</a> </td>
         </tr>		
  	  	</c:forEach>
 	  </c:if>

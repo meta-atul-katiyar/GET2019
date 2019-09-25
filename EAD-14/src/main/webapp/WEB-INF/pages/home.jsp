@@ -8,34 +8,45 @@
 	 <meta name="viewport" content="width=device-width, initial-scale=1">
  	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 	<title>Home page</title>
+	<style>
+	
+.topnav {
+	overflow: hidden;
+	background-color: #333;
+}
+
+.topnav a {
+	float: left;
+	color: #f2f2f2;
+	text-align: center;
+	padding: 14px 16px;
+	text-decoration: none;
+	font-size: 17px;
+}
+
+.topnav a:hover {
+	background-color: #ddd;
+	color: black;
+}
+
+.topnav a.active {
+	background-color: #4CAF50;
+	color: white;
+}
+	</style>
 </head>
 <body>
-	
-<div class="container ">
-  <div class="row">
-    <div class="col-sm-4">
-      <h3>Operation 1</h3>
-      <p class ="bg-light text-dark" style="text-decoration: none;"><a href="AddUser">Add Student</a></p>
-    </div>
-    <div class="col-sm-4">
-      <h3>Operation 2</h3>
-     
-      <p class = "bg-light text-dark" style="text-decoration: none;"><a href="showUser">Show Student</a></p>
-    </div>
-    
-      <div class="col-sm-4">
-      <h3>Operation 3</h3>
-     
-      <p class = "bg-light text-dark" style="text-decoration: none;"><a href="UserHome">User Home</a></p>
-    </div>
-  </div>
-</div>
-<!-- <form action="/logout"><input type="button" value="logout"  /></form> -->
 
-	
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<div class = "topnav">
+<a href="home"> Home</a>
+<a href="UserHome">About</a>
+<a href="AddUser">Add User</a>
+<a href="showUser">Show User</a>
+<a style="float:right"  href="logout">logout</a>
+</div>
+
+<h3>Successfully Logged In</h3>
+
 </body>
 
 </html>

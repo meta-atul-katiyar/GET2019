@@ -2,16 +2,24 @@ package com.metacube.demo.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Example;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
@@ -78,7 +86,7 @@ public class UserController {
 	 */
 	@GetMapping("/showUser")
 	public String showStudent(Model model) {
-		List<User> allUsers = userService.getAllUsers();
+		List<User> allUsers = (List<User>) userService.getAllUsers();
 		model.addAttribute("users",allUsers);
 		return "showAllUsers";
 	}
@@ -92,14 +100,15 @@ public class UserController {
 	@GetMapping("/login")
 	public String login(@RequestParam(value="error",required=false) String error,
 			@RequestParam(value = "logout",	required = false) String logout, Model model){
-		String username="";
+		String userName="";
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		if (principal instanceof UserDetails) {
-		   username = ((UserDetails)principal).getUsername();
+		   userName = ((UserDetails)principal).getUsername();
+		   model.addAttribute("username", userName);
 		} else {
-		   username = principal.toString();
+			userName = principal.toString();
 		}
-		System.out.println("user: "+username);
+		System.out.println("user: "+userName);
 		if(error != null){
 			model.addAttribute("errorMsg","Authentication Failed");
 		}
@@ -111,7 +120,7 @@ public class UserController {
 	}
 	
 	@GetMapping("/UserHome")
-	public String userHome(Model model) {
+	public String userHome( Model model) {
 		List<User> allUsers ;
 		String username="";
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -122,12 +131,40 @@ public class UserController {
 		}
 		
 		System.out.println("user: "+username);
-		allUsers = userService.getUser(username);
-		for(User u : allUsers) {
-			System.out.println("ushome: "+u.getContactNumber());
-		}
-		model.addAttribute("user",allUsers);
+		allUsers = userService.findByUserName(username);
+
+		model.addAttribute("users",allUsers);
 		return "userHome";
 	}
+	
+	@GetMapping("/EditUserDetails")
+	public String editUser( Model model) {
+		User user = null ;
+		String username="";
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		if (principal instanceof UserDetails) {
+		   username = ((UserDetails)principal).getUsername();
+		} else {
+		   username = principal.toString();
+		}
+		for(User u : userService.findByUserName(username)) {
+			user = u;
+		}
+		System.out.println("user: "+user.getEmail());
+		
+
+		model.addAttribute(user);
+		return "editUser";
+	}
+	
+	@PostMapping("/EditUserDetails")
+	public String editUserPost(@Validated User user,
+			BindingResult bindingResult, Model model) {
+		
+			System.out.println(user);
+				userService.addUser(user);
+			return "redirect:/UserHome";
+	}
+	
 	
 }

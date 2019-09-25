@@ -9,16 +9,42 @@
 	 <meta name="viewport" content="width=device-width, initial-scale=1">
  	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 	<title>Home page</title>
+	
+	<style>
+	
+.topnav {
+	overflow: hidden;
+	background-color: #333;
+}
+
+.topnav a {
+	float: left;
+	color: #f2f2f2;
+	text-align: center;
+	padding: 14px 16px;
+	text-decoration: none;
+	font-size: 17px;
+}
+
+.topnav a:hover {
+	background-color: #ddd;
+	color: black;
+}
+
+.topnav a.active {
+	background-color: #4CAF50;
+	color: white;
+}
+	</style>
 </head>
 <body>
-	
-<div class="container text-center">
-  <div class="row">
-    <div class="col-sm-12">
 
-      <p class ="bg-light text-dark" style="text-decoration: none;"><a href="home">Home Page</a></p>
-    </div>
-  </div>
+<div class = "topnav">
+<a href="home"> Home</a>
+<a href="UserHome">About</a>
+<a href="AddUser">Add User</a>
+<a href="showUser">Show User</a>
+<a style="float:right"  href="logout">logout</a>
 </div>
 
 <div class="table-responsive">

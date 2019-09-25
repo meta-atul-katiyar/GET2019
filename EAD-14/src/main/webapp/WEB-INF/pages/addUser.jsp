@@ -11,8 +11,44 @@
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <title>Add User</title>
+
+<style>
+	
+.topnav {
+	overflow: hidden;
+	background-color: #333;
+}
+
+.topnav a {
+	float: left;
+	color: #f2f2f2;
+	text-align: center;
+	padding: 14px 16px;
+	text-decoration: none;
+	font-size: 17px;
+}
+
+.topnav a:hover {
+	background-color: #ddd;
+	color: black;
+}
+
+.topnav a.active {
+	background-color: #4CAF50;
+	color: white;
+}
+	</style>
+
 </head>
 <body>
+<div class = "topnav">
+<a href="home"> Home</a>
+<a href="UserHome">About</a>
+<a href="AddUser">Add User</a>
+<a href="showUser">Show User</a>
+<a style="float:right"  href="logout">logout</a>
+</div>
+
 
 	<div class="container">
 		<div >

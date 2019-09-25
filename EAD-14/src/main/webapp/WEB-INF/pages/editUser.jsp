@@ -7,13 +7,13 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<link href="webjars/bootstrap/3.3.6/css/bootstrap.min.css"
-	rel="stylesheet">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <title>Edit User Info</title>
 
 <style>
-
-
 .topnav {
 	overflow: hidden;
 	background-color: #333;
@@ -37,72 +37,64 @@
 	background-color: #4CAF50;
 	color: white;
 }
-.profile-container {position: absolute;
-					right: 0px;
-					top: 60px;
-					background-color: white
-					}
-					
-.profile-container img{position: relative;
-					right: 0px;
-					top: 0px;
-					background-color: white;
-					width: 150;
-					height: 180}
-					
-.profile-container button{postion:relative;
-					top:240px;right:0px}
 
+.profile-container {
+	position: absolute;
+	right: 0px;
+	top: 60px;
+	background-color: white
+}
+
+.profile-container img {
+	position: relative;
+	right: 0px;
+	top: 0px;
+	background-color: white;
+	width: 150;
+	height: 180
+}
+
+.profile-container button {
+	postion: relative;
+	top: 240px;
+	right: 0px
+}
 </style>
 </head>
 <body>
 	<div class="topnav">
-		<a class="active" href="/UserHome">Home</a>
-		<a href="/CoWorkers">CoWorkers</a>
-		<a href="/Friends">Friends</a>
-		<a href="/About">About</a>
-		<a href="/Logout" style="float:right;">Logout</a>
-
+		<a href="home"> Home</a> <a href="UserHome">About</a> <a
+			href="AddUser">Add User</a> <a href="showUser">Show User</a> <a
+			style="float: right" href="logout">logout</a>
 	</div>
-		<div id="empDetail" class="container" align=center>
-		<h1>Register Employee</h1>
+	<div id="empDetail" class="container" align=center>
+		<h1>Edit</h1>
 		<hr>
-		<br />
-		<br />
-		
-		<form:form modelAttribute="employee">
-			<%--             <form:errors path="*" cssClass="errorblock" element="div" /><br/><br/> --%>
-			<div class="form-group row">
-				<label for="fullName" class="col-sm-2 col-form-label">Full
-					Name</label>
-					<div class="col-sm-10">
-						<form:input path="fullName" class="form-control" id="fullName" />
-						<form:errors path="fullName" cssClass="error"></form:errors>
-			`	</div>
+		<br /> <br />
+
+		<form:form modelAttribute="user">
+			<form:errors path="${Email}" cssClass="error text-warning" />
+			<div class="form-group">
+				<form:label path="firstName">First Name:</form:label>
+				<form:input path="firstName" cssClass="form-control" id="firstName"
+					placeholder="Enter Student frist Name" />
+				<form:errors cssClass="error text-warning" path="firstName" />
 			</div>
 
-			<div class="form-group row">
-				<label class="col-sm-2 col-form-label">Gender</label>
-
-				<div class="form-check">
-					<form:radiobutton path="gender" class="form-check-input"
-						value="male" />
-					Male
-<!-- 				</div> -->
-<!-- 				<div class="form-check-inline"> -->
-					<form:radiobutton path="gender" class="form-check-input"
-						value="female" />
-					Female
-<!-- 				</div> -->
-<!-- 				<div class="form-check-inline"> -->
-					<form:radiobutton path="gender" class="form-check-input"
-						value="other" />
-					Other
-					
-				</div>
-					<form:errors path="gender" cssClass="error"></form:errors>
+			<div class="form-group">
+				<form:label path="lastName">Last Name:</form:label>
+				<form:input path="lastName" cssClass="form-control" id="lastName"
+					placeholder="Enter Student Last Name" />
+				<form:errors cssClass="error text-warning" path="lastName" />
 			</div>
 
+
+			<div class="form-group">
+				<form:label path="fatherName">Father Name:</form:label>
+				<form:input path="fatherName" cssClass="form-control"
+					id="fatherName" placeholder="Enter Father  Name" />
+				<form:errors cssClass="error text-warning" path="fatherName" />
+			</div>
 			<div class="form-group row">
 				<label for="contactNumber" class="col-sm-2 col-form-label">Contact
 					Number</label>
@@ -112,25 +104,25 @@
 					<form:errors path="contactNumber" cssClass="error"></form:errors>
 				</div>
 			</div>
-
-
-			<div class="form-group row">
-				<label for="organization" class="col-sm-2 col-form-label">Organization</label>
-				<div class="col-sm-10">
-				<form:select path="organization" id="organization"
-					class="form-control">
-					<form:options items="${organizationList}" class="form-control"/>
-				</form:select>
-				</div>
-				<form:errors path="organization" cssClass="error"></form:errors>
+			<div class="form-group">
+				<form:label path="email">Email:</form:label>
+				<form:input path="email" cssClass="form-control" id="Email"
+					placeholder="Enter Email" />
+				<form:errors cssClass="error text-warning" path="email" />
 			</div>
 
+			<div class="form-group">
+				<form:label path="username">Username:</form:label>
+				<form:input path="username" class="form-control" />
+				<form:errors cssClass="error text-warning" path="username" />
+			</div>
 
+			
 			<button type="submit" class="btn btn-primary">Submit</button>
 
 			<button type="reset" class="btn btn-primary">Reset</button>
-			
-			</form:form>
+
+		</form:form>
 	</div>
 </body>
 </html>

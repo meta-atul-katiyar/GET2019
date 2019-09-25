@@ -33,7 +33,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		.antMatchers("/showUser").hasAuthority("ADMIN")
 		.anyRequest().authenticated().and().formLogin().loginPage("/login")
         .permitAll().defaultSuccessUrl("/home").failureUrl("/login?error=true").
-        and().logout().permitAll();
+        and().logout().logoutSuccessUrl("/login")
+        .invalidateHttpSession(true)
+        .deleteCookies("JSESSIONID")
+        .permitAll();
 		http.csrf().disable();
 	}
 	

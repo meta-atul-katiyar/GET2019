@@ -6,10 +6,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 
 import com.metacube.demo.model.User;
-import com.metacube.demo.dao.IUserDao;
+import com.metacube.demo.repository.UserRepository;
+
+import com.metacube.demo.dto.UserDto;
 import com.metacube.demo.service.IUserService;
 
 /*
@@ -19,23 +22,23 @@ import com.metacube.demo.service.IUserService;
 public class UserService implements IUserService {
 
 	@Autowired
-	private IUserDao dao;
+	UserRepository userRepoObj;
 	
 	//Method to add student in the database.
 	@Override
 	public void addUser(User user) {
-		dao.addUser(user);
+		userRepoObj.save(user);
 	}
 	
 	//Method to get student list from database.
 	@Override
-	public List<User> getAllUsers() {
-		return dao.getAllUsers();
+	public Iterable<User> getAllUsers() {
+		return userRepoObj.findAll();
 	}
 
 	@Override
-	public ArrayList<User> getUser(String username) {
-		return dao.getUser(username);
+	public List<User> findByUserName(String username) {
+		return userRepoObj.findByusername(username);
 	}
 
 }

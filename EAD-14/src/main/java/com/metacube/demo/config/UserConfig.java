@@ -8,14 +8,11 @@ import javax.sql.DataSource;
 
 import org.apache.commons.dbcp.BasicDataSource;
 import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
-import org.springframework.core.env.Environment;
 import org.springframework.orm.hibernate5.HibernateTemplate;
-import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
+import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
@@ -28,23 +25,28 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 public class UserConfig {
 
 	@Bean
-	public HibernateTemplate hibernateTemplate() {
-		return new HibernateTemplate(sessionFactory());
+	public EntityManagerFactory entityManagerFactory() {
+
+	HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
+	vendorAdapter.setGenerateDdl(true);
+	vendorAdapter.setShowSql(false);
+	vendorAdapter.setDatabasePlatform("org.hibernate.dialect.MySQL5Dialect");
+	LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
+	factory.setJpaVendorAdapter(vendorAdapter);
+	factory.setJpaProperties(hibernateProperties());
+	factory.setPackagesToScan("com.metacube.demo.model");
+	factory.setDataSource(getDataSource());
+	factory.afterPropertiesSet();
+	return factory.getObject();
 	}
 
+	// JpaTransactionManager Bean
 	@Bean
-	public SessionFactory sessionFactory() {
-		LocalSessionFactoryBean lsfb = new LocalSessionFactoryBean();
-		lsfb.setDataSource(getDataSource());
-		lsfb.setPackagesToScan("com.metacube.demo.model");
-		lsfb.setHibernateProperties(hibernateProperties());
-		
-		try {
-			lsfb.afterPropertiesSet();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return lsfb.getObject();
+	public JpaTransactionManager transactionManager() {
+	JpaTransactionManager txManager = new JpaTransactionManager();
+	txManager.setDataSource(getDataSource());
+	txManager.setEntityManagerFactory(entityManagerFactory());
+	return txManager;
 	}
 
 	@Bean
@@ -57,10 +59,6 @@ public class UserConfig {
 		return dataSource;
 	}
 
-	@Bean
-	public HibernateTransactionManager hibTransMan() {
-		return new HibernateTransactionManager(sessionFactory());
-	}
 	//Setting properties of hibernate
 	private Properties hibernateProperties() {
 		Properties properties = new Properties();
