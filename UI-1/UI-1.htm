@@ -1,0 +1,259 @@
+<!--
+    It is web page for metacube parking system.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="functions.js"></script>
+
+    <title> Metacube Parking System</title>
+</head>
+<body >
+    <div class = "topnav">
+        <span><a onclick="collapseEmpForm('addEmployee','EmployeeRegistration')" href="#addEmployee">Add Employee</a>&nbsp;</span> 
+        <span><a onclick="collapseEmpForm('addVehicle','VehicleDetailsForm')" href="#addVehicle">Add Vehicle</a>&nbsp;</span>  
+        <span><a onclick="collapseEmpForm('Price','PriceList')" href="#Price">Pricing</a>&nbsp;</span>
+        <span><a onclick="collapseEmpForm('feedback','GetInTouch')" href="#feedback">Feedback</a>&nbsp;</span>
+    </div>
+    <h1 align = "center ">Welcome to Metacube Parking System</h1> 
+    <img src="ac1975e4-f8ee-4b5c-b76d-321325562de3.jpg" width="100%"  align="center" />
+     
+    <!--
+        Register form for employee.
+    -->
+    <div  class="container" id = employeeForm>
+    <h2 id="EmployeeRegistration" onclick="collapseEmpForm('addEmployee','EmployeeRegistration')">Employee Registration</h2>
+    <div class="containerForm" id="addEmployee" style="display:none"> 
+        <form action="" name="registrationForm" method = "GET"> 
+            <div class="row">
+                <div class="col-25">
+                <label for="name">Full name </label></div>
+                <div class="col-75">
+                <input type="text" name="name" id="name" pattern="[A-Za-z]{3,}" required /></div>
+                </div><br/>
+
+                <div class="row">
+                    <div class="col-25">
+                 <label for="email">Email </label></div>
+                 <div class="col-75">
+                <input type="email" id="email" name="email" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"  required />
+                     </div></div><br/>
+
+                <div class="row">
+                    <div class="col-25">
+               <label for="gender">Gender </label></div>
+                    <label class="radioContainer"> Male
+                <input type="radio" name="gender" value="male" checked/>
+                <span class="checkmark"></span>
+                </label>
+
+                <label class="radioContainer"> Female
+                <input type="radio" name="gender" value="female"/> 
+                <span class="checkmark"></span>
+                </label>
+
+                <label class="radioContainer"> Other
+                <input type="radio" name="gender" value="other"/> 
+                <span class="checkmark"></span>
+                </label>
+                </div><br/>
+
+                <div class="row">
+                    <div class="col-25">
+                <label for="password">Password </label></div>
+                <div class="col-75">
+                <input type="password" id="password" name="password" pattern="(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,20}" required />
+                </div></div><br/>
+
+                <div class="row">
+                    <div class="col-25">
+                <label for="confirmPassword">Confirm Password </label></div>
+                <div class="col-75">
+                <input type="password" id ="confirmPassword" name="Confirm password"  required /></div>
+                </div><br/>
+
+                <div class="row">
+                    <div class="col-25">
+                <label for="contact"> Contact Number </label></div>
+                <div class="col-75">
+                <input type="number" id="contact" name="ContactNumber" pattern="(7|8|9)\d{9}" required /></div>
+                </div><br/>
+
+                <div class="row">
+            
+                    <input type="submit" value="Submit"  />
+                </div>
+        </form> 
+    </div>
+</div>
+
+   
+    <!--
+        Form to add vehicle of employee.
+    -->
+    <div  class="container" id="vehicleForm">
+    <h2 id="VehicleDetailsForm" onclick="collapseEmpForm('addVehicle','VehicleDetailsForm')">Vehicle Details Form</h2>
+    <div class="containerForm" id="addVehicle"  style="display:none">
+            <form action="" name = "VehicleDetails" method="GET">
+                <div class="row">
+                    <div class="col-25">
+               <label for="vehicleName">Vehicle Name </label></div>  
+               <div class="col-75">
+                <input id="vehicleName" type="text"  name="vehicleName" pattern="[A-Za-z]{3,}" required /></div>
+                </div><br/>
+
+                <div class="row">
+                    <div class="col-25">
+               <label for="type">Type </label></div>
+               <div class="col-75">
+                <select id="type" value ="type" required>
+                        <option >Select Type</option>
+                        <option value="cycle" >Cycle</option>
+                        <option value="motorCycle" >Motor Cycle</option>
+                        <option value="fourWheelers" >Four Wheelers </option>
+                </select>
+            
+            </div></div>
+                <br/>
+
+                <div class="row">
+                    <div class="col-25">
+               <label for="vehicleNumber"> Vehicle Number </label></div>
+               <div class="col-75">
+                <input id="vehicleNumber" type="text" name="vehicleNumber" pattern="[A-Z][A-Z]\d\d[A-Z][A-Z]\d{4}" required />
+                    </div></div>
+                <br/>
+
+                <div class="row">
+                    <div class="col-25">
+                <label for="empId">EmployeeId </label></div>
+                <div class="col-75">
+                <input id="empId" type="text" name= "empId" required />
+                </div>
+                    </div>
+                <br/>
+                
+                <div class="row">
+                    <div class="col-25">
+                <label for="identification">Indentification </label></div>
+                <div class="col-75">
+                <textarea  cols="20" id="identification" name="identification"></textarea>
+            </div></div><br/>
+            <div class="row">
+                <input type="submit" value="Add Vehicle"  />
+            </div>
+            </form>
+        </div>
+    </div>
+
+      <!--
+            This div section to show the price sheet.
+        -->
+        <div  class="container" id="priceList">
+                <h2 id="PriceList" onclick="collapseEmpForm('Price','PriceList')">Price List</h2>
+                <div class="containerForm" id="Price"  align = "center" style="display:none" >
+                    <div id="main">
+                        <!-- Cycle Pricing -->
+                    <div align="center" id="cycle" class="priceCategory">
+                        <h3>Cycle</h2>
+                            <div class="circle">
+                                <span><b><span>&#36;</span>100 </b></span>/Monthly
+                            </div><br/>
+                            <span> <b></b><span>&#36;</span>5</b>/daily</span><br/>
+                        
+            
+                            <span> <b></b><span>&#36;</span>100</b>/monthly</span><br/>
+                     
+            
+                            <span> <b></b><span>&#36;</span>1000</b>/yearly</span><br/>
+                            <input type="submit"  value="PURCHASE NOW"></input>
+                    </div>
+            
+                    <!-- MotorCycle Pricing -->
+                    <div align="center" id="motorcycle" class="priceCategory">
+                      <h3>MotorCycle</h2>
+                        <div class="circle">
+                            <span><b><span>&#36;</span>200 </b></span>/Monthly
+                        </div><br/>
+    
+                        <span> <b></b><span>&#36;</span>10</b>/daily</span><br/>
+                        
+        
+                        <span> <b></b><span>&#36;</span>200</b>/monthly</span><br/>
+                        
+        
+                        <span> <b></b><span>&#36;</span>2000</b>/yearly</span><br/>
+                        
+                        <input type="submit" value="PURCHASE NOW"></input>
+                    </div>
+            
+                    <!-- FourWheeler Pricing -->
+                    <div align="center" id="fourwheeler" class="priceCategory">
+                    <h3>Four Wheelers</h2>
+                        <div class="circle">
+                            <span><b><span>&#36;</span>400 </b></span>/Monthly
+                        </div><br/>
+        
+                        <span> <b></b><span>&#36;</span>20</b>/daily</span><br/>
+        
+                        <span> <b></b><span>&#36;</span>400</b>/monthly</span><br/>
+        
+                        <span> <b></b><span>&#36;</span>4000</b>/yearly</span><br/>
+                        <input type="submit"  value="PURCHASE NOW"></input>
+                    </div>
+                </div>
+               </div>         
+        </div>  
+
+    <!-- Feedback -->
+    <div  class="container" id="feedbackForm">
+    <h2 id="GetInTouch" onclick="collapseEmpForm('feedback','GetInTouch')">Get In Touch</h2>
+	<div class="containerForm" id="feedback" style="display:none">
+            <form action = "" method = "GET" name="FeedbackForm">
+                    <div class="row">
+                            <!-- <div class="col-25">
+                       <label for="name">Name </label></div> -->
+                       <div class="col-75">
+                        <input type="text" name="name" id = "name" placeholder="name"  pattern="[A-Za-z]{3,}" required/>
+                        </div></div>
+                        <br/>
+                    
+                        <div class="row">
+                                
+                        <div class="col-75">
+                        <input type="email" name="email" id= "email" placeholder="email" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" required/>
+                        </div></div>
+                        <br/>
+                    
+                        <div class="row">
+                                <!-- <div class="col-25">
+                        <label for="subject">Subject </label></div> -->
+                        <div class="col-75">
+                        <input type="text" name="subject" id = "subject " placeholder="subject" required/>
+                        </div></div>
+                        <br/>
+        
+                        <div class="row">
+                                <!-- <div class="col-25">
+                        <label for="message">Message </label></div> -->
+                        <div class="col-75">
+                        <textarea cols = "20" name="message" placeholder="Message" id="message" required></textarea></div>
+                        </div>
+                        <br/>
+                   
+                        <div class="row">
+                   <input type="submit" value="Send feedback" /></div>
+            </form>
+        </div>
+    </div>
+
+
+      
+</div>
+</body>
+</html>
