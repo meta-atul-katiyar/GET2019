@@ -1,0 +1,181 @@
+body {
+    background-image: url("images/bodybg.png");
+}
+
+#header {
+    background-color: #648CFF;
+}
+
+.navigation {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.navigation a {
+    text-decoration: none;
+    color: white;
+    font-size: 20px;
+}
+
+.logo {
+    padding: 22;
+}
+
+#cover {
+    background-image: url("images/homebg.png");
+    background-size: cover;
+    height: 700px;
+    display: flex;
+    justify-content: space-around;
+    padding: 70 200;
+}
+
+#cover h1 {
+    color: white;
+    font-size: 80px;
+}
+
+.button {
+    background: black;
+    color: white;
+    padding: 15 30;
+    text-decoration: none;
+    margin-right: 5px;
+    border-radius: 5px;
+}
+
+.red {
+    background: #FC6A42;
+}
+
+.blue {
+    background: #4466C9;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    margin: auto;
+}
+
+.content h1 {
+    color: #648CFF;
+    text-align: center;
+}
+
+.content-sub-heading {
+    color:#83878D;
+    font-size: 18px;
+    text-align: center;
+}
+
+#features>div {
+    display: flex;
+    justify-content: space-around;
+    padding: 100 0 ;
+}
+
+.feature-container {
+    margin-right: 20px;
+    display: flex;
+}
+
+.feature-container img {
+    width: 80px;
+    padding-right: 15;
+}
+
+#features div:last-child>img {
+    width: 70%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+}
+
+.screenshots-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 100 0;
+}
+
+.screenshots-container h2 {
+    font-size: 40px;
+}
+
+.screenshots-container p {
+    color: #83878D;
+}
+
+.screenshots-container p {
+    font-size: 25px;
+    width: 483px;
+}
+
+#reviews {
+    padding: 70px 0PX;
+}
+
+.review-container {
+    display: flex;
+    justify-content: space-around;
+    font-size: 20px;
+    font-style: oblique;
+}
+
+.review-container p {
+    padding: 10px;
+    width: 562px;
+}
+
+#bottom {
+    display: flex;
+    background-image: url("images/downloadbg.png");
+    padding-top: 100;
+    justify-content: space-around;
+}
+
+#bottom h1 {
+    color: white;
+}
+
+#bottom p {
+    color: white;
+}
+
+.bottom-content {
+    padding: 50 150;
+}
+
+#promotion-image {
+    padding-right: 200px;
+}
+
+#footer {
+    background-color: #383A53;
+}
+
+#footer p{
+    text-align: center;
+    color: #797979;
+    padding: 20px;
+}
+
+#footer hr {
+    width: 80%;
+    margin: auto;
+}
+
+li {
+    display: inline-block;
+    width: auto;
+    padding: 0 10;
+    list-style: outside none none;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
