@@ -11,5 +11,8 @@ spring:
    prefix: /WEB-INF/pages/
    suffix: .jsp
    
+ main:
+  allow-bean-definition-overriding: true
+   
 welcome:
   message: welcome  

@@ -21,22 +21,27 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		auth.jdbcAuthentication().dataSource( new UserConfig().getDataSource())
 		.passwordEncoder(passwordEncoder())
 		.usersByUsernameQuery("SELECT username, password, enabled FROM user WHERE username = ?")
-		.authoritiesByUsernameQuery("SELECT username, role FROM (user AS U NATURAL JOIN user_role AS UR)"
-				+ " Inner JOIN role_list AS RL ON RL.ID=UR.roleId WHERE U.username = ?");
+		.authoritiesByUsernameQuery("SELECT username, role FROM user AS U "
+				+ " WHERE U.username = ?");
 	}
 	
 	@Override
 	protected void configure(final HttpSecurity http)throws Exception{
 		http
 		.authorizeRequests()
-		.antMatchers("/home").hasAnyAuthority("USER", "ADMIN")
-		.antMatchers("/showUser").hasAuthority("ADMIN")
+		.antMatchers("/home").hasAnyAuthority("user", "admin")
+		.antMatchers("/showUser").hasAuthority("admin")
+		.antMatchers("/AddUser").hasAuthority("admin")
 		.anyRequest().authenticated().and().formLogin().loginPage("/login")
-        .permitAll().defaultSuccessUrl("/home").failureUrl("/login?error=true").
-        and().logout().logoutSuccessUrl("/login")
+        .permitAll().defaultSuccessUrl("/home").failureUrl("/login?error=true")
+        
+        .and().logout().logoutSuccessUrl("/login")
+        
         .invalidateHttpSession(true)
         .deleteCookies("JSESSIONID")
-        .permitAll();
+        .permitAll()
+        .and().exceptionHandling().accessDeniedPage("/accessDenied");
+		
 		http.csrf().disable();
 	}
 	

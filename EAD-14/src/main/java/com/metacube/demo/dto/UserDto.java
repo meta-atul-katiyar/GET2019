@@ -60,7 +60,6 @@ public class UserDto {
 	}
 
 	@NotBlank(message = "{blankPassword}")
-	@Pattern(regexp="^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,20}$", message = "{validPassword}")
 	 String password;
 
 	//Default constructor. 

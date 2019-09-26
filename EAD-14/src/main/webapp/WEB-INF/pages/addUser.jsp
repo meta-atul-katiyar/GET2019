@@ -110,6 +110,17 @@
 					<form:errors path="password" cssClass="error"></form:errors>
 				</div>
 			</div>
+			
+			<div class="form-group row">
+				<label for="role" class="col-sm-2 col-form-label">role</label>
+				<div class="col-sm-10">
+				<form:select path="role" id="role"
+					class="form-control">
+					<form:options items="${roleList}" class="form-control"/>
+				</form:select>
+				</div>
+				<form:errors path="role" cssClass="error"></form:errors>
+			</div>
 
 			
 			

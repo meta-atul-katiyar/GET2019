@@ -58,6 +58,7 @@
           <th>contactNumber</th>
           <th>Email</th>
           <th>username</th>
+          <th> ClickTo Edit</th>
         </tr>
       </thead>
       <tbody>
@@ -72,6 +73,7 @@
           <td> ${user.contactNumber }</td>
           <td> ${user.email}</td>
           <td> ${user.username}</td>
+          <td> <a href="EditUserDetails?userName=${user.username}">Edit</a> </td>
         </tr>		
  	  	</c:forEach>
 	  </c:if>

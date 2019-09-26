@@ -75,7 +75,7 @@
           <td> ${user.contactNumber }</td>
           <td> ${user.email}</td>
           <td> ${user.username}</td>
-          <td> <a href="EditUserDetails">Edit</a> </td>
+          <td> <a href="EditUserDetails?userName=""">Edit</a> </td>
         </tr>		
  	  	</c:forEach>
 	  </c:if>

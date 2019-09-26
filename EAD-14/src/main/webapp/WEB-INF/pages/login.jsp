@@ -40,7 +40,6 @@
 <a href="UserHome">About</a>
 <a href="AddUser">Add User</a>
 <a href="showUser">Show User</a>
-<a style="float:right"  href="logout">logout</a>
 </div>
 
 <div class="container ">

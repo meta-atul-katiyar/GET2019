@@ -21,4 +21,5 @@ public interface IUserService {
 	public Iterable<User> getAllUsers();
 	
 	List<User> findByUserName(String username);
+
 }

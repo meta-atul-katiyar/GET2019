@@ -113,14 +113,32 @@
 
 			<div class="form-group">
 				<form:label path="username">Username:</form:label>
-				<form:input path="username" class="form-control" />
+				<form:input path="username" class="form-control" readonly="true" />
 				<form:errors cssClass="error text-warning" path="username" />
 			</div>
+			
+			<div class="form-group row">
+				<label for="role" class="col-sm-2 col-form-label">role</label>
+				<div class="col-sm-10">
+				<form:select path="role" id="role"
+					class="form-control">
+					<form:options items="${roleList}" class="form-control"/>
+				</form:select>
+				</div>
+				<form:errors path="role" cssClass="error"></form:errors>
+			</div>
+			
+			<div class="form-group row">
+				<div class="col-sm-10">
+					<form:input path="password" type="hidden" class="form-control"
+						id="password" />
+					<form:errors path="password" cssClass="error"></form:errors>
+				</div>
+			</div>
+			
 
 			
 			<button type="submit" class="btn btn-primary">Submit</button>
-
-			<button type="reset" class="btn btn-primary">Reset</button>
 
 		</form:form>
 	</div>

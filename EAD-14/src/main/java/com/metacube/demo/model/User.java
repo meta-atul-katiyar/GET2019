@@ -36,6 +36,9 @@ public class User {
 	@Email(message = "{validEmail}")
 	@NotBlank(message = "{blankEmail}")
 	 String email;
+	
+	@NotBlank(message = "{blankPassword}")
+	 String password;
 
 	@Pattern(regexp = "(0/91)?[6-9][0-9]{9}", message = "{validContact}")
 	@NotNull(message = "{blankContact}")
@@ -44,9 +47,29 @@ public class User {
 	@NotBlank(message = "{blankUserName}")
 	@Pattern(regexp="^[a-zA-Z0-9]{4,}", message = "{validUserName}")
 	 String username;
+	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
+
+	@NotBlank(message = "{blankRole}")
+	String role;
+	
 	boolean enabled = true;
 
-	
+	//getter setter
 	public boolean isEnabled() {
 		return enabled;
 	}
@@ -63,9 +86,7 @@ public class User {
 		this.contactNumber = contactNumber;
 	}
 
-	@NotBlank(message = "{blankPassword}")
-	@Pattern(regexp="^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,20}$", message = "{validPassword}")
-	 String password;
+
 
 	//Default constructor. 
 	public User() {}
