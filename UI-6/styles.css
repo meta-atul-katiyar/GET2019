@@ -1,0 +1,232 @@
+
+
+
+body {
+    font-family: Rubik,sans-serif;
+    background: #fafafa;
+}
+
+
+
+a, a:hover, a:focus {
+    color: inherit;
+    text-decoration: none;
+    transition: all 0.3s;
+}
+
+#sidebar 
+#sidebar a,
+#sidebar li,
+#sidebar ul {
+    border: 0;
+    font-weight: 400;
+    line-height: 1;
+    list-style: none;
+    margin: 0;
+
+    position: relative;
+    text-decoration: none
+    
+}
+
+#sidebar .sidebar-header {
+    display: flex;
+    padding: 40px 0px 30px 70px;
+    justify-content: space;
+}
+#sidebar .sidebar-header img{
+    height:25px;
+    width:20px;
+}
+#sidebar .sidebar-header h5{
+    font-weight: 800;
+}
+
+#sidebar i{
+    padding-right: 10px;
+}
+
+#sidebar ul.components {
+    border-bottom: 1px solid #47748b;
+}
+
+
+#sidebar ul li a {
+    padding: 20px 0px 20px 20px;
+    font-size: 1.0em;
+    font-weight:500;
+    display: block;
+}
+#sidebar ul li a:hover {
+    background: #fff;
+    color:  rgb(83, 94, 247);
+}
+
+#sidebar ul li a:active {
+    background:  rgb(133, 138, 212);
+}
+ 
+ 
+#sidebar ul li ul li a {
+    font-size: 0.9em !important;
+    padding-left: 50px !important;
+    font-weight:200;
+    color:  rgb(73, 74, 85);
+}
+
+.menu-title{
+    padding: 10px 20px 10px 20px;
+    color: rgb(155, 157, 175);
+    font-weight: 100;
+    font-size: 0.8em !important;
+}
+
+.wrapper {
+    display: flex;
+    position: absolute;
+    align-items: stretch;
+}
+
+
+#sidebar {
+    height: 100%;
+    position: fixed;
+    z-index: 1; 
+    width:240px;
+    overflow-y: auto;
+    background-color: #fff;
+    padding-bottom: 50px;
+    justify-content: space-around;
+}
+
+
+/* top nav */
+#mainDiv{
+     position: relative;
+     margin-left:240px;
+    background-color: rgb(235, 232, 232);
+}
+
+#topNav{
+    background: #575afa;
+    
+    height: 70px;
+}
+
+/*SEARCH FORM*/
+.search-form {
+    border-radius: 30px 30px 30px 30px;
+    height:30px;
+    color: #7477f0;
+    /*border-radius:Top-left, Top-right, Bottom-right, Bottom-left;*/
+}
+#search-form input[type=text]{
+    background-color: #a4a5f8;
+    border:0px solid;
+    outline: none;
+    /*border-radius:Top-left, Top-right, Bottom-right, Bottom-left;*/
+}
+
+.form-control:focus {
+    box-shadow: none;
+  }
+
+::placeholder{
+    font-size: 0.7rem;
+   color: whitesmoke;
+}
+/*to cange only one form and not all give unique class name like  class="search-form" */
+#search-form button {
+    border-radius: 0px 30px 30px 0px;
+    background-color: #a4a5f8;
+    height:30px;
+    padding-top: 2.2px; 
+    color: #ddd;
+  
+}
+
+
+   #navbarItems {
+    justify-content: space-around;
+   }
+   .nav-item :active {
+    background-color: #121477;
+   }
+
+
+.flag{
+    height:25%;
+    width:16%
+}
+
+.button-badge {
+    
+    padding: 1rem 20px 1rem 2rem ;
+    position: relative;
+    display: inline-block;
+    border-radius: .2rem;
+    justify-content: space-around;
+
+  }
+  
+  .alert {
+    position: absolute;
+    top: -5px;
+    right: -15px;
+    font-size: .8em;
+  }
+
+  #badgeStyle{
+      position: absolute;
+      top: 0px;
+      right: 0px;
+  }
+
+ 
+
+.profileIcon{
+    vertical-align: middle;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-top: 20%;
+  }
+
+
+#profileMenu i {
+ padding-right: 20px;
+}
+
+#dashboardHeading{
+    padding:20px 30px 20px 30px;
+}
+
+#dashboardHeading strong{
+    font-size: 20px;
+}
+
+
+/* star checked */
+.checked {
+    color: orange;
+  }
+
+
+  body {
+    --table-width: 100%; /* Or any value, this will change dinamically */
+  }
+
+  .newUserListIcons{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    
+  }
+
+
+#newUsersBlock{
+    height:400px;
+    overflow-y: scroll;
+}
+
+
