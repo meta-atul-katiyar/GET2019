@@ -66,6 +66,10 @@ a, a:hover, a:focus {
     background:  rgb(133, 138, 212);
 }
  
+.nav-link{
+    padding-right:0px;
+    padding-left:0px;
+}
  
 #sidebar ul li ul li a {
     font-size: 0.9em !important;
@@ -108,14 +112,16 @@ a, a:hover, a:focus {
 
 #topNav{
     background: #575afa;
-    
-    height: 70px;
+    padding:0px;
+    /* height: 70px; */
 }
 
 /*SEARCH FORM*/
 .search-form {
+    margin-left:20px;
     border-radius: 30px 30px 30px 30px;
     height:30px;
+
     color: #7477f0;
     /*border-radius:Top-left, Top-right, Bottom-right, Bottom-left;*/
 }
@@ -147,20 +153,37 @@ a, a:hover, a:focus {
 
    #navbarItems {
     justify-content: space-around;
+    background-color: #121477;
+    
    }
+
+   #nav-link{
+    padding-left:20px;
+    padding-right:20px;
+   }
+
+   #navbarItems ul li:hover{
+       height:70px;
+       background: red;
+   }
+
+   .nav-link{
+    height: 70px;
+}
+
    .nav-item :active {
     background-color: #121477;
    }
 
-
 .flag{
     height:25%;
-    width:16%
+    width:16%;
+
 }
 
 .button-badge {
     
-    padding: 1rem 20px 1rem 2rem ;
+    padding: 1.3rem 3rem 1rem 2rem ;
     position: relative;
     display: inline-block;
     border-radius: .2rem;
@@ -177,7 +200,7 @@ a, a:hover, a:focus {
 
   #badgeStyle{
       position: absolute;
-      top: 0px;
+      top: 10px;
       right: 0px;
   }
 
@@ -185,10 +208,10 @@ a, a:hover, a:focus {
 
 .profileIcon{
     vertical-align: middle;
-    width: 40px;
-    height: 40px;
+    width: 30px;
+    height: 30px;
     border-radius: 50%;
-    margin-top: 20%;
+    
   }
 
 
