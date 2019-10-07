@@ -31,7 +31,7 @@ a, a:hover, a:focus {
 
 #sidebar .sidebar-header {
     display: flex;
-    padding: 40px 0px 30px 70px;
+    padding: 35px 0px 22px 70px;
     justify-content: space;
 }
 #sidebar .sidebar-header img{
@@ -95,7 +95,6 @@ a, a:hover, a:focus {
     width:240px;
     overflow-y: auto;
     background-color: #fff;
-    padding-bottom: 50px;
     justify-content: space-around;
 }
 
