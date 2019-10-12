@@ -1,0 +1,128 @@
+<div class="">
+    <div class="row justify-content-around">
+        <div class="col-xl-2 col-lg-4 col-md-4 scrollbar scrollbar-primary" id="taskLists">
+
+            <div class="card-body">
+                <h6>New</h6>
+                <div>
+                    <div *ngFor="let task of taskList ">
+                        <div *ngIf="task.status == 'New'">
+                            <div *ngIf="task.taskPriority == 'High'" id="newTask" class="taskDetail high">
+
+                                <p class="newTaskHead">{{task.taskName}}</p>
+                                <p>{{task.taskDescription}}</p>
+                                <button [routerLink]="['/edit-task/',task.creationDate]"
+                                    class="btn  newEditButton">Edit</button>
+                                <button [routerLink]="['/task-details/',task.creationDate]"
+                                    class="btn  newEditButton">Details</button>
+                            </div>
+                            <div *ngIf="task.taskPriority == 'Medium'" id="newTask" class="taskDetail medium">
+
+                                <p class="newTaskHead">{{task.taskName}}</p>
+                                <p>{{task.taskDescription}}</p>
+                                newEditButton <button [routerLink]="['/task-details/',task.creationDate]"
+                                    class="btn  newEditButton">Details</button>
+                            </div>
+                            <div *ngIf="task.taskPriority == 'Low'" id="newTask" class="taskDetail low">
+
+                                <p class="newTaskHead">{{task.taskName}}</p>
+                                <p>{{task.taskDescription}}</p>
+                                <button [routerLink]="['/edit-task/',task.creationDate]"
+                                    class="btn  newEditButton">Edit</button>
+                                <button [routerLink]="['/task-details/',task.creationDate]"
+                                    class="btn  newEditButton">Details</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-xl-2 col-lg-4 col-md-4 scrollbar scrollbar-primary" id="taskLists">
+
+            <div class="card-body">
+                <h6>In Progress</h6>
+
+                <div>
+                    <div *ngFor="let task of taskList ">
+                        <div *ngIf="task.status == 'In Progress'">
+                            <div *ngIf="task.taskPriority == 'High'" id="inProgressTask" class="taskDetail high">
+
+                                <p class="newTaskHead">{{task.taskName}}</p>
+                                <p>{{task.taskDescription}}</p>
+                                <button [routerLink]="['/edit-task/',task.creationDate]"
+                                    class="btn  progressEditButton">Edit</button>
+                                <button [routerLink]="['/task-details/',task.creationDate]"
+                                    class="btn  progressEditButton">Details</button>
+                            </div>
+                            <div *ngIf="task.taskPriority == 'Medium'" id="inProgressTask" class="taskDetail medium">
+
+                                <p class="newTaskHead">{{task.taskName}}</p>
+                                <p>{{task.taskDescription}}</p>
+                                <button [routerLink]="['/edit-task/',task.creationDate]"
+                                    class="btn  progressEditButton">Edit</button>
+                                <button [routerLink]="['/task-details/',task.creationDate]"
+                                    class="btn  progressEditButton">Details</button>
+                            </div>
+                            <div *ngIf="task.taskPriority == 'Low'" id="inProgressTask" class="taskDetail low">
+
+                                <p class="newTaskHead">{{task.taskName}}</p>
+                                <p>{{task.taskDescription}}</p>
+                                <button [routerLink]="['/edit-task/',task.creationDate]"
+                                    class="btn  progressEditButton">Edit</button>
+                                <button [routerLink]="['/task-details/',task.creationDate]"
+                                    class="btn  progressEditButton">Details</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-xl-2 col-lg-4 col-md-4 scrollbar scrollbar-primary" id="taskLists">
+
+            <div class="card-body">
+                <h6>Completed</h6>
+                <div>
+                    <div *ngFor="let task of taskList ">
+                        <div *ngIf="task.status == 'Completed'">
+                            <div *ngIf="task.taskPriority == 'High'" id="completedTask" class="taskDetail high">
+
+                                <p class="newTaskHead">{{task.taskName}}</p>
+                                <p>{{task.taskDescription}}</p>
+                                <button [routerLink]="['/edit-task/',task.creationDate]"
+                                    class="btn  completeEditButton">Edit</button>
+                                <button [routerLink]="['/task-details/',task.creationDate]"
+                                    class="btn  completeEditButton">Details</button>
+                            </div>
+                            <div *ngIf="task.taskPriority == 'Medium'" id="completedTask" class="taskDetail medium">
+
+                                <p class="newTaskHead">{{task.taskName}}</p>
+                                <p>{{task.taskDescription}}</p>
+                                <button [routerLink]="['/edit-task/',task.creationDate]"
+                                    class="btn  completeEditButton">Edit</button>
+                                <button [routerLink]="['/task-details/',task.creationDate]"
+                                    class="btn  completeEditButton">Details</button>
+                            </div>
+                            <div *ngIf="task.taskPriority == 'Low'" id="completedTask" class="taskDetail low">
+
+                                <p class="newTaskHead">{{task.taskName}}</p>
+                                <p>{{task.taskDescription}}</p>
+                                <button [routerLink]="['/edit-task/',task.creationDate]"
+                                    class="btn  completeEditButton">Edit</button>
+                                <button [routerLink]="['/task-details/',task.creationDate]"
+                                    class="btn  completeEditButton">Details</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
