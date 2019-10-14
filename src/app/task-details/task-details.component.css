@@ -1,0 +1,71 @@
+
+
+h6{
+    text-align: center;
+}
+
+#taskLists{
+    background-color:rgb(240, 238, 238);
+    height:600px;
+    margin-top:2rem;
+    margin-bottom:2rem;
+    border-radius: 2%;
+}
+
+#newTask{
+    background-color: rgb(153, 153, 253);
+    margin:1rem 0;
+    border-radius: 2%;
+}
+
+.newTaskHead{
+    background-color: rgb(216, 216, 250);
+}
+
+#inProgressTask{
+    background-color: rgb(247, 194, 223);
+    margin:1rem 0;
+    border-radius: 2%;
+}
+
+.progressTaskHead{
+    background-color: rgb(255, 221, 240);
+}
+
+
+#completedTask{
+    background-color: rgb(190, 248, 250);
+    margin:1rem 0;
+    border-radius: 2%;
+}
+
+.completedTaskHead{
+    background-color: rgb(239, 253, 253);
+}
+
+
+.taskDetail > p{
+    padding: 0 1rem;
+    padding-right: 1rem;
+}
+
+.newEditButton{
+    width: 49%;
+    background-color: rgb(109, 109, 248);
+    margin:0.5%;
+}
+
+.progressEditButton{
+    width: 49%;
+    background-color: rgba(255, 174, 219, 0.822);
+    margin:0.5%;
+}
+
+.completeEditButton{
+    width: 49%;
+    background-color: rgba(113, 237, 243, 0.788);
+    margin:0.5%;
+}
+
+
+
