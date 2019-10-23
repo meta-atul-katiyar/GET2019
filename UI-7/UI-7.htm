@@ -1,0 +1,72 @@
+<!--
+    It is web page for metacube parking system.
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="functions.js"></script>
+
+    <title> Metacube Parking System</title>
+</head>
+
+<body>
+
+
+    <h1 id="titleOnPage"> Welcome to Metacube parking registration</h1>
+    <div id="greetings">
+        <p id="hiWithName"></p>
+        <p id="messageForNextAction"></p>
+    </div>
+    <section class="middle">
+
+        <!--
+        Register form for employee.
+    -->
+        <div class="container" id=employeeForm>
+
+            <label>
+                <h2 id="labelText">Full Name</h2>
+            </label>
+            
+            <input type="text" name="name" id="inputField"  required />
+            <input type="password" name="password" id="Password" onkeypress="changeBorder()" style="display: none;" required />
+            <label>
+                <h2 id="confirmPassHead" style="display: none;">Confirm Password</h2>
+            </label>
+
+            <input type="password" id="confirmPassword" style="display:none" required /> 
+            
+            <div id="radios" style="display:none">
+            <input type="radio" name="radio" value="radio1" id="radio1" checked> <label id="radioLabel1" for="radio1"></label> <br />
+            <input type="radio" name="radio" value="radio2" id="radio2"> <label id="radioLabel2" for="radio2"></label> <br />
+            <input type="radio" name="radio" value="radio3" id="radio3"> <label id="radioLabel3" for="radio3"></label>
+        </div>
+        <div id="currDiv" style="display:none" >
+            <select  id = "currencyList" onchange="changeCurrValue()">
+                <option value="INR">INR</option>
+                <option value="YEN">YEN</option>
+                <option value="USD">USD</option>
+              </select>
+        </div>
+        <p id="errorMessage"></p>
+
+        <div id="buttons">
+        <input id="submitButton" type="submit" value="Next" onclick="showNextItem()" />
+        <input id="resetButton" type="reset" value="Reset" onclick="blankInputField()" /></div>
+        </div>
+
+        </div>
+    </section>
+
+
+    </div>
+</body>
+
+</html>
